@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Please Login/Register to Continue</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="d-flex justify-content-around">
+        <a routerLink="login" class="btn btn-lg btn-primary" (click)="bsModalRef.hide()">Login</a>
+        <a routerLink="register" class="btn btn-lg btn-primary" (click)="bsModalRef.hide()">Register</a>
+    </div>
+    
+</div>
+<div class="modal-footer">
+    <!-- <button type="submit" class="btn btn-primary" (click)="createToken()">
+        PAY
+    </button> -->
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
+</div>

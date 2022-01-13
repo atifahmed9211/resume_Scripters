@@ -1,0 +1,47 @@
+// Here you can add other styles
+@font-face{
+    font-family: Roboto-Regular;
+    src: url(../assets/fonts/Roboto-Regular.ttf);
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    font-family: Roboto-Regular !important;
+    background-color: #fafbf6 !important;
+}
+.form-control:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 0%) !important;
+}
+button:focus{
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 0%) !important;
+}
+
+.navbar-brand-full{
+    width: 100%;
+    height: auto;
+}
+.sidebar{
+    background: #0f2b33;
+    .nav-link{
+        .nav-icon{
+            color: #00a67d;
+        }
+        &:hover{
+            background: #00a67d;
+        }
+    }
+    .nav-link.active{
+        background: #00a67d;
+        .nav-icon{
+            color: #ffff;
+        }
+    }
+    .nav-dropdown-toggle{
+        &::before{
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3Cpath fill='%23fff' d='M9.148 2.352l-4.148 4.148 4.148 4.148q0.148 0.148 0.148 0.352t-0.148 0.352l-1.297 1.297q-0.148 0.148-0.352 0.148t-0.352-0.148l-5.797-5.797q-0.148-0.148-0.148-0.352t0.148-0.352l5.797-5.797q0.148-0.148 0.352-0.148t0.352 0.148l1.297 1.297q0.148 0.148 0.148 0.352t-0.148 0.352z'/%3E%3C/svg%3E");
+        }
+    }
+}

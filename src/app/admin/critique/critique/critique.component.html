@@ -1,0 +1,181 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Customer Detail :</h2>
+                    <div class="d-flex">
+                        <p><b>Name : </b>{{critique?.users[0].name}}</p>
+                        <p class="mx-5"><b>Email : </b>{{critique?.users[0].email}}</p>
+                        <p><b>File : </b><a href="{{mediaUrl}}critique/{{critique?.file}}" download="{{critique?.file}}">{{critique?.file}} <i class="ml-2 fa fa-download"></i></a></p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="critiqueForm" (submit)="updateCritique()">
+                        <div class="row">
+                            <div class="col">
+                                <label>Brevity Value:</label>
+                                <input type="text" formControlName="brevityValue" class="form-control" placeholder="Enter Brevity Value">
+                            </div>
+                            <div class="col">
+                                <label for="email">Impact Value:</label>
+                                <input type="text" formControlName="impactValue" class="form-control" placeholder="Enter Impact Value">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label>Brevity Description:</label>
+                                <textarea class="form-control" formControlName="brevityDescription" name="" id="" cols="30" rows="5"></textarea>
+                            </div>
+                            <div class="col">
+                                <label for="email">Impact Description:</label>
+                                <textarea class="form-control" formControlName="impactDescription" name="" id="" cols="30" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label>Depth Value:</label>
+                                <input type="text" class="form-control" formControlName="depthValue" placeholder="Enter Depth Value">
+                            </div>
+                            <div class="col">
+                                <label>No. of Pages:</label>
+                                <input type="text" class="form-control" formControlName="noOfPages" placeholder="Enter Number Of Pages">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label>Depth Description:</label>
+                                <textarea class="form-control" formControlName="depthDescription" name="" id="" cols="30" rows="5"></textarea>
+                            </div>
+                            <div class="col">
+                                <label>Pages Description:</label>
+                                <textarea class="form-control" formControlName="pagesDescription" name="" id="" cols="30" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label>Word Count:</label>
+                                <input type="text" class="form-control" formControlName="wordCount" placeholder="Enter Word Count">
+                            </div>
+                            <div class="col">
+                                <label>File Size:</label>
+                                <input type="text" class="form-control" formControlName="fileSize" placeholder="Enter Impact Value">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label>Word Count Description:</label>
+                                <textarea class="form-control" formControlName="wordDescription" name="" id="" cols="30" rows="5"></textarea>
+                            </div>
+                            <div class="col">
+                                <label>File Size Description:</label>
+                                <textarea class="form-control" formControlName="fileDescription" name="" id="" cols="30" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label>Email:</label>
+                                <input type="text" class="form-control" formControlName="email" placeholder="Enter Email">
+                            </div>
+                            <div class="col">
+                                <label>Phone:</label>
+                                <input type="text" class="form-control" formControlName="phone" placeholder="Enter Phone">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label>Linkedin:</label>
+                                <input type="text" class="form-control" formControlName="linkedin" placeholder="Enter Linkedin">
+                            </div>
+                            <div class="col">
+                                <label>Address:</label>
+                                <input type="text" class="form-control" formControlName="address" placeholder="Enter Address">
+                            </div>
+                        </div>
+                        <h2 class="text-center mt-3">Add Industries</h2>
+                        <div formArrayName="industries">
+                            <div *ngFor="let industry of industries.controls; let i = index">
+                                <div formGroupName="{{i}}">
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <label>Name:</label>
+                                            <input type="text" class="form-control" formControlName="name" placeholder="Enter Industry Name">
+                                        </div>
+                                        <div class="col">
+                                            <label>Value:</label>
+                                            <input type="text" class="form-control" formControlName="value" placeholder="Enter Industry Value">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary mt-3" (click)="addIndustries()">Add Industry</button>
+                        <h2 class="text-center mt-3">Add Grammar & Flow Comments</h2>
+                        <div formArrayName="grammarFlow">
+                            <div *ngFor="let grammar of grammarFlow.controls; let i = index">
+                                <div [formGroup]="grammar">
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <label>Title:</label>
+                                            <input type="text" class="form-control" formControlName="title" placeholder="Enter Title">
+                                        </div>
+                                        <div class="col">
+                                            <label>Description:</label>
+                                            <textarea class="form-control" formControlName="description" name="" id="" cols="30" rows="5"></textarea>
+                                        </div>
+                                        <div class="col">
+                                            <label>Status:</label><br>
+                                            <div class="form-check-inline">
+                                                <label class="form-check-label">
+                                                    <input type="radio" class="form-check-input" formControlName="status" value="good">Good
+                                                </label>
+                                            </div>
+                                            <div class="form-check-inline">
+                                                <label class="form-check-label">
+                                                    <input type="radio" class="form-check-input" formControlName="status" value="bad">Bad
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary mt-3" (click)="addGrammarFlow()">Add Grammar & Flow Comment</button>
+                        <h2 class="text-center mt-3">Add Visual Presentation Comments</h2>
+                        <div formArrayName="visualPresenatation">
+                            <div *ngFor="let visual of visualPresenatation.controls; let i = index">
+                                <div [formGroup]="visual">
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <label>Title:</label>
+                                            <input type="text" class="form-control" formControlName="title" placeholder="Enter Title">
+                                        </div>
+                                        <div class="col">
+                                            <label>Description:</label>
+                                            <textarea class="form-control" formControlName="description" name="" id="" cols="30" rows="5"></textarea>
+                                        </div>
+                                        <div class="col">
+                                            <label>Status:</label><br>
+                                            <div class="form-check-inline">
+                                                <label class="form-check-label">
+                                                    <input type="radio" class="form-check-input" formControlName="status" value="good">Good
+                                                </label>
+                                            </div>
+                                            <div class="form-check-inline">
+                                                <label class="form-check-label">
+                                                    <input type="radio" class="form-check-input" formControlName="status" value="bad">Bad
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary mt-3" (click)="addVisualPresenatation()">Add Visual Presentation Comment</button>
+                        <button type="submit" class="btn btn-success float-right">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

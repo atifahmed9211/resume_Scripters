@@ -1,0 +1,33 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="blogs?.length != 0">
+                  <tr *ngFor="let blog of blogs;let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{ blog.title }}</td>
+                    <td><img src="{{mediaUrl}}blogs_imgs/{{blog.img}}" width="100" alt=""></td>
+                    <td>
+                      <a routerLink="../blog/{{blog.id}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                      <a routerLink="../edit/{{blog.id}}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                      <a href="javascript:;" (click)="deleteBlog(blog.id)" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody *ngIf="blogs?.length == 0">
+                  <tr>
+                      <td colspan="4" class="no-data-available text-center">No data!</td>
+                  </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+</div>

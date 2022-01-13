@@ -1,0 +1,47 @@
+// If you want to override variables do it here
+@import "variables";
+
+// Import styles
+@import "~@coreui/coreui/scss/coreui";
+
+// If you want to add something do it here
+@import "custom";
+
+.modal-content{
+    .modal-title {
+        background-image: url("../assets/images/headerlogo.png");
+        width: 200px;
+        background-repeat: no-repeat;
+        background-color: #00533f;
+        padding: 2px;
+        z-index: 1;
+    }
+    .close {
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-color: #00533f;
+        color: #fff;
+        border-radius: 50%;
+        transition: all .3s;
+    }
+    // .modal-body{
+
+    // }
+    .modal-footer{
+        transition: alll .3s;
+        .btn-primary{
+            background-color: #00a67d !important;
+            padding: 5px 20px;
+            font-size: 16px;
+            &:hover{
+                background-color: #122c34 !important;
+            }
+        }
+        .btn-default{
+            &:hover{
+                background-color: rgba(170, 170, 170, 0.288);
+            }
+        }
+    }
+}

@@ -1,0 +1,40 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Services</th>
+                    <th>Service Type</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="packages?.length != 0">
+                  <tr *ngFor="let package of packages; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ package.title }}</td>
+                    <td>{{ package.description }}</td>
+                    <td>{{ package.price }}</td>
+                    <td>
+                        <p *ngFor="let service of package.services">{{service.title}}</p>
+                    </td>
+                    <td>{{ package.service_types[0].name }}</td>
+                    <td>
+                        <a routerLink="../edit/{{package.id}}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                        <a href="javascript:;" (click)="deletePackage(package.id)" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody *ngIf="packages?.length == 0">
+                    <tr>
+                        <td colspan="6" class="no-data-available text-center">No data!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

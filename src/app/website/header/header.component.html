@@ -1,0 +1,56 @@
+<nav class="navbar navbar-dark navbar-expand-lg {{navbarClass}}" role="navigation">
+    <div class="container">
+        <a class="navbar-brand" routerLink="/"><img src="{{ logoSrc }}"></a>
+        <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
+            &#9776;
+        </button>
+        <div class="collapse navbar-collapse navigation" id="exCollapsingNavbar">
+            <ul *ngIf="url != 'login'" class="nav navbar-nav navigation-links">
+                <li class="nav-item dropdown dropdown-slide dropdown-hover">
+                  <a  class="nav-link dropdown-toggle navigation-anchor" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Resume Services</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a routerLink="/Resume-service" class="dropdown-item" >Private Sector</a>
+                    <a class="dropdown-item" routerLink="/federal">Federal</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown dropdown-slide dropdown-hover">
+                    <a class="nav-link dropdown-toggle navigation-anchor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      About Us
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <a routerLink="/about-us" class="dropdown-item" >Our Company</a>
+                      <a class="dropdown-item" routerLink="/writers">Our Writers</a>
+                      <a class="dropdown-item" routerLink="/FAQ's">FAQ</a>
+                      <a class="dropdown-item" routerLink="/contact-us"> Contact Us</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a routerLink="/testimonials" class="nav-link navigation-anchor">Testimonials</a></li>
+                <!-- <li class="nav-item dropdown dropdown-slide dropdown-hover">
+                  <a class="nav-link dropdown-toggle navigation-anchor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Resource
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a routerLink="../career-advice" class="dropdown-item"> Career Advice</a>
+                    
+                  </div>
+                </li> -->
+                <li class="nav-item"><a class="nav-link navigation-anchor" routerLink="/blog"> Blog</a></li>
+            </ul>
+            
+            <div class="text-center login-btn" *ngIf="!user">
+                <a routerLink="/login" class="nav-link">Login</a>
+            </div>
+            <div class="text-center login-btn" *ngIf="user">
+              <a routerLink="/user" class="nav-link">Dashboard</a>
+            </div>
+            <div class="text-center login-btn" *ngIf="user">
+              <a href="javascript:;" class="nav-link" (click)="logout()">Log Out</a>
+            </div>
+            <!-- <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+                <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
+                    
+            </ul> -->
+        </div>
+    </div>
+</nav>
+

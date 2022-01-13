@@ -1,0 +1,47 @@
+<app-header></app-header>
+<div class="login-body">
+    <div class="row m-0">
+        <div class="col-lg-6 col-md-6 login-bg p-0">
+            <img class="w-100" src="../../../assets/images/login-bg.jpg">
+        </div>
+        <div class="col-md-6 col-md-6 p-0 d-flex justify-content-center">
+            <div class="login-form">
+                <div class="login-form-2">
+                    <h1>Login</h1>
+                    <h3>Login in to your account</h3>
+                    
+                    <form class="mt-4" [formGroup]="loginForm" (submit) = "login()">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" formControlName="email" class="form-control" placeholder="Your Email *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" formControlName="password" class="form-control" placeholder="Your Password *" value="" />
+                        </div>
+
+                        <div class="form-group links d-flex justify-content-between">
+                            <a href="#" class="ForgetPwd" value="Login">Forget Password?</a>
+                        </div>
+
+                        <div class="form-group d-flex justify-content-center">
+                            <input type="submit" [disabled]="!loginForm.valid" class="btnSubmit" value="Login" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 p-0">
+            <div class="packages text-center">
+                <h2>Get Started</h2>
+                <p>Our proffessional resume writing has helped over 400,000 proffessionals View our packages and make
+                    a purchase to create an account
+                </p>
+                <a routerLink="/Resume-service" type="button" class="pkg-btn">View Packages</a>
+                <p>Looking for your resume critique? Find it through the original link in your email</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

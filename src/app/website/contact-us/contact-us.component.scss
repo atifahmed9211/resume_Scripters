@@ -1,0 +1,169 @@
+ /* CONTACT US CSS start from here */
+ @font-face{
+    font-family: Roboto-Regular;
+    src: url(../../../assets/fonts/Roboto-Regular.ttf);
+}
+@font-face{
+    font-family: Roboto-Medium;
+    src: url(../../../assets/fonts/Roboto-Medium.ttf);
+}
+@font-face{
+    font-family: Roboto-Bold;
+    src: url(../../../assets/fonts/Roboto-Bold.ttf);
+}
+ 
+ .banner{
+    background-color: #00a67d;
+    font-family: Roboto-Regular;
+    padding: 20px 35px;
+    height: 315px;
+    display: flex;
+    align-items: center;
+
+    .banner-text{
+        h1{
+            font-weight: 600;
+            text-align: center;
+            color: #ffffff;
+            line-height: 1.4;
+            font-size: 50px;
+        }
+        h2{
+            font-weight: 500;
+            text-align: center;
+            color: #ffffff;
+            font-size: 25px;
+        }
+    }
+}
+
+.contact-us-form{
+    margin-bottom: 60px;
+    margin-top: 60px;
+    .contact-form{
+        -webkit-box-shadow: 0px 0px 14px 5px rgba(0,0,0,0.20); 
+        box-shadow: 0px 0px 14px 5px rgba(0,0,0,0.20);
+        background-color: #ffffff;
+        border: 1px solid #d1d5e2;
+        border-radius: 12px;
+        margin-right: 15px;
+        margin-left: 15px;
+        width: 100%;
+        .border-r{
+            border-right: 1px solid #d1d5e2;
+        }
+        label{
+            font-weight: 600;
+            color: #00a67d;
+            font-size: 25px;
+        }
+        select{
+            background-color: #f5f7fd;
+            border: 1px solid #d1d5e2;
+            border-radius: 0px;
+            padding: 15px 15px;
+            color: #7b7b86;
+            font-size: 20px;
+            width: 100%;
+        }
+        input{
+            background-color: #f5f7fd;
+            border: 1px solid #d1d5e2;
+            border-radius: 12px;
+            padding: 30px 15px;
+            color: #7b7b86;
+            font-size: 16px;
+        }
+        textarea{
+            background-color: #f5f7fd;
+            border: 1px solid #d1d5e2;
+            border-radius: 12px;
+            color: #7b7b86;
+            font-size: 16px;
+        }
+        h2{
+            
+            line-height: 1;
+            i{
+                font-family: Roboto-Medium;
+                color: #afb0bc;
+                font-size: 18px;
+                line-height: 1;
+            }
+        }
+        button{
+            background-color: #00a67d;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-top: 25px;
+            font-size: 20px;
+            padding: 20px;
+            border: none;
+        }
+        h1{
+            font-weight: 600;
+            color: #282a41;
+            font-size: 27px;
+        }
+        h2{
+            font-weight: 500;
+            color: #7b7b86;
+            font-size: 16px;
+        }
+        hr{
+            border-top: 1px solid rgb(209 213 226);
+            margin-bottom: 30px;
+            margin-top: 40px;
+        }
+        .social-icons{
+            color: #6d96a2;
+            padding: 10px 0px;
+            font-size: 20px;
+            a{
+                text-decoration: none;
+                color: #6d96a2;
+                i{
+                    transition: all .3s;
+                    &:hover{
+                        transform: scale(1.2);
+                    }
+                }
+                
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 991px) {
+    .contact-us-form{
+        .contact-form{
+            .border-r {
+                border-right: 0px solid #d1d5e200;
+            }
+        } 
+    } 
+}
+
+@media only screen and (max-width: 500px) and (min-width: 300px){
+    .banner{
+        padding: 0;
+    }
+    .contact-us-form{
+        margin-top: 30px;
+        .contact-form{
+            margin-left: 0px;
+            margin-right: 0px;
+            h1{
+                font-size: 18px;
+            }
+            .p-5 {
+                padding: 2rem!important;
+            }
+        }
+    }
+    .row{
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}

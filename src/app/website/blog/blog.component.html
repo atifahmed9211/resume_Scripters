@@ -1,0 +1,155 @@
+<app-header [navbarClass]= "navbarClass"></app-header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 mt-5">
+            <h1>Career Advice</h1>
+        </div>
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 mt-3" *ngFor="let blog of blogs;let i = index">
+                            <div class="blog" *ngIf="i<4">
+                                <div class="img">
+                                    <img class="w-100" src="{{mediaUrl}}blogs_imgs/{{blog?.img}}">
+                                </div>
+                                <h2><a routerLink="../blog-detail/{{blog?.id}}">{{blog?.title}}</a></h2>
+                                <h3>{{blog?.created_at | date}}</h3>
+                            </div>
+                        </div>
+                        <!-- <div class="col-lg-6 col-md-6 mt-3">
+                            <div class="blog">
+                                <div class="img">
+                                    <img class="w-100" src="../../../assets/images/blog1.jpg">
+                                </div>
+                                <h2><a routerLink="../blog-detail">What is the Purpose of a
+                                    Cover Letter?</a></h2>
+                                <h3>20 Oct 2020</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 mt-3">
+                            <div class="blog">
+                                <div class="img">
+                                    <img class="w-100" src="../../../assets/images/blog1.jpg">
+                                </div>
+                                <h2><a routerLink="../blog-detail">What is the Purpose of a
+                                    Cover Letter?</a></h2>
+                                <h3>20 Oct 2020</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 mt-3">
+                            <div class="blog">
+                                <div class="img">
+                                    <img class="w-100" src="../../../assets/images/blog1.jpg">
+                                </div>
+                                <h2><a routerLink="../blog-detail">What is the Purpose of a
+                                    Cover Letter?</a></h2>
+                                <h3>20 Oct 2020</h3>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 mt-3">
+                    <div class="blog">
+                        <div class="img">
+                            <img class="w-100" src="{{mediaUrl}}blogs_imgs/{{blogs[4]?.img}}">
+                        </div>
+                        <h2><a routerLink="../blog-detail/{{blogs[4]?.id}}">{{blogs[4]?.title}}</a></h2>
+                        <h3>{{blogs[4]?.created_at | date}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-lg-3 col-md-3 mt-3" *ngFor="let blog of blogs;let i=index;">
+                    <div class="blog" *ngIf="i>4">
+                        <div class="img">
+                            <img class="w-100" src="{{mediaUrl}}blogs_imgs/{{blog?.img}}">
+                        </div>
+                        <h2><a routerLink="../blog-detail/{{blog?.id}}">{{blog?.title}}</a></h2>
+                        <h3>{{blog?.created_at | date}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-lg-12 text-center" data-aos="fade-down" data-aos-duration="1000">
+            <a href="javascript;" class="more-btn">View More Blogs</a>
+        </div> -->
+    </div>
+</div>
+
+<div class="banner-content mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="content">
+                    <h1 data-aos="fade-right">Transform your resume into a job-seeking missile</h1>
+                    <p>
+                        Upload your <span>resume</span> for a free expert review
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="content text-center">
+                    <div class="upload-btn-wrapper">
+                        <img src="../../../assets/images/ic_upload.png">
+                        <button class="foo">Upload Your Resume</button>
+                        <input type="file" name="myfile" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="container my-5">
+    <section id="steps">
+        <div class="text-center mb-5">
+            <span>STEPS</span>
+            <h2 class="font-weight-bold display-4 ">Why Career <span style=" color: #9B5DE5">Scripters?</span></h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="bg-light position-relative px-3 my-5">
+                    <div class="font-weight-bold circle text-white rounded-circle d-flex align-items-center justify-content-center mx-auto position-relative border border-white"
+                         style="width: 60px;height: 60px;top: -30px;border-width: 4px !important; background-color: #9B5DE5">
+                        1
+                    </div>
+                    <div class="px-3 text-center pb-3">
+                        <h4>Headline</h4>
+                        <p class="font-weight-light my-3">Lorem ipsum dolor sit consectetur adipisicing elit. Alias amet
+                            deleniti et fugit iusto nesciunt.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="bg-light position-relative px-3 my-5">
+                    <div class="font-weight-bold circle text-white rounded-circle d-flex align-items-center justify-content-center mx-auto position-relative border border-white"
+                         style="width: 60px;height: 60px;top: -30px;border-width: 4px !important; background-color: #9B5DE5">
+                        2
+                    </div>
+                    <div class="px-3 text-center pb-3">
+                        <h4>Headline</h4>
+                        <p class="font-weight-light my-3">Lorem ipsum dolor sit consectetur adipisicing elit. Alias amet
+                            deleniti et fugit iusto nesciunt.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="bg-light position-relative px-3 my-5">
+                    <div class="font-weight-bold circle text-white rounded-circle d-flex align-items-center justify-content-center mx-auto position-relative border border-white"
+                         style="width: 60px;height: 60px;top: -30px;border-width: 4px !important; background-color: #9B5DE5">
+                        3
+                    </div>
+                    <div class="px-3 text-center pb-3">
+                        <h4>Headline</h4>
+                        <p class="font-weight-light my-3">Lorem ipsum dolor sit consectetur adipisicing elit. Alias amet
+                            deleniti et fugit iusto nesciunt.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div> -->
+
+<app-footer></app-footer>

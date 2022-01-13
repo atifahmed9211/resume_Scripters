@@ -1,0 +1,290 @@
+@font-face{
+    font-family: Roboto-Regular;
+    src: url(../../../assets/fonts/Roboto-Regular.ttf);
+}
+@font-face{
+    font-family: Roboto-Medium;
+    src: url(../../../assets/fonts/Roboto-Medium.ttf);
+}
+@font-face{
+    font-family: Roboto-Bold;
+    src: url(../../../assets/fonts/Roboto-Bold.ttf);
+}
+
+h1{
+    margin-bottom: 12px;
+    font-size: 50px;
+    font-weight: 600;
+    color: #282a41;
+}
+
+.banner{
+    background-color: #00a67d;
+    padding: 20px 35px;
+    height: 315px;
+    display: flex;
+    align-items: center;
+
+    .banner-text{
+        h1{
+            text-align: center;
+            color: #ffffff;
+            line-height: 1.4;
+            font-weight: 600;
+            font-size: 60px;
+        }
+        p{
+            font-size: 25px;
+            color: #ffffff;
+        }
+    }
+}
+
+.our-story{
+    margin-top: 50px;
+    h1{
+        
+        margin-bottom: 12px;
+        font-size: 50px;
+        color: #282a41;
+    }
+    h3{
+        
+        color: #7a7b86;
+        line-height: 2;
+        font-size: 20px;
+    }
+    img{
+        border-radius: 30px;
+    }
+}
+
+.our-team{
+    margin-top: 50px;
+    h3{
+        
+        color: #7a7b86;
+        line-height: 2;
+        font-size: 20px;
+    }
+    .box{
+        padding: 40px;
+        border-radius: 12px;
+        background-color: #fff;
+        -webkit-box-shadow: 0px 0px 14px 5px rgba(0,0,0,0.20); 
+        box-shadow: 0px 0px 14px 5px rgba(0,0,0,0.20);
+        .writers{
+            text-align: center;
+            img{
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+            }
+            h2{
+                
+                color: #777882;
+                margin-top: 20px;
+                line-height: 1.6;
+                font-size: 20px;
+            }
+            .writer-name{
+                h2{
+                    margin-bottom: 0px;
+                    margin-top: 20px;
+                    color: #122c34;
+                    font-size: 25px;
+                }
+                p{
+                    
+                    margin-bottom: 0px;
+                    color: #777882;
+                    font-size: 16px;
+                }
+            }
+            h5{
+                color: #878891;
+            }
+        }
+    }
+}
+
+/* brand-resume */
+.brand-resume{
+    margin-top: 60px;
+    h1{
+        font-size: 50px;
+        font-weight: 600;
+    }
+    .box{
+        background-color: #fff;
+        border-radius: 12px;
+        transition: 0.6s;
+        -webkit-box-shadow: 0px 0px 14px 5px rgba(0,0,0,0.20); 
+        box-shadow: 0px 0px 14px 5px rgba(0,0,0,0.20);
+        .icon{
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+            i{
+                font-size: 20px;
+                height: 70px;
+                width: 70px;
+                border: 1px solid #122c34;
+                color: #122c34;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        h3{
+            color: #122c34;
+            font-weight: 600;
+        }
+
+    }
+    .box:hover{
+        background-color: #122c34;
+        cursor: pointer;
+        color: #fff;
+    }
+    .box:hover .icon i{
+        border: 1px solid #fff;
+        color: #fff;
+    }
+    .box:hover h3{
+        color: #fff;
+    }
+}
+
+.sectionThree{
+    position: relative;
+    padding-bottom: 40px;
+    .heading{
+        margin-top: 60px;
+        text-align: center;
+        width: 100%;
+    }
+    .company{
+        -webkit-box-shadow: 0px 0px 14px 5px rgba(0,0,0,0.20); 
+        box-shadow: 0px 0px 14px 5px rgba(0,0,0,0.20);
+        background-color: #fff;
+        border-radius: 12px;
+        margin-right: 15px;
+        margin-left: 15px;
+        width: 100%;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        .bran-images{
+            width: 200px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            transition: 0.6s;
+            cursor: pointer;
+            .img-hover{
+                position: absolute;
+                opacity: 0;
+            }
+            &:hover{
+                .img{
+                    position: absolute;
+                    opacity: 0;
+                }
+                .img-hover{
+                    position: absolute;
+                    opacity: 1;
+                }
+            }
+        }
+        img{
+            width: 100%;
+            padding: 40px;
+        }
+    }
+}
+
+
+@media only screen and (max-width: 767px) and (min-width: 300px){
+
+    .banner{
+        background-image: none;
+        background-color: #00a67d;
+        padding: 20px;
+        height: auto;
+        .banner-text{
+            h1{
+                font-size: 30px;
+            }
+        }
+    }
+    h1{
+        font-size: 35px !important;
+    }
+    .our-customer{
+        .company{
+            display: block;
+            div{
+                text-align: center;
+                img{
+                    width: 100px;
+                    padding: 15px;
+                    margin: 15px auto;
+                }
+            }
+        }
+    }
+    .sectionThree{
+        .company{
+            display: block;
+            .bran-images{
+                margin: auto;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 991px) and (min-width: 768px){
+    .our-customer{
+        .company{
+            div{
+                text-align: center;
+                img{
+                    padding: 25px;
+                }
+            }
+        }
+    }
+    .sectionThree{
+        .company{
+            .bran-images{
+                img{
+                    padding: 25px;
+                }
+            }
+        }
+    }
+    .box{
+        .writers{
+            h2{
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 1024px){
+    .our-team{
+        .box{
+            .writers{
+                h2{
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+
+}

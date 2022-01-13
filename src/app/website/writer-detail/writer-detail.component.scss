@@ -1,0 +1,85 @@
+@font-face{
+    font-family: Roboto-Regular;
+    src: url(../../../assets/fonts/Roboto-Regular.ttf);
+}
+@font-face{
+    font-family: Roboto-Medium;
+    src: url(../../../assets/fonts/Roboto-Medium.ttf);
+}
+@font-face{
+    font-family: Roboto-Bold;
+    src: url(../../../assets/fonts/Roboto-Bold.ttf);
+}
+
+h1{
+    font-family: Roboto-Medium;
+    margin-bottom: 12px;
+    font-size: 50px;
+    color: #282a41;
+}
+
+.banner{
+    background-image: url(../../../assets/images/about-bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 630px;
+    display: flex;
+    align-items: center;
+
+    .banner-text{
+        img{
+            height: 400px;
+            object-fit: cover;
+        }
+        h1{
+            font-family: Roboto-Bold;
+            color: #ffffff;
+            line-height: 1.4;
+            font-size: 50px;
+        }
+        h2{
+            font-family: Roboto-Medium;
+            color: #ffffff;
+            line-height: 1.4;
+            font-size: 25px;
+        }
+        .more-btn{
+            background-color: #ffffff;
+            font-family: Roboto-Bold;
+            text-decoration: none;
+            display: inline-block;
+            padding: 20px 60px;
+            margin-top: 15px;
+            color: #00a67d;
+            font-size: 20px;
+            transition: 1s;
+            box-shadow: -12px 10px 0px 0px rgba(255,224,143,1);
+            -webkit-box-shadow: -12px 10px 0px 0px rgba(255,224,143,1);
+            -moz-box-shadow: -12px 10px 0px 0px rgba(255,224,143,1);
+        }
+        .more-btn:hover{
+            box-shadow: 0px 0px 0px 0px rgba(255,224,143,1);
+            -webkit-box-shadow: 0px 0px 0px 0px rgba(255,224,143,1);
+            -moz-box-shadow: 0px 0px 0px 0px rgba(255,224,143,1);
+            background-color: #0f2b33;
+            color: #ffffff;
+        }
+
+    }
+}
+
+.our-story{
+    margin-top: 50px;
+    h1{
+        font-family: Roboto-Medium;
+        margin-bottom: 12px;
+        font-size: 50px;
+        color: #282a41;
+    }
+    h3{
+        font-family: Roboto-Medium;
+        color: #7a7b86;
+        line-height: 2;
+        font-size: 20px;
+    }
+}

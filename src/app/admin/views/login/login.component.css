@@ -1,0 +1,10 @@
+.login-right-card {
+  background: #0f2b33;
+}
+
+.login-left-card .login-btn {
+  background-color: #00a67d;
+}
+.login-left-card .login-btn:hover {
+  background: #0f2b33;
+}/*# sourceMappingURL=login.component.css.map */

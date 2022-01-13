@@ -1,0 +1,14 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="d-flex mb-3">
+                <input type="text" name="" id="" class="form-control" [(ngModel)]="blogTitle"  placeholder="Enter BLog Title">
+                <input type="file" name="" id="" class="form-control" (change)="blogImage($event)">
+            </div>
+            
+            <ckeditor [editor]="Editor" [config]="config" (ready)="onReady($event)"></ckeditor>
+            <button type="button" class="btn btn-lg btn-success mt-3 float-right" (click)="saveBlog()">{{btnText}}</button>
+        </div>
+    </div>
+</div>
+
