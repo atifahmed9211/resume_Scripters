@@ -3,6 +3,8 @@ import { navItems } from './_nav';
 import { IconSetService } from '@coreui/icons-angular';
 import { freeSet } from '@coreui/icons';
 import { Router } from '@angular/router';
+
+
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -11,14 +13,16 @@ import { Router } from '@angular/router';
 })
 export class UserComponent implements OnInit {
 
+  username: any;
+  public user = null;
+
   public sidebarMinimized = false;
   public navItems = navItems;
 
   constructor(
     public iconSet: IconSetService,
-    public router : Router
-  ) 
-  {
+    public router: Router
+  ) {
     // iconSet singleton
     iconSet.icons = { ...freeSet };
   }
@@ -26,13 +30,18 @@ export class UserComponent implements OnInit {
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
-  logout(){
+  public logout(): void {
     localStorage.removeItem("userToken");
     localStorage.removeItem("user");
-    this.router.navigate(["/login"]);
+    this.router.navigateByUrl('');
   }
 
   ngOnInit(): void {
+    if (localStorage.getItem("user")) {
+      this.user = JSON.parse(localStorage.getItem("user"))
+      console.log(this.user);
+      // to display username in html page
+      this.username = this.user.name;
+    }
   }
-
 }

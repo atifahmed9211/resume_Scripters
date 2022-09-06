@@ -17,7 +17,7 @@
                     <td>{{ i + 1 }}</td>
                     <td>{{ critique.users[0].name }}</td>
                     <td>{{ critique.users[0].email }}</td>
-                    <td><a href="{{ mediaUrl }}critiques/{{ critique.file }}" download=" {{ critique.file }}"> {{ critique.file }}</a><i class="ml-2 fa fa-download"></i></td>
+                    <td><a href="{{ mediaUrl }}public/critiques/{{ critique.file }}" download=" {{ critique.file }}"> {{ critique.file }}</a><i class="ml-2 fa fa-download"></i></td>
                     <td>{{critique.status}}</td>
                     <td>
                         <a routerLink="../critique/{{critique.id}}" class="btn btn-success"><i class="fa fa-pencil"></i></a>

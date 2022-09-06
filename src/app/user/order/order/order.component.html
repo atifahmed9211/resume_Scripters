@@ -2,81 +2,269 @@
     <div class="col-12">
         <tabset #orderTabs>
             <tab heading="Order Info">
-                <div class="d-flex">
-                    <div class=" flex-fill">
-                        <h2>Customer Detail :</h2>
-                        <div class="d-flex flex-column">
-                            <p class="mx-5"><b>Name :</b> {{ order?.users[0].name }}</p>
-                            <p class="mx-5"><b>Email :</b> {{ order?.users[0].email }}</p>
+                <div class="row">
+                    <div class="d-flex col-8">
+                        <!--Question-->
+                        <div *ngIf="showQuestionForm"
+                            class="card border-secondary d-flex flex-column justify-content-center align-items-center flex-fill">
+                            <div class="card-header">
+                                <h3>Please Fill up your Questionnaire :</h3>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <form [formGroup]="questionForm">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">
+                                            1) Kindly paste the link(s) of at least two jobs for which you are actively
+                                            applying for</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
+                                            placeholder="Enter your text here" formControlName="q1"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">
+                                            2) Do you want to have a general resume that can be applicable for several
+                                            job
+                                            postings, or a specific resume targeted to one particular position?</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
+                                            placeholder="Enter your text here" formControlName="q2"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">
+                                            3) What is your targeted industry?</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
+                                            placeholder="Ex: IT/Technology, SaaS, Software"
+                                            formControlName="q3"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">
+                                            4) What are the areas of expertise that you would like to mention in your
+                                            resume
+                                            as keywords?</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
+                                            placeholder="Ex: Project Management, Social Media"
+                                            formControlName="q4"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">
+                                            5) What have been the biggest accomplishments during your career?</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
+                                            placeholder="Enter your text here" formControlName="q5"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">
+                                            6) Have you received any honors or awards? What are they?</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
+                                            placeholder="Enter your text here" formControlName="q6"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">
+                                            7) Do you have any special certifications/training to include in the
+                                            resume?</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
+                                            placeholder="Enter your text here" formControlName="q7"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">
+                                            8) What is your LinkedIn URL?</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
+                                            placeholder="Enter your text here" formControlName="q8"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">
+                                            9) Upload Your Resume</label>
+                                        <input type="file" (change)="submitCV($event)" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <input type="submit" class="btn btn-success btn-lg btn-block"
+                                            (click)="submitQuestion()" />
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <h2>Order Detail :</h2>
-                        <div class="d-flex flex-column">
-                            <p class="mx-5"><b>Price :</b> {{ order?.price | currency }}</p>
-                            <p class="mx-5"><b>Status :</b> {{ order?.status }}</p>
-                            <p class="mx-5"><b>Date :</b> {{ order?.created_at | date }}</p>
-                        </div>
-                        <h2>Service / Package Detail</h2>
-                        <div class="d-flex flex-column">
-                            <p class="mx-5"><b>Service Type :</b> {{ order?.service_types[0].name }}</p>
-                            <p class="mx-5"><b>Service / Package Name :</b> {{ (order?.services.length > 0)?order?.services[0].title:order?.packages[0].title }}</p>
-                            <h3 class="mx-5">Description : </h3>
-                            <p class="mx-5">{{ (order?.services.length > 0)?order?.services[0].description:order?.packages[0].description }}</p>
+                        <!--Question With Answer-->
+                        <div *ngIf="showAnswerForm"
+                            class="card border-secondary d-flex flex-column justify-content-center align-items-center flex-fill">
+                            <div>
+                                <!--Doc File
+                                https://firebasestorage.googleapis.com/v0/b/careerscriptchat.appspot.com/o/Atif_Ahmed.doc?alt=media&token=45ab2936-a11b-4567-a0d7-5c93f4a902c9
+                                pdf file
+                                https://firebasestorage.googleapis.com/v0/b/careerscriptchat.appspot.com/o/Atif_Ahmed.pdf?alt=media&token=99c96086-eeea-45d8-b2aa-19689445047b
+                                pages file
+                                https://firebasestorage.googleapis.com/v0/b/careerscriptchat.appspot.com/o/dummy.pages?alt=media&token=606eb240-efca-4b02-9d57-65c59ff31971 
+                                text file
+                                https://firebasestorage.googleapis.com/v0/b/careerscriptchat.appspot.com/o/dummy.txt?alt=media&token=55ea6fe3-168e-443d-a43f-78a12835c770 
+
+                            -->
+                                <ngx-doc-viewer
+                                    url="https://firebasestorage.googleapis.com/v0/b/careerscriptchat.appspot.com/o/dummy.txt?alt=media&token=55ea6fe3-168e-443d-a43f-78a12835c770"
+                                    viewer="google" style="width:100%;height:80vh;" disableContent="all">
+                                </ngx-doc-viewer>
+                                <!-- <iframe [src]="mediaUrl+'answers_files/'+order.answers_file | safe" width="500px"
+                                height="500px"></iframe> -->
+                            </div>
+                            <div class="card-header">
+                                <h3>Questionnaire :</h3>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <div class="mb-3">
+                                    <h5>
+                                        1) Kindly paste the link(s) of at least two jobs for which you are actively
+                                        applying
+                                        for
+                                    </h5>
+                                    <p>{{questionaire_answer.q1}}</p>
+                                </div>
+                                <div class="mb-3">
+                                    <h5>
+                                        2) Do you want to have a general resume that can be applicable for several job
+                                        postings, or a specific resume targeted to one particular position?
+                                    </h5>
+                                    <p>{{questionaire_answer.q2}}</p>
+                                </div>
+                                <div class="mb-3">
+                                    <h5>
+                                        3) What is your targeted industry?
+                                    </h5>
+                                    <p>{{questionaire_answer.q3}}</p>
+                                </div>
+                                <div class="mb-3">
+                                    <h5>
+                                        4) What are the areas of expertise that you would like to mention in your resume
+                                        as
+                                        keywords?
+                                    </h5>
+                                    <p>{{questionaire_answer.q4}}</p>
+                                </div>
+                                <div class="mb-3">
+                                    <h5>
+                                        5) What have been the biggest accomplishments during your career?
+                                    </h5>
+                                    <p>{{questionaire_answer.q5}}</p>
+                                </div>
+                                <div class="mb-3">
+                                    <h5>
+                                        6) Have you received any honors or awards? What are they?
+                                    </h5>
+                                    <p>{{questionaire_answer.q6}}</p>
+                                </div>
+                                <div class="mb-3">
+                                    <h5>
+                                        7) Do you have any special certifications/training to include in the resume?
+                                    </h5>
+                                    <p>{{questionaire_answer.q7}}</p>
+                                </div>
+                                <div class="mb-3">
+                                    <h5>
+                                        8) What is your LinkedIn URL?
+                                    </h5>
+                                    <p>{{questionaire_answer.q8}}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="d-flex flex-column justify-content-center align-items-center flex-fill">
-                        <div *ngIf="order?.status == 'Order Placed'">
-                            <h2>Your Order Has Been Placed!</h2>
-                            <p>Shortly You will recieve Questions File. Please Download and upload your answers file to continue </p>
+                    <div class="flex-fill col-4">
+                        <div class="card border-secondary mb-2" style="max-width: 18rem;">
+                            <div class="card-header">
+                                <h4>Order Detail</h4>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <div class="row">
+                                    <p class="col-4"><b>Price :</b></p>
+                                    <p class="col-8 text-right">{{ order?.price | currency }}</p>
+                                </div>
+                                <div class="row">
+                                    <p class="col-4"><b>Status :</b></p>
+                                    <p class="col-8 text-right"> {{ order?.status }}</p>
+                                </div>
+                                <div class="row">
+                                    <p class="col-4"><b>Date :</b></p>
+                                    <p class="col-8 text-right"> {{ order?.created_at | date }}</p>
+                                </div>
+                            </div>
                         </div>
-                        <div *ngIf="order?.status == 'Questionnaire Start'">
-                            <a href="{{mediaUrl}}questions_files/{{order?.questions_file}}"  download="{{order?.questions_files}}" class="btn btn-lg btn-success">Download Questionnaire</a>
-                            <h2>Upload Your Answers File</h2>
-                            <input type="file" (change)="uploadFile($event)">
+                        <div class="card border-secondary mb-2" style="max-width: 18rem;">
+                            <div class="card-header">
+                                <h4>Service / Package Detail</h4>
+                            </div>
+                            <div class="card-body d-flex flex-column list-inline">
+                                <div class="row">
+                                    <p class="col-6"><b>Service Type :</b></p>
+                                    <p class="col-6 text-right">{{ order?.service_types[0].name }}</p>
+                                </div>
+                                <div class="row">
+                                    <p class="col-6"><b>Service /<br /> Package Name :</b></p>
+                                    <p class="col-6 text-right"> {{ (order?.services.length >
+                                        0)?order?.services[0].title:order?.packages[0].title }}</p>
+                                </div>
+                                <div class="row">
+                                    <p class="col-5"><b>Description :</b> </p>
+                                    <p class="col-7 text-right">{{ (order?.services.length >
+                                        0)?order?.services[0].description:order?.packages[0].description }} </p>
+                                </div>
+                            </div>
                         </div>
-                        <div *ngIf="order?.status == 'Questionnaire Completed'">
-                            <h2>Questionnaire Completed</h2>
-                        </div>
-                        
                     </div>
                 </div>
-                
             </tab>
-            <tab heading="Chat">
+            <tab heading="Chat" (selectTab)="enterChatRoom()">
                 <div class="card">
                     <div class="card-header msg_head">
                         <div class="d-flex bd-highlight">
-                            <!-- <div class="img_cont">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
+                            <div class="img_cont">
+                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                                    class="rounded-circle user_img">
                                 <span class="online_icon"></span>
-                            </div> -->
-                            <div class="user_info">
+                            </div>
+                            <!-- <div class="user_info">
                                 <span>Chat with Admin</span>
                                 <p>1767 Messages</p>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
-                    <div class="card-body msg_card_body">
-                        <div class="d-flex justify-content-start mb-4">
-                            <div class="msg_cotainer">
-                                Hi, how are you samim?
+                    <div #chatcontent [scrollTop]="scrolltop" class="card-body msg_card_body chat-content">
+                        <div class="message-box" *ngFor="let chat of chats">
+                            <div class="chat-status" text-center
+                                *ngIf="chat.type==='join'||chat.type==='exit';else message">
+                                <span class="chat-date">{{chat.date}}</span>
+                                <span class="chat-content-center">{{chat.message}}</span>
                             </div>
-                        </div>
-                        <div class="d-flex justify-content-end mb-4">
-                            <div class="msg_cotainer_send">
-                                Hi Khalid i am good tnx how about you?
-                            </div>
+                            <ng-template #message>
+                                <div class="chat-message">
+                                    <div class="right-bubble"
+                                        [ngClass]="{'right-bubble': chat.nickname === nickname, 'left-bubble': chat.nickname !== nickname}">
+                                        <span class="msg-name" *ngIf="chat.nickname === nickname">Me</span>
+                                        <span class="msg-name"
+                                            *ngIf="chat.nickname !== nickname">{{chat.nickname}}</span>
+                                        <span class="msg-date"> at {{chat.date}}</span>
+                                        <p text-wrap>{{chat.message}}</p>
+                                        <a *ngIf="chat.fileName" class="message_File_Download_Link"
+                                            (click)="DownloadMessageFile(chat.attachFile,chat.fileName)"><i
+                                                class="fas fa-arrow-to-bottom"></i>{{chat.fileName}}</a>
+                                    </div>
+                                </div>
+                            </ng-template>
                         </div>
                     </div>
+
                     <div class="card-footer">
-                        <div class="input-group">
-                            <div class="input-group-append">
-                                <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
+                        <form [formGroup]="chatForm">
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <label for="fileMessage" class="input-group-text attach_btn"><i
+                                            class="fas fa-paperclip"></i></label>
+                                    <input id="fileMessage" type="file" class="" style="display:none"
+                                        formControlName="attachFile" (change)="uploadFile($event)" />
+                                </div>
+                                <textarea #textAreaMessage (keydown.enter)="sendMessage(chatForm.value)"
+                                    class="form-control type_msg" placeholder="Type your message..."
+                                    formControlName="message" (input)="send_btn_class($event)">
+                                </textarea>
+                                <div class="input-group-append">
+                                    <button [disabled]="!send_btn_enable" [ngClass]="{send_btn:send_btn_enable}"
+                                        class="input-group-text" (click)="sendMessage(chatForm.value)"><i
+                                            class="fas fa-location-arrow"></i></button>
+                                </div>
                             </div>
-                            <textarea name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
-                            <div class="input-group-append">
-                                <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </tab>

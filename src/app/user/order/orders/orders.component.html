@@ -5,22 +5,33 @@
                 <thead>
                   <tr>
                     <th>#</th>
-                    <!-- <th>User Name</th>
-                    <th>User Email</th> -->
+                    <th>User Name</th>
+                    <th>User Email</th>
                     <th>Service/Package Name</th>
                     <th>Service Type</th>
                     <th>Price</th>
                     <th>Status</th>
                     <th>Actions</th>
-                    
                   </tr>
                 </thead>
                 <tbody *ngIf="orders?.length != 0">
-                  <tr *ngFor="let order of orders[0].orders; let i = index">
-                    <td>{{ i + 1 }}</td>
+                  <tr *ngFor="let order of orders[0].orders; let i=index">
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ userName }}</td>
+                      <td>{{ email }}</td>
+                      <td>{{ package_title[i] }}</td>
+                      <td>{{ service_type[i] }}</td>
+                      <td>{{ order.price | currency }}</td>
+                      <td>{{ order.status }}</td>
+                      <td>
+                        <a routerLink="../order/{{order.id}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                      </td>
+                  </tr>
+                  <!-- <tr *ngFor="let order of orders[0].orders; let i = index">
+                    <td>{{ i + 1 }}</td> -->
                     <!-- <td>{{ order.name }}</td>
                     <td>{{ order.email }}</td> -->
-                    <td *ngIf="order.services.length > 0">{{ order.services[0].title }}</td>
+                    <!-- <td *ngIf="order.services.length > 0">{{ order.services[0].title }}</td>
                     <td *ngIf="order.packages.length > 0">{{ order.packages[0].title }}</td>
                     <td>{{ order.service_types[0].name }}</td>
                     <td>{{ order.price | currency }}</td>
@@ -28,7 +39,7 @@
                     <td>
                         <a routerLink="../order/{{order.id}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
                     </td>
-                  </tr>
+                  </tr> -->
                 </tbody>
                 <tbody *ngIf="orders?.length == 0">
                     <tr>

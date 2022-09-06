@@ -26,6 +26,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+
 @NgModule({
   declarations: [UserComponent],
   imports: [
@@ -43,7 +44,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     IconSetModule.forRoot(),
     FormsModule,
     TabsModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     IconSetService,

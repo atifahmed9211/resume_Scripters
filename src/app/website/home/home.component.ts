@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, EventEmitter,HostListener } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter,HostListener,ViewChild,ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import * as AOS from 'aos';
 import { WebsiteService } from '../website.service';
@@ -6,6 +6,9 @@ import { environment } from '../../../environments/environment';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { LoginCheckModalComponent } from '../shared-components/login-check-modal/login-check-modal.component';
+import { HomeServiceService} from '../../services/home-service.service'
+import { CircleProgressOptions } from 'ng-circle-progress';
+
 declare var $;
 @Component({
   selector: 'app-home',
@@ -13,18 +16,25 @@ declare var $;
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  @ViewChild('circleProgress') circleProgressbar!:ElementRef<CircleProgressOptions>;
+  showLoader:boolean;
   mediaUrl    = environment.mediaUrl;
   homeLogo    = "./../../../assets/images/headerlogo.png";
   navbarClass = "navbar1";
   packages    = [];
   blogs       = [];
-  
+  public user = null;
+
   constructor(
     private webService  : WebsiteService,
     private router      : Router,
     private toastr      : ToastrService,
     private modalService: BsModalService,
-  ) { }
+    private homeData:HomeServiceService
+  ) { 
+    this.showLoader=homeData.showLoader;
+  }
   @HostListener('window:scroll', [])
   onWindowScroll() {
     var oTop;
@@ -52,9 +62,7 @@ export class HomeComponent implements OnInit {
           }
         });
       });
-    }
-    
-     
+    }  
   }
 
   showOne = false;
@@ -108,7 +116,8 @@ export class HomeComponent implements OnInit {
       formData.append("file",event.target.files[0]);
       this.webService.createCritique(formData).subscribe((res)=>{
         console.log(res);
-        this.toastr.success('Resume Uploaded Successfully', 'Success');
+        this.bsModalRef = this.modalService.show(LoginCheckModalComponent, {class: 'modal-dialog-centered'});
+        this.bsModalRef.content.closeBtnName = 'Close';
       },
       (error)=>{
         console.log(error);
@@ -116,6 +125,8 @@ export class HomeComponent implements OnInit {
       })
     }else{
       // this.router.navigateByUrl("register");
+      console.log(document.getElementById('circleProgress'));
+      console.log(this.circleProgressbar);
       this.bsModalRef = this.modalService.show(LoginCheckModalComponent, {class: 'modal-dialog-centered'});
       this.bsModalRef.content.closeBtnName = 'Close';
     }
@@ -145,6 +156,26 @@ export class HomeComponent implements OnInit {
     AOS.init();
     this.getPackages();
     this.getBlogs();
+    if(localStorage.getItem("user")){
+      this.user = JSON.parse(localStorage.getItem("user"))
+    }  
   }
-
+  BuyNow(pkgId)
+  {
+    if(this.user)
+    {
+      this.router.navigate(['./checkout'])
+      console.log("package id",pkgId);
+      for(let pkg of this.packages)
+      {
+        if(pkg.id==pkgId)
+        {
+          this.webService.selectedPackage=pkg;
+        }
+      }
+    }
+    else{
+      this.router.navigate(['./login'])
+    }
+  }
 }

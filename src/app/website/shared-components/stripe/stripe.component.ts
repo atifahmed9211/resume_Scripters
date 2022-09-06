@@ -88,24 +88,24 @@ export class StripeComponent implements AfterViewInit,OnInit,OnDestroy {
       if(paymentMethodError){
         console.log('Something is wrong:', paymentMethodError);
       }else{
-        let payment = {
-          amount:this.amount,
-          id:this.id,
-          service_type_id:this.service_type_id,
-          type:this.type,
-          paymentMethodId:paymentMethod.id
-        }
-        this.websiteService.createOrder(payment).subscribe((res)=>{
-          console.log(res);
-          this.bsModalRef.hide();
-          this.toastr.success('Resume Uploaded Successfully', 'Success');
-        },
-        (error)=>{
-          console.log(error);
-          this.toastr.error('Resume Upload Failed', 'Error');
-        })
-        console.log('Something is wright:',paymentMethod)
-      }
+      //   let payment = {
+      //     amount:this.amount,
+      //     id:this.id,
+      //     service_type_id:this.service_type_id,
+      //     type:this.type,
+      //     paymentMethodId:paymentMethod.id
+      //   }
+      //   this.websiteService.createOrder(payment).subscribe((res)=>{
+      //     console.log(res);
+      //     this.bsModalRef.hide();
+      //     this.toastr.success('Resume Uploaded Successfully', 'Success');
+      //   },
+      //   (error)=>{
+      //     console.log(error);
+      //     this.toastr.error('Resume Upload Failed', 'Error');
+      //   })
+      //   console.log('Something is wright:',paymentMethod)
+       }
     }
   }
 

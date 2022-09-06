@@ -6,7 +6,7 @@ import { UserComponent } from './user.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'orders',
     pathMatch: 'full',
   },
   {
@@ -30,6 +30,9 @@ const routes: Routes = [
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
       }
     ]
+  },
+  {
+    path:'profile'
   }
 ];
 

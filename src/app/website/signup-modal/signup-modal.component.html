@@ -1,0 +1,39 @@
+<div class="login-body">
+    <div class="row m-0">
+        <div class="col-md-12 p-0 d-flex justify-content-center">
+            <div class="login-form">
+                <div class="login-form-2">
+                    <h1>Join Us</h1>
+                    <h3>Sign Up with us to access all the packages</h3>
+
+                    <form [formGroup]="regForm" class="mt-4" (submit)="signUp()">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" class="form-control" placeholder="Enter you full name..."
+                                formControlName="name" />
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" placeholder="Enter your email"
+                                formControlName="email" />
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" placeholder="Enter your password"
+                                formControlName="password" />
+                        </div>
+
+                        <!-- <div class="form-group links d-flex justify-content-between">
+                            <a href="#" class="ForgetPwd" value="Login">Forget Password?</a>
+                        </div> -->
+
+                        <div class="form-group d-flex justify-content-center">
+                            <button type="submit" [disabled]="!regForm.valid" class="btnSubmit">Join Us</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -32,11 +32,14 @@
 </head>
 <body class="app">
   <!-- App Loading... -->
+
+  <!--Stripe Payment Gateway-->
   <script src="https://js.stripe.com/v3/"></script>
-  <script>
-    var stripe = Stripe('pk_test_UxG2cgnjixNLREduxv6bSNpF00T4UoQlyR');
-    var elements = stripe.elements();
-  </script>
+    <script type="text/javascript">
+      const stripe   = Stripe('pk_test_51GsRqCHBOqdNhpQrY94gN4SCPGkQtbljzIkj3mtFOjlmjHdkr0MBngoOUfwtVdFYY5qskLFH1hsLZmlAKQeBt2zj00t1PR5rft');
+      const elements = stripe.elements();
+    </script>
+
   <!--Start of Tawk.to Script-->
   <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();

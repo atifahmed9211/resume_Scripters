@@ -25,6 +25,12 @@ import { SignupComponent } from './signup/signup.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { LoginCheckModalComponent } from './shared-components/login-check-modal/login-check-modal.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import { LoginModalComponent } from './login-modal/login-modal.component';
+import { SignupModalComponent } from './signup-modal/signup-modal.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { PaymentConfirmationComponent } from './checkout/payment-confirmation/payment-confirmation.component';
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -46,7 +52,11 @@ import { LoginCheckModalComponent } from './shared-components/login-check-modal/
     PrivacyPolicyComponent,
     StripeComponent,
     SignupComponent,
-    LoginCheckModalComponent
+    LoginCheckModalComponent,
+    LoginModalComponent,
+    SignupModalComponent,
+    CheckoutComponent,
+    PaymentConfirmationComponent,
   ],
   imports: [
     CommonModule,
@@ -54,7 +64,29 @@ import { LoginCheckModalComponent } from './shared-components/login-check-modal/
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
-    WebsiteRoutingModule
+    WebsiteRoutingModule,
+    NgCircleProgressModule.forRoot({
+      "renderOnClick":false,
+      "percent":100,
+      "radius": 60,
+      "space": -5,
+      "backgroundPadding":0,
+      "outerStrokeGradient": false,
+      "outerStrokeWidth": 5,
+      "outerStrokeColor": "#00a67d",
+      "outerStrokeGradientStopColor": "#53a9ff",
+      "innerStrokeColor": "#e7e8ea",
+      "innerStrokeWidth": 5,
+      "title": "UI",
+      "animateTitle": false,
+      "animationDuration": 3000,
+      "showTitle": false,
+      "showSubtitle": false,
+      "showUnits": false,
+      "showBackground": true,
+      "responsive": true,
+      "lazy": true,
+    }),
   ],
   entryComponents:[StripeComponent,LoginCheckModalComponent]
 })

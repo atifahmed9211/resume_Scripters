@@ -10,9 +10,32 @@
                             Upload your <span>resume</span> for a free expert review
                         </p>
                         <div class="upload-btn-wrapper">
-                            <img src="../../../assets/images/ic_upload.png">
-                            <button class="foo">Upload Your Resume</button>
-                            <input type="file" name="myfile" (change)="uploadResume($event)"/>
+                                <div style="position:relative;">
+                                <div>
+                                    <label for="file-upload" *ngIf="!showLoader">
+                                        <span class="resume-upload-image rounded-circle">
+                                            <img *ngIf="!showLoader" src="../../../assets/images/ic_upload.png">
+                                        </span>
+                                    </label>
+                                    <span *ngIf="showLoader" class="tickIcon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor" class="bi bi-check2-all" viewBox="0 0 16 16">
+                                            <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"/>
+                                            <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/>
+                                        </svg>
+                                        <i class="bi bi-check2-all"></i>
+                                    </span>
+                                </div>
+                                    <div id="loadingCircle" *ngIf="showLoader">
+                                        <circle-progress #circleProgress [animation]="true">
+                                        </circle-progress>
+                                    </div>
+                                </div>
+                            <br/>
+                            <label *ngIf="!showLoader" for="file-upload" data-aos-duration="1000" class="more-btn">
+                                upload your resume
+                            </label>
+                            <br/><br/><br/><br/>
+                            <input id="file-upload" type="file" name="myfile" (change)="uploadResume($event)"/>
                         </div>
                     </div>
                 </div>
@@ -123,7 +146,7 @@
                             </div>
                         </div>
                         <div class="w-100 text-center mt-3">
-                            <a routerLink="/Resume-service" class="more-btn">Read More</a>
+                            <a routerLink="#" class="more-btn" (click)="BuyNow(pkg.id)">Buy Now</a>
                         </div>
                     </div>
                 </div>

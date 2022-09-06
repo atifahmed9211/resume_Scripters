@@ -28,6 +28,7 @@ export class AdminComponent implements OnInit {
   }
   logout(){
     localStorage.removeItem("adminToken");
+    localStorage.removeItem("nickname");
     this.router.navigate(["admin/login"]);
   }
 

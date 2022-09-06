@@ -20,7 +20,7 @@
                     <td><a href="{{ mediaUrl }}critiques/{{ critique.file }}" download=" {{ critique.file }}"> {{ critique.file }}</a><i class="ml-2 fa fa-download"></i></td>
                     <td>{{critique.status}}</td>
                     <td>
-                        <a routerLink="../critique/{{critique.id}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                        <a [ngClass]="{disabled:critique.status=='Pending'}" routerLink="../critique/{{critique.id}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
                     </td>
                   </tr>
                 </tbody>

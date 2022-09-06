@@ -20,9 +20,14 @@
                   <td>{{ i + 1 }}</td>
                   <td>{{ order.users[0].name }}</td>
                   <td>{{ order.users[0].email }}</td>
-                  <td *ngIf="order.services.length > 0">{{ order.services[0].title }}</td>
-                  <td *ngIf="order.packages.length > 0">{{ order.packages[0].title }}</td>
-                  <td>{{ order.service_types[0].name }}</td>
+                  <td *ngIf="order.packages.length > 0 else elseBlock">{{ order.packages[0].title }}</td>
+                  <ng-template #elseBlock>
+                    <td>Null</td>
+                  </ng-template>
+                  <td *ngIf="order.service_types.length > 0 else elseBlock">{{ order.service_types[0].name }}</td>
+                  <ng-template #elseBlock>
+                    <td>Null</td>
+                  </ng-template>
                   <td>{{ order.price | currency }}</td>
                   <td>{{ order.status }}</td>
                   <td>

@@ -35,17 +35,43 @@
                   </div>
                 </li> -->
                 <li class="nav-item"><a class="nav-link navigation-anchor" routerLink="/blog"> Blog</a></li>
-            </ul>
             
-            <div class="text-center login-btn" *ngIf="!user">
-                <a routerLink="/login" class="nav-link">Login</a>
-            </div>
-            <div class="text-center login-btn" *ngIf="user">
-              <a routerLink="/user" class="nav-link">Dashboard</a>
-            </div>
-            <div class="text-center login-btn" *ngIf="user">
-              <a href="javascript:;" class="nav-link" (click)="logout()">Log Out</a>
-            </div>
+            <div class="login-btn" *ngIf="!user">
+                <li class="nav-item dropdown dropdown-slide dropdown-hover">
+                  <a class="nav-link dropdown-toggle navigation-anchor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span>
+                      <i class="bi bi-person"></i>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                      </svg>
+                    </span>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" (click)="login()">Login</a>
+                    <a class="dropdown-item" (click)="register()">Register</a>
+                  </div>
+                </li>
+                <li >
+
+                </li>
+                </div>
+                <div *ngIf="user">
+                  <li class="nav-item dropdown dropdown-slide dropdown-hover">
+                    <a class="nav-link dropdown-toggle navigation-anchor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span>
+                        <i class="bi bi-person"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                          <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                        </svg>
+                      </span>
+                    </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item">{{username}}</a>
+                    <a routerLink="/user" class="dropdown-item">Dashboard</a>
+                    <a href="javascript:;" class="dropdown-item" (click)="logout()">Log Out</a>
+                  </div>
+                </div>
+              </ul>
             <!-- <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
                 <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
                     

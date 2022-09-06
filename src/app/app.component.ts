@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-
 import * as AOS from 'aos';
+import * as firebase from 'firebase';
+import { environment } from '../environments/environment';
 
 @Component({
   // tslint:disable-next-line
@@ -13,6 +14,7 @@ export class AppComponent implements OnInit {
     private router: Router
   ) {
     AOS.init();
+    firebase.initializeApp(environment.config);
   }
 
   ngOnInit() {

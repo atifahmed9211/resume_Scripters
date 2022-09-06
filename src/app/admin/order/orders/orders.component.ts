@@ -2,12 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { AdminService } from '../../admin.service';
 import { environment } from '../../../../environments/environment';
+
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnDestroy,OnInit {
+  
   mediaUrl                        = environment.mediaUrl;
   dtOptions : DataTables.Settings = {};
   dtTrigger : Subject<any>        = new Subject<any>();
@@ -15,8 +17,9 @@ export class OrdersComponent implements OnDestroy,OnInit {
   dtInitial : boolean             = false;
 
   constructor(
-    private as:AdminService
-  ) { }
+    private as:AdminService,  
+  ) { 
+  }
 
   ngOnInit(): void {
     this.getOrders();
@@ -37,5 +40,4 @@ export class OrdersComponent implements OnDestroy,OnInit {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }
-
 }

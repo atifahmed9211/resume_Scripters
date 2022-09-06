@@ -1,19 +1,37 @@
-<div class="modal-header">
+<!-- <div class="modal-header">
     <h4 class="modal-title pull-left">Please Login/Register to Continue</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
         <span aria-hidden="true">&times;</span>
     </button>
-</div>
+</div> -->
 <div class="modal-body">
-    <div class="d-flex justify-content-around">
+    <!-- <div class="d-flex justify-content-around">
         <a routerLink="login" class="btn btn-lg btn-primary" (click)="bsModalRef.hide()">Login</a>
         <a routerLink="register" class="btn btn-lg btn-primary" (click)="bsModalRef.hide()">Register</a>
-    </div>
-    
+    </div> -->
+    <span>Next Step</span><br/><br/>
+    <h4>Hi Atif, where shall we send your critique?</h4>
+        <p>We will get you a detailed analysis of your resume within 48 hours.<strong> Now, we 
+        just need to know where to send it!</strong></p>
+    <form>
+        <label>Email Address</label>
+        <br/>
+        <div class="row">
+            <div class="col-sm-8">
+                <input type="email" class="form-control" placeholder="name@example.com"/>
+            </div>
+            <div class="col-sm-4">
+                <input id="getEmailButton" type="button" class="btn btn-primary" value="Get my critique" (click)="uploadCV()"/>
+            </div>
+        </div>
+        <br/><br/>
+        <p>By uploading my resume, I agree to the TopResume <a class="link" href="#">Terms of Use</a>  
+            and acknowledge I have read the <a class="link" href="#">Privacy Policy</a></p> 
+    </form>    
 </div>
-<div class="modal-footer">
-    <!-- <button type="submit" class="btn btn-primary" (click)="createToken()">
+<!-- <div class="modal-footer">
+    <button type="submit" class="btn btn-primary" (click)="createToken()">
         PAY
-    </button> -->
+    </button>
     <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
-</div>
+</div> -->

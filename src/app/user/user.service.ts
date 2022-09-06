@@ -6,10 +6,12 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService{
   private baseUrl = environment.baseUrl;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {
+    
+   }
 
   // Orders Calls
 

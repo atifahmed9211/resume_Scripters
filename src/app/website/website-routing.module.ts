@@ -16,6 +16,7 @@ import { FederalServicesComponent } from './federal-services/federal-services.co
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
 import { SignupComponent } from './signup/signup.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const routes: Routes = [
   {
@@ -117,6 +118,10 @@ const routes: Routes = [
     path: '',
     redirectTo:"home",
     pathMatch:"full"
+  },
+  {
+    path:'checkout',
+    component:CheckoutComponent
   }
 ];
 

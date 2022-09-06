@@ -87,32 +87,38 @@ h3{
                 display: inline-block;
                 position: relative;
                 overflow: hidden;
-                margin-top: 20px;
-                cursor: pointer;
-                
-                img{
-                    position: absolute;
-                    margin-left: 37%;
-                    margin-top: 8%;
-                    width: 70px;
-                }
-                .foo {
-                    background-color: #ffffff38;
-                    border: dashed 3px #ffe08f;
-                    padding: 100px 40px 20px;
-                    border-radius: 0px;
-                    color: #ffe08f;
-                    font-weight: bold;
-                    font-size: 20px;
-                    cursor: pointer;
-                    
+                text-align: center;
+            
+                  #loadingCircle{
+                    position:absolute;
+                    top:0px;
+                    right:0px;
+                    bottom:0px;
+                    left:0px;
                   }
-                  input[type=file] {
-                    font-size: 100px;
+                  @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                  }
+
+                .resume-upload-image{
+                    display: block;
+                    padding:20px 30px;
+                    cursor: pointer;
+                    border:3px solid #ffffff;
+                    background-color:rgba(25, 61, 34, 0.4);
+                }
+                .tickIcon{
+                    color:rgba(255,224,143,1);
+                }
+                .tickIcon svg{
+                    padding:10px 30px;
+                }
+                  #file-upload{
+                    display: none;
                     position: absolute;
                     left: 0;
                     top: 0;
-                    opacity: 0;
                   }
               }
         }
@@ -1019,7 +1025,7 @@ h3{
     }
     .box{
         transition: 0.6s;
-        background-color: #fff;
+        background-color: #00a67d;
         -webkit-box-shadow: 0px 0px 14px 5px rgba(0,0,0,0.20); 
         box-shadow: 0px 0px 14px 5px rgba(0,0,0,0.20);
         border-radius: 12px;

@@ -11,6 +11,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { SafePipe } from './safe.pipe';
+
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -20,16 +24,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    HttpClientModule,
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    SafePipe,
   ],
   providers: [
+    DatePipe,
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     }
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
