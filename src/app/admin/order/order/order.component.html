@@ -1,6 +1,12 @@
-<div class="row">
+<div class="row" [ngClass]="{blur:firstDraftSend}">
     <div class="col-12">
         <tabset #orderTabs>
+            <button *ngIf="order?.status==2" (click)="sendFirstDraft()" style="position:absolute;right:0"
+                class="mt-2 mr-4 btn btn-primary">Send First Draft</button>
+            <button *ngIf="order?.status==5 || order?.status==8" (click)="sendRevision()" style="position:absolute;right:0"
+                class="mt-2 mr-4 btn btn-primary">Send Revision</button>
+            <button *ngIf="order?.status==4" (click)="sendFinalDraft()" style="position:absolute;right:0"
+                class="mt-2 mr-4 btn btn-primary">Send Final Draft</button>
             <tab heading="Order Info">
                 <div class="d-flex">
                     <div class=" flex-fill">
@@ -12,30 +18,33 @@
                         <h2>Order Detail :</h2>
                         <div class="d-flex flex-column">
                             <p class="mx-5"><b>Price :</b> {{ order?.price | currency }}</p>
-                            <p class="mx-5"><b>Status :</b> {{ order?.status }}</p>
+                            <p class="mx-5"><b>Status :</b> {{ admin_status[order?.status] }}</p>
                             <p class="mx-5"><b>Date :</b> {{ order?.created_at | date }}</p>
                         </div>
                         <h2>Service / Package Detail</h2>
                         <div class="d-flex flex-column">
                             <p class="mx-5"><b>Service Type :</b> {{ order?.service_types[0].name }}</p>
-                            <p class="mx-5"><b>Service / Package Name :</b> {{ (order?.services.length > 0)?order?.services[0].title:order?.packages[0].title }}</p>
+                            <p class="mx-5"><b>Service / Package Name :</b> {{ (order?.services.length >
+                                0)?order?.services[0].title:order?.packages[0].title }}</p>
                             <h3 class="mx-5">Description : </h3>
-                            <p class="mx-5">{{ (order?.services.length > 0)?order?.services[0].description:order?.packages[0].description }}</p>
+                            <p class="mx-5">{{ (order?.services.length >
+                                0)?order?.services[0].description:order?.packages[0].description }}</p>
                         </div>
                     </div>
                     <div class="d-flex flex-column justify-content-center align-items-center flex-fill">
-                        <div *ngIf="order?.status == 'Questionnaire Start' || order?.status=='Order Placed'">
+                        <div *ngIf="order?.status == 1">
                             <h2>No Questionaire Completed</h2>
                         </div>
-                        <div *ngIf="order?.status == 'Questionnaire Completed'">
+                        <div *ngIf="order?.status!=1">
                             <div class="mb-3">
                                 <label class="form-label">
-                                    1) Kindly paste the link(s) of at least two jobs for which you are actively applying for</label>
+                                    1) Kindly paste the link(s) of at least two jobs for which you are actively applying
+                                    for</label>
                                 <p>{{questionaire_answer.q1}}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">
-                                    2) Do you want to have a general resume that can be applicable for several job 
+                                    2) Do you want to have a general resume that can be applicable for several job
                                     postings, or a specific resume targeted to one particular position?</label>
                                 <p>{{questionaire_answer.q2}}</p>
                             </div>
@@ -46,7 +55,8 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">
-                                    4) What are the areas of expertise that you would like to mention in your resume as keywords?</label>
+                                    4) What are the areas of expertise that you would like to mention in your resume as
+                                    keywords?</label>
                                 <p>{{questionaire_answer.q4}}</p>
                             </div>
                             <div class="mb-3">
@@ -70,19 +80,22 @@
                                 <p>{{questionaire_answer.q8}}</p>
                             </div>
                             <div class="mb-3">
-                                <a href="{{mediaUrl}}answers_files/{{order?.answers_file}}"  download="{{order?.answers_file}}" class="btn btn-lg btn-success">Download Resume</a>
+                                <a href="{{mediaUrl}}answers_files/{{order?.answers_file}}"
+                                    download="{{order?.answers_file}}" class="btn btn-lg btn-success">Download
+                                    Resume</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
             </tab>
             <tab heading="Chat" (selectTab)="enterChatRoom()">
                 <div class="card">
                     <div class="card-header msg_head">
                         <div class="d-flex bd-highlight">
                             <div class="img_cont">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
+                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                                    class="rounded-circle user_img">
                                 <span class="online_icon"></span>
                             </div>
                             <!-- <div class="user_info">
@@ -93,20 +106,39 @@
                     </div>
                     <div #chatcontent [scrollTop]="scrolltop" class="card-body msg_card_body chat-content">
                         <div class="message-box" *ngFor="let chat of chats">
-                            <div class="chat-status" text-center *ngIf="chat.type==='join'||chat.type==='exit';else message">
-                              <span class="chat-date">{{chat.date}}</span>
-                              <span class="chat-content-center">{{chat.message}}</span>
+                            <div class="chat-status" text-center
+                                *ngIf="chat.type==='join'||chat.type==='exit';else message">
+                                <span class="chat-date">{{chat.date}}</span>
+                                <span class="chat-content-center">{{chat.message}}</span>
                             </div>
                             <ng-template #message>
-                              <div class="chat-message">
-                                <div class="right-bubble" [ngClass]="{'right-bubble': chat.nickname === nickname, 'left-bubble': chat.nickname !== nickname}">
-                                  <span class="msg-name" *ngIf="chat.nickname === nickname">Me</span>
-                                  <span class="msg-name" *ngIf="chat.nickname !== nickname">{{chat.nickname}}</span>
-                                  <span class="msg-date"> at {{chat.date}}</span>
-                                  <p text-wrap>{{chat.message}}</p>
-                                  <a *ngIf="chat.fileName" class="message_File_Download_Link" (click)="DownloadMessageFile(chat.attachFile,chat.fileName)"><i class="fas fa-arrow-to-bottom"></i>{{chat.fileName}}</a>
+                                <div *ngIf="chat.type!='firstDraftMessage'" class="chat-message">
+                                    <div class="right-bubble"
+                                        [ngClass]="{'right-bubble': chat.nickname === nickname, 'left-bubble': chat.nickname !== nickname}">
+                                        <span class="msg-name" *ngIf="chat.nickname === nickname">Me</span>
+                                        <span class="msg-name"
+                                            *ngIf="chat.nickname !== nickname">{{chat.nickname}}</span>
+                                        <span class="msg-date"> at {{chat.date}}</span>
+                                        <p [innerHTML]="chat.message"></p>
+                                        <a *ngIf="chat.fileName" class="message_File_Download_Link"
+                                            (click)="DownloadMessageFile(chat.attachFile,chat.fileName)"><i
+                                                class="fas fa-arrow-to-bottom"></i>{{chat.fileName}}</a>
+                                    </div>
                                 </div>
-                              </div>
+                                <div *ngIf="chat.type=='firstDraftMessage'" class="chat-message">
+                                    <div class="right-bubble"
+                                        [ngClass]="{'right-bubble': chat.nickname === nickname, 'left-bubble': chat.nickname !== nickname}">
+                                        <span class="msg-name" *ngIf="chat.nickname === nickname">Me</span>
+                                        <span class="msg-name"
+                                            *ngIf="chat.nickname !== nickname">{{chat.nickname}}</span>
+                                        <span class="msg-date"> at {{chat.date}}</span>
+                                        <p [innerHTML]="chat.message"></p>
+                                        <!-- <span>
+                                            <i
+                                                    class="fas fa-arrow-to-bottom"></i>{{chat.}}
+                                        </span> -->
+                                    </div>
+                                </div>
                             </ng-template>
                         </div>
                     </div>
@@ -114,25 +146,301 @@
                         <form [formGroup]="chatForm">
                             <div class="input-group">
                                 <div class="input-group-append">
-                                    <label for="fileMessage" class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></label>
-                                    <input id="fileMessage" type="file" class="" style="display:none" formControlName="attachFile" (change)="uploadFile($event)"/>
+                                    <label for="fileMessage" class="input-group-text attach_btn"><i
+                                            class="fas fa-paperclip"></i></label>
+                                    <input #fileMessage id="fileMessage" type="file" class="" style="display:none"
+                                        formControlName="attachFile" (change)="onFileChange($event)" multiple/>
                                 </div>
-                                <textarea
-                                    #textAreaMessage 
-                                    (keydown.enter)="sendMessage(chatForm.value)" 
-                                    class="form-control type_msg" 
-                                    placeholder="Type your message..." 
-                                    formControlName="message" (input)="send_btn_class($event)">
-                                </textarea>
+                                <div class="col-lg-11 col-md-10 col-sm-9 col-8" style="padding:0">
+                                    <ckeditor [(ngModel)]="ckContent" formControlName="message"
+                                        (change)="send_btn_class($event)" [config]="{enterMode :2,
+                                    shiftEnterMode:2,height:100,width:'100%'}">
+                                        <ckbutton [name]="'saveButton'" [command]="'saveCmd'" [icon]="'save.png'"
+                                            [label]="'Save Document'" [toolbar]="'clipboard,1'">
+                                        </ckbutton>
+                                    </ckeditor>
+                                </div>
                                 <div class="input-group-append">
-                                    <button [disabled]="!send_btn_enable" [ngClass]="{send_btn:send_btn_enable}" class="input-group-text" (click)="sendMessage(chatForm.value)"><i class="fas fa-location-arrow"></i></button>
+                                    <button [disabled]="!send_btn_enable" [ngClass]="{send_btn:send_btn_enable}"
+                                        class="input-group-text" (click)="sendMessage(chatForm.value)"><i
+                                            class="fas fa-location-arrow"></i></button>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-12">
+                                    <span *ngFor="let item of files; let i=index">
+                                        <p class="selectedFiles">
+                                            {{item.name}}
+                                        </p>
+                                            <div *ngIf="showLoader && item==files[files.length-1]" class="spinner-border spinner-border-sm" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        <i *ngIf="!showLoader || !(item==files[files.length-1])" (click)="deleteItem(i)" class="fal fa-times-circle"></i>
+                                        &nbsp;&nbsp;&nbsp;
+                                    </span>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </tab>
-            <tab heading="Files">Static content 2</tab>
+            <tab heading="Files">
+                <div class="firstDraft">
+                    <H2>First Draft</H2>
+                    <div *ngFor="let item of draftFiles">
+                        <div *ngIf="item.file_status=='firstDraft'">
+                            {{item.date}}
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="{{mediaUrl}}{{item.file_path}}" download="{{item.file}}"
+                                target="_blank">{{item.file}}<i class="fas fa-arrow-to-bottom"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="firstDraft">
+                    <H2>Revision</H2>
+                    <div *ngFor="let item of draftFiles">
+                        <div *ngIf="item.file_status=='revision'">
+                            {{item.date}}
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="{{mediaUrl}}files/{{order.id}}/{{item.file}}" target="_blank"
+                                download="{{item.file}}">{{item.file}}<i class="fas fa-arrow-to-bottom"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="firstDraft">
+                    <H2>Final Draft</H2>
+                    <div *ngFor="let item of draftFiles">
+                        <div *ngIf="item.file_status=='finalDraft'">
+                            {{item.date}}
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="{{mediaUrl}}files/{{order.id}}/{{item.file}}" target="_blank"
+                                download="{{item.file}}">{{item.file}}<i class="fas fa-arrow-to-bottom"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="firstDraft">
+                    <H2>Other Files</H2>
+                    <div *ngFor="let item of draftFiles">
+                        <div *ngIf="item.file_status=='others'">
+                            {{item.date}}
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="{{mediaUrl}}files/{{order.id}}/{{item.file}}" target="_blank"
+                                download="{{item.file}}">{{item.file}}<i class="fas fa-arrow-to-bottom"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+            <tab *ngIf="resume_detail" heading="Resume Data" id="resume_data">
+                <fieldset>
+                    <legend><span class="number">1</span> Your Basic Info</legend>
+                    <table class="table">
+                        <tr>
+                            <th>First Name</th>
+                            <th>Middle Name</th>
+                            <th>Last Name</th>
+                            <th>Phone Number</th>
+                            <th>Email</th>
+                            <th>Linkdin Profile URL</th>
+                        </tr>
+                        <tr>
+                            <td>{{resume_detail.firstName}}</td>
+                            <td>{{resume_detail.middleName}}</td>
+                            <td>{{resume_detail.lastName}}</td>
+                            <td>{{resume_detail.phoneNumber}}</td>
+                            <td>{{resume_detail.email}}</td>
+                            <td>{{resume_detail.linkdin_url}}</td>
+                        </tr>
+                    </table>
+                    <div>
+                        <b>Current Postal Address:</b>
+                        <p>
+                            {{resume_detail.address}}
+                        </p>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend><span class="number">2</span>Languages</legend>
+                    <table class="table">
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Proficiency</th>
+                        </tr>
+                        <tr *ngFor="let item of resume_detail.languages; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.language_name}}</td>
+                            <td>{{item.proficiency_level}}</td>
+                        </tr>
+                    </table>
+                </fieldset>
+                <fieldset>
+                    <legend><span class="number">3</span>Technical Skills</legend>
+                    <table class="table">
+                        <tr>
+                            <th>Computer Skill</th>
+                            <th>Interpersonal Skill</th>
+                        </tr>
+                        <tr>
+                            <td>{{resume_detail.computer_skill}}</td>
+                            <td>{{resume_detail.interpersonal_skill}}</td>
+                        </tr>
+                    </table>
+                </fieldset>
+                <fieldset>
+                    <legend><span class="number">4</span>Desired Position</legend>
+                    <table class="table">
+                        <tr>
+                            <th>#</th>
+                            <th>Country Targeted</th>
+                            <th>Position Title</th>
+                            <th>Description</th>
+                            <th>Link</th>
+                            <th>Expected Salary</th>
+                        </tr>
+                        <tr *ngFor="let item of resume_detail.positions; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.country_targeted}}</td>
+                            <td>{{item.position_title}}</td>
+                            <td>{{item.description}}</td>
+                            <td>{{item.position_link}}</td>
+                            <td>{{item.salary}}</td>
+                        </tr>
+                    </table>
+                </fieldset>
+                <fieldset>
+                    <legend><span class="number">5</span> Area of Expertise</legend>
+
+                    <b>
+                        Please tell us about any/ all awards, honours or acknowledgements you have
+                        received.
+                    </b>
+                    <p>
+                        {{resume_detail.expertise1}}
+                    </p>
+                    <div class="html2pdf__page-break"></div>
+                    <b>
+                        Please tell us about the top 12 areas within your business/industry where
+                        you consider
+                        yourself an
+                        expert.
+                    </b>
+                    <p>
+                        {{resume_detail.expertise2}}
+                    </p>
+                </fieldset>
+                <fieldset>
+                    <legend><span class="number">6</span> Academic Degrees</legend>
+                    <table class="table">
+                        <tr>
+                            <th>#</th>
+                            <th>Name of Educational Institute</th>
+                            <th>Name of Degree</th>
+                            <th>State</th>
+                            <th>City</th>
+                            <th>Starting Date</th>
+                            <th>Ending Date</th>
+                        </tr>
+                        <tr *ngFor="let item of resume_detail.academic_degrees; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.name_of_institute}}</td>
+                            <td>{{item.name_of_degree}}</td>
+                            <td>{{item.state}}</td>
+                            <td>{{item.city}}</td>
+                            <td>{{item.starting_date}}</td>
+                            <td>{{item.ending_date}}</td>
+                        </tr>
+                    </table>
+                </fieldset>
+                <fieldset>
+                    <legend><span class="number">7</span>
+                        Training & Certificates Professional training only
+                    </legend>
+                    <table class="table">
+                        <tr>
+                            <th>#</th>
+                            <th>Institution/Organization</th>
+                            <th>Name of Course</th>
+                            <th>State</th>
+                            <th>City</th>
+                            <th>Starting Date</th>
+                            <th>Ending Date</th>
+                        </tr>
+                        <tr *ngFor="let item of resume_detail.certifications; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.name_of_institute}}</td>
+                            <td>{{item.name_of_course}}</td>
+                            <td>{{item.state}}</td>
+                            <td>{{item.city}}</td>
+                            <td>{{item.starting_date}}</td>
+                            <td>{{item.ending_date}}</td>
+                        </tr>
+                    </table>
+                </fieldset>
+                <fieldset>
+                    <legend><span class="number">8</span>
+                        Professional Membership [active and past]
+                    </legend>
+                    <table class="table">
+                        <tr>
+                            <th>#</th>
+                            <th>Name of Institute</th>
+                            <th>Explanation[if applicable]</th>
+                            <th>State</th>
+                            <th>City</th>
+                            <th>Starting Date</th>
+                            <th>Ending Date</th>
+                        </tr>
+                        <tr *ngFor="let item of resume_detail.memberships; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.name_of_institute}}</td>
+                            <td>{{item.explanation}}</td>
+                            <td>{{item.state}}</td>
+                            <td>{{item.city}}</td>
+                            <td>{{item.starting_date}}</td>
+                            <td>{{item.ending_date}}</td>
+                        </tr>
+                    </table>
+                </fieldset>
+                <div class="html2pdf__page-break"></div>
+                <fieldset>
+                    <legend><span class="number">9</span>
+                        Employment History
+                    </legend>
+                    <table class="table">
+                        <tr>
+                            <th>#</th>
+                            <th>Name of Organization/Institution:</th>
+                            <th>Your Position Name</th>
+                            <th>Starting Date</th>
+                            <th>Ending Date</th>
+                            <th>State</th>
+                            <th>City</th>
+                        </tr>
+                        <tr *ngFor="let item of resume_detail.experience; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.name_of_institute}}</td>
+                            <td>{{item.position}}</td>
+                            <td>{{item.starting_date}}</td>
+                            <td>{{item.ending_date}}</td>
+                            <td>{{item.state}}</td>
+                            <td>{{item.city}}</td>
+                        </tr>
+                    </table>
+                    <table class="table">
+                        <tr>
+                            <th>#</th>
+                            <th>Duties/Contributions</th>
+                            <th>Achievements</th>
+                        </tr>
+                        <tr *ngFor="let item of resume_detail.experience; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.duties}}</td>
+                            <td>{{item.achievements}}</td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </tab>
+            <button class="btn btn-success" (click)="downloadResumeData()">Download Resume Detail</button>
         </tabset>
     </div>
 </div>

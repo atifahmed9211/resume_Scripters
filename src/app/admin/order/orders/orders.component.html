@@ -29,7 +29,7 @@
                     <td>Null</td>
                   </ng-template>
                   <td>{{ order.price | currency }}</td>
-                  <td>{{ order.status }}</td>
+                  <td>{{ admin_order_status[order.status] }}</td>
                   <td>
                       <a routerLink="../order/{{order.id}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
                   </td>

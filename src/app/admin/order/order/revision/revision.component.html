@@ -1,0 +1,49 @@
+<div class="modal-header">
+    <span>Next Step</span>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="hideModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="revisionDraft">
+        <label>Enter Your Message</label>
+        <br />
+        <div class="row">
+            <div class="col-sm-12">
+                <ckeditor [(ngModel)]="ckContent" formControlName="message"
+                    [config]="{enterMode :2, shiftEnterMode:2,height:100,width:'100%'}">
+                    <ckbutton [name]="'saveButton'" [command]="'saveCmd'" [icon]="'save.png'" [label]="'Save Document'"
+                        [toolbar]="'clipboard,1'">
+                    </ckbutton>
+                </ckeditor>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-12">
+                <input #fileMessage type="file" multiple class="form-control" (change)="onFileChange($event)"
+                    formControlName="attachFile" />
+            </div>
+        </div>
+        <br />
+        <div class="row mb-3">
+            <div class="col-sm-12">
+                <span *ngFor="let item of files; let i=index">
+                    <p class="selectedFiles">
+                        {{item.name}}
+                    </p>
+                    <div *ngIf="showLoader && item==files[files.length-1]" class="spinner-border spinner-border-sm" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <i *ngIf="!showLoader || !(item==files[files.length-1])" (click)="deleteItem(i)" class="fal fa-times-circle"></i>
+                    &nbsp;&nbsp;&nbsp;
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <input type="submit" class="form-control btn btn-primary" (click)="sendRevision()">
+            </div>
+        </div>
+    </form>
+</div>

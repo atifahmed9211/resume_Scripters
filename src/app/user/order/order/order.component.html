@@ -3,103 +3,163 @@
         <tabset #orderTabs>
             <tab heading="Order Info">
                 <div class="row">
+                    <div class="d-flex col-12">
+                        <div class="card flex-fill">
+                            <ul class="ml-3">
+                                <h4>{{order?.users[0].name}}</h4>
+                                <!-- #{{order.id}} -->
+                                <button *ngIf="order.status==3 || order.status==5" class="btn btn-primary"
+                                    (click)="updateOrderStatus('approve')">Approve
+                                    Draft</button>
+                                <button *ngIf="order.status==3 || order.status==5" class="btn btn-danger"
+                                    (click)="updateOrderStatus('revision')">Revision</button>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="d-flex col-8">
                         <!--Question-->
-                        <div *ngIf="showQuestionForm"
+                        <div *ngIf="order.status==1"
                             class="card border-secondary d-flex flex-column justify-content-center align-items-center flex-fill">
                             <div class="card-header">
                                 <h3>Please Fill up your Questionnaire :</h3>
                             </div>
                             <div class="card-body d-flex flex-column">
                                 <form [formGroup]="questionForm">
+                                    <div *ngIf="us.chooseCV" class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">
+                                            <strong>Upload Your Resume</strong></label>
+                                        <input type="file" (change)="submitCV($event)" formControlName="resume" />
+                                        <a *ngIf="!selectedResume" routerLink="resumedata">if you don't have a resume
+                                            then click here</a>
+                                        <br />
+                                    </div>
                                     <div class="mb-3">
                                         <label for="exampleFormControlTextarea1" class="form-label">
-                                            1) Kindly paste the link(s) of at least two jobs for which you are actively
-                                            applying for</label>
+                                            <strong>Kindly paste the link(s) of at least two jobs for which you are
+                                                actively
+                                                applying for</strong></label>
                                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
                                             placeholder="Enter your text here" formControlName="q1"></textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleFormControlTextarea1" class="form-label">
-                                            2) Do you want to have a general resume that can be applicable for several
-                                            job
-                                            postings, or a specific resume targeted to one particular position?</label>
+                                            <strong>
+                                                Do you want to have a general resume that can be applicable for several
+                                                job
+                                                postings, or a specific resume targeted to one particular
+                                                position?</strong>
+                                        </label>
                                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
                                             placeholder="Enter your text here" formControlName="q2"></textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleFormControlTextarea1" class="form-label">
-                                            3) What is your targeted industry?</label>
+                                            <strong>
+                                                What is your targeted industry?</strong>
+                                        </label>
                                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
                                             placeholder="Ex: IT/Technology, SaaS, Software"
                                             formControlName="q3"></textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleFormControlTextarea1" class="form-label">
-                                            4) What are the areas of expertise that you would like to mention in your
-                                            resume
-                                            as keywords?</label>
+                                            <strong>
+                                                What are the areas of expertise that you would like to mention in your
+                                                resume
+                                                as keywords?</strong></label>
                                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
                                             placeholder="Ex: Project Management, Social Media"
                                             formControlName="q4"></textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleFormControlTextarea1" class="form-label">
-                                            5) What have been the biggest accomplishments during your career?</label>
+                                            <strong>
+                                                What have been the biggest accomplishments during your career?</strong>
+                                        </label>
                                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
                                             placeholder="Enter your text here" formControlName="q5"></textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleFormControlTextarea1" class="form-label">
-                                            6) Have you received any honors or awards? What are they?</label>
+                                            <strong>
+                                                Have you received any honors or awards? What are they?</strong></label>
                                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
                                             placeholder="Enter your text here" formControlName="q6"></textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleFormControlTextarea1" class="form-label">
-                                            7) Do you have any special certifications/training to include in the
-                                            resume?</label>
+                                            <strong>
+                                                Do you have any special certifications/training to include in the
+                                                resume?</strong>
+                                        </label>
                                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
                                             placeholder="Enter your text here" formControlName="q7"></textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleFormControlTextarea1" class="form-label">
-                                            8) What is your LinkedIn URL?</label>
+                                            <strong>
+                                                What is your LinkedIn URL?</strong></label>
                                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
                                             placeholder="Enter your text here" formControlName="q8"></textarea>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">
-                                            9) Upload Your Resume</label>
-                                        <input type="file" (change)="submitCV($event)" />
-                                    </div>
-                                    <div class="mb-3">
                                         <input type="submit" class="btn btn-success btn-lg btn-block"
+                                            [disabled]="questionForm.invalid && us.chooseCV"
                                             (click)="submitQuestion()" />
                                     </div>
                                 </form>
                             </div>
                         </div>
                         <!--Question With Answer-->
-                        <div *ngIf="showAnswerForm"
+                        <div *ngIf="order.status!=1"
                             class="card border-secondary d-flex flex-column justify-content-center align-items-center flex-fill">
-                            <div>
-                                <!--Doc File
-                                https://firebasestorage.googleapis.com/v0/b/careerscriptchat.appspot.com/o/Atif_Ahmed.doc?alt=media&token=45ab2936-a11b-4567-a0d7-5c93f4a902c9
-                                pdf file
-                                https://firebasestorage.googleapis.com/v0/b/careerscriptchat.appspot.com/o/Atif_Ahmed.pdf?alt=media&token=99c96086-eeea-45d8-b2aa-19689445047b
-                                pages file
-                                https://firebasestorage.googleapis.com/v0/b/careerscriptchat.appspot.com/o/dummy.pages?alt=media&token=606eb240-efca-4b02-9d57-65c59ff31971 
-                                text file
-                                https://firebasestorage.googleapis.com/v0/b/careerscriptchat.appspot.com/o/dummy.txt?alt=media&token=55ea6fe3-168e-443d-a43f-78a12835c770 
-
-                            -->
-                                <ngx-doc-viewer
-                                    url="https://firebasestorage.googleapis.com/v0/b/careerscriptchat.appspot.com/o/dummy.txt?alt=media&token=55ea6fe3-168e-443d-a43f-78a12835c770"
-                                    viewer="google" style="width:100%;height:80vh;" disableContent="all">
-                                </ngx-doc-viewer>
-                                <!-- <iframe [src]="mediaUrl+'answers_files/'+order.answers_file | safe" width="500px"
+                            <div class="row">
+                                <div class="col-5">
+                                    <ngx-doc-viewer
+                                        url="https://firebasestorage.googleapis.com/v0/b/careerscriptchat.appspot.com/o/Atif_Ahmed.pdf?alt=media&token=99c96086-eeea-45d8-b2aa-19689445047b"
+                                        viewer="google" style="width:100%;height:92%;" disableContent="all">
+                                    </ngx-doc-viewer>
+                                    <div class="text-center">
+                                        <a href="{{mediaUrl}}answers_files/{{order.answers_file}}"><i
+                                                class="fas fa-arrow-to-bottom"></i>Download</a>
+                                    </div>
+                                    <!-- <iframe [src]="mediaUrl+'answers_files/'+order.answers_file | safe" width="500px"
                                 height="500px"></iframe> -->
+                                </div>
+                                <div class="col-7">
+                                    <div class="MuiBox-root jss444 jss420">
+                                        <div class="MuiBox-root jss445 jss422">
+                                            <div class="MuiBox-root jss446 jss423">
+                                                Iswaran Panneerselvam's goals
+                                            </div>
+                                            <div class="MuiBox-root jss447 jss424">Global Head of Compliance</div>
+                                            <hr class="jss429">
+                                            <div class="MuiBox-root jss448 jss425">
+                                                <p class="MuiTypography-root jss426 MuiTypography-body2">
+                                                    Financial Services (Banking, Lending, Investing, Real Estate)
+                                                </p>
+                                                <p class="MuiTypography-root jss426 MuiTypography-body2">
+                                                    International
+                                                </p>
+                                            </div>
+                                            <p class="MuiTypography-root jss427 MuiTypography-body2">
+                                                Client Notes
+                                            </p>
+                                            <div class="MuiBox-root jss449 jss428">
+                                                <p class="MuiTypography-root jss430 jss431 MuiTypography-body2">
+                                                    Global Head of compliance and risk roles. in banking, blockchain
+                                                    and Web3 and crypto exchanges plus custody
+                                                </p>
+                                            </div>
+                                            <p class="MuiTypography-root jss432 MuiTypography-body2">See more</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+
+                                </div>
                             </div>
                             <div class="card-header">
                                 <h3>Questionnaire :</h3>
@@ -107,7 +167,7 @@
                             <div class="card-body d-flex flex-column">
                                 <div class="mb-3">
                                     <h5>
-                                        1) Kindly paste the link(s) of at least two jobs for which you are actively
+                                        Kindly paste the link(s) of at least two jobs for which you are actively
                                         applying
                                         for
                                     </h5>
@@ -115,20 +175,20 @@
                                 </div>
                                 <div class="mb-3">
                                     <h5>
-                                        2) Do you want to have a general resume that can be applicable for several job
+                                        Do you want to have a general resume that can be applicable for several job
                                         postings, or a specific resume targeted to one particular position?
                                     </h5>
                                     <p>{{questionaire_answer.q2}}</p>
                                 </div>
                                 <div class="mb-3">
                                     <h5>
-                                        3) What is your targeted industry?
+                                        What is your targeted industry?
                                     </h5>
                                     <p>{{questionaire_answer.q3}}</p>
                                 </div>
                                 <div class="mb-3">
                                     <h5>
-                                        4) What are the areas of expertise that you would like to mention in your resume
+                                        What are the areas of expertise that you would like to mention in your resume
                                         as
                                         keywords?
                                     </h5>
@@ -136,25 +196,25 @@
                                 </div>
                                 <div class="mb-3">
                                     <h5>
-                                        5) What have been the biggest accomplishments during your career?
+                                        What have been the biggest accomplishments during your career?
                                     </h5>
                                     <p>{{questionaire_answer.q5}}</p>
                                 </div>
                                 <div class="mb-3">
                                     <h5>
-                                        6) Have you received any honors or awards? What are they?
+                                        Have you received any honors or awards? What are they?
                                     </h5>
                                     <p>{{questionaire_answer.q6}}</p>
                                 </div>
                                 <div class="mb-3">
                                     <h5>
-                                        7) Do you have any special certifications/training to include in the resume?
+                                        Do you have any special certifications/training to include in the resume?
                                     </h5>
                                     <p>{{questionaire_answer.q7}}</p>
                                 </div>
                                 <div class="mb-3">
                                     <h5>
-                                        8) What is your LinkedIn URL?
+                                        What is your LinkedIn URL?
                                     </h5>
                                     <p>{{questionaire_answer.q8}}</p>
                                 </div>
@@ -173,7 +233,7 @@
                                 </div>
                                 <div class="row">
                                     <p class="col-4"><b>Status :</b></p>
-                                    <p class="col-8 text-right"> {{ order?.status }}</p>
+                                    <p class="col-8 text-right"> {{ user_status[order?.status] }}</p>
                                 </div>
                                 <div class="row">
                                     <p class="col-4"><b>Date :</b></p>
@@ -235,7 +295,8 @@
                                         <span class="msg-name"
                                             *ngIf="chat.nickname !== nickname">{{chat.nickname}}</span>
                                         <span class="msg-date"> at {{chat.date}}</span>
-                                        <p text-wrap>{{chat.message}}</p>
+                                        <!-- <p text-wrap>chat.message</p> -->
+                                        <p [innerHTML]="chat.message"></p>
                                         <a *ngIf="chat.fileName" class="message_File_Download_Link"
                                             (click)="DownloadMessageFile(chat.attachFile,chat.fileName)"><i
                                                 class="fas fa-arrow-to-bottom"></i>{{chat.fileName}}</a>
@@ -247,28 +308,104 @@
 
                     <div class="card-footer">
                         <form [formGroup]="chatForm">
-                            <div class="input-group">
-                                <div class="input-group-append">
+                            <div class="row" style="padding:0">
+                                <div class="input-group-append" style="padding:0">
                                     <label for="fileMessage" class="input-group-text attach_btn"><i
                                             class="fas fa-paperclip"></i></label>
-                                    <input id="fileMessage" type="file" class="" style="display:none"
-                                        formControlName="attachFile" (change)="uploadFile($event)" />
+                                    <input #fileMessage id="fileMessage" type="file" class="" style="display:none"
+                                        formControlName="attachFile" (change)="onFileChange($event)" multiple/>
                                 </div>
-                                <textarea #textAreaMessage (keydown.enter)="sendMessage(chatForm.value)"
-                                    class="form-control type_msg" placeholder="Type your message..."
-                                    formControlName="message" (input)="send_btn_class($event)">
-                                </textarea>
-                                <div class="input-group-append">
-                                    <button [disabled]="!send_btn_enable" [ngClass]="{send_btn:send_btn_enable}"
-                                        class="input-group-text" (click)="sendMessage(chatForm.value)"><i
+                                <div class="col-lg-11 col-md-10 col-sm-9 col-8" style="padding:0">
+                                    <ckeditor [(ngModel)]="ckContent" formControlName="message"
+                                        (change)="send_btn_class($event)" [config]="{enterMode :2,
+                                            shiftEnterMode:2,height:100,width:'100%'}">
+                                        <ckbutton [name]="'saveButton'" [command]="'saveCmd'" [icon]="'save.png'"
+                                            [label]="'Save Document'" [toolbar]="'clipboard,1'">
+                                        </ckbutton>
+                                    </ckeditor>
+                                </div>
+                                <div class="input-group-append" style="padding:0">
+                                    <button [ngClass]="{send_btn:send_btn_enable}" class="input-group-text"
+                                        (click)="sendMessage(chatForm.value)"><i
                                             class="fas fa-location-arrow"></i></button>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-12">
+                                    <span *ngFor="let item of files; let i=index">
+                                        <p class="selectedFiles">
+                                            {{item.name}}
+                                        </p>
+                                            <div *ngIf="showLoader && item==files[files.length-1]" class="spinner-border spinner-border-sm" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        <i *ngIf="!showLoader || !(item==files[files.length-1])" (click)="deleteItem(i)" class="fal fa-times-circle"></i>
+                                        &nbsp;&nbsp;&nbsp;
+                                    </span>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </tab>
-            <tab heading="Files">Static content 2</tab>
+            <tab heading="Files">
+                <div class="firstDraft">
+                    <H2>First Draft</H2>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td>#</td>
+                                <td>Name</td>
+                                <td>Date</td>
+                                <td>Download</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of draftFiles; let i=index">
+                                <td *ngIf="item.file_status=='firstDraft'">{{i+1}}</td>
+                                <td *ngIf="item.file_status=='firstDraft'">{{item.file}}</td>
+                                <td *ngIf="item.file_status=='firstDraft'">{{item.date}}</td>
+                                <td *ngIf="item.file_status=='firstDraft'"><a href="{{mediaUrl}}{{item.file_path}}"
+                                        download="{{item.file}}" target="_blank"><i
+                                            class="fas fa-arrow-to-bottom"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="firstDraft">
+                    <H2>Revision</H2>
+                    <div *ngFor="let item of draftFiles">
+                        <div *ngIf="item.file_status=='revision'">
+                            {{item.date}}
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="{{mediaUrl}}files/{{order.id}}/{{item.file}}" target="_blank"
+                                download="{{item.file}}">{{item.file}}<i class="fas fa-arrow-to-bottom"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="firstDraft">
+                    <H2>Final Draft</H2>
+                    <div *ngFor="let item of draftFiles">
+                        <div *ngIf="item.file_status=='finalDraft'">
+                            {{item.date}}
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="{{mediaUrl}}files/{{order.id}}/{{item.file}}" target="_blank"
+                                download="{{item.file}}">{{item.file}}<i class="fas fa-arrow-to-bottom"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="firstDraft">
+                    <H2>Other Files</H2>
+                    <div *ngFor="let item of draftFiles">
+                        <div *ngIf="item.file_status=='others'">
+                            {{item.date}}
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="{{mediaUrl}}files/{{order.id}}/{{item.file}}" target="_blank"
+                                download="{{item.file}}">{{item.file}}<i class="fas fa-arrow-to-bottom"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </tab>
         </tabset>
     </div>
 </div>

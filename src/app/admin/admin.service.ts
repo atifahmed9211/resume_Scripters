@@ -8,6 +8,10 @@ import { environment } from '../../environments/environment';
 })
 export class AdminService {
   private baseUrl = environment.baseUrl;
+  selectedOrderId;
+  firstDraftData;
+  adminRevisionData;
+  finalDraftData;
 
   constructor(private http:HttpClient) { }
   // Authentications Calls
@@ -227,4 +231,11 @@ export class AdminService {
   }
   // Orders Calls End
 
+uploadDraftFiles(order):Observable<any>
+  {
+    let token = localStorage.getItem("adminToken");
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(`${this.baseUrl}/update-order`,order,{headers})
+  }
 }

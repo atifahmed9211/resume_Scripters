@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="redirectToOrder()">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
@@ -13,62 +13,6 @@
                 </svg>
                 <i class="bi bi-check2-all"></i>
             </span>
-            Congratulations! Order Completed.</h4>
-    </div>
-    <div class="d-flex flex-column justify-content-center align-items-center flex-fill col-12">
-        <div class="card-header"><h3>Please Fill up your Questionnaire :</h3></div>
-        <div class="card-body d-flex flex-column">
-            <form [formGroup]="questionForm">
-                <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">
-                        1) Kindly paste the link(s) of at least two jobs for which you are actively applying for</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Enter your text here" formControlName="q1"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">
-                        2) Do you want to have a general resume that can be applicable for several job 
-                        postings, or a specific resume targeted to one particular position?</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Enter your text here" formControlName="q2"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">
-                        3) What is your targeted industry?</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Ex: IT/Technology, SaaS, Software" formControlName="q3"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">
-                        4) What are the areas of expertise that you would like to mention in your resume as keywords?</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Ex: Project Management, Social Media" formControlName="q4"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">
-                        5) What have been the biggest accomplishments during your career?</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Enter your text here" formControlName="q5"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">
-                        6) Have you received any honors or awards? What are they?</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Enter your text here" formControlName="q6"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">
-                        7) Do you have any special certifications/training to include in the resume?</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Enter your text here" formControlName="q7"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">
-                        8) What is your LinkedIn URL?</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Enter your text here" formControlName="q8"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">
-                        9) Upload Your Resume</label>
-                    <input type="file" (change)="submitCV($event)"/>
-                </div>
-                <div class="mb-3">
-                    <input type="submit" class="btn btn-success btn-lg btn-block" (click)="submitQuestion()"/>                              
-                </div>
-            </form>
-        </div>
+            payment method Completed.</h4>
     </div>
 </div>

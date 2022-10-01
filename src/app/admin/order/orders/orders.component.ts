@@ -15,6 +15,7 @@ export class OrdersComponent implements OnDestroy,OnInit {
   dtTrigger : Subject<any>        = new Subject<any>();
   orders    : any                 = [];
   dtInitial : boolean             = false;
+  admin_order_status=environment.admin_status;
 
   constructor(
     private as:AdminService,  

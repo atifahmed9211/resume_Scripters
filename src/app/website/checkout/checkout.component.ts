@@ -24,12 +24,13 @@ export class CheckoutComponent implements OnInit, OnDestroy, AfterViewInit {
   id = null;
   service_type_id = null;
   type = null;
+  loginUserName=JSON.parse(localStorage.getItem('user'))
 
   constructor(
     private cd: ChangeDetectorRef,
     private webservice: WebsiteService,
     private modalService: BsModalService,
-    private http:HttpClient
+    private http:HttpClient,
   ) { 
     this.selectedPackage=webservice.selectedPackage;
     console.log("selected package",this.selectedPackage)
@@ -37,8 +38,8 @@ export class CheckoutComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   public bsModalRef: BsModalRef;
   checkoutForm:FormGroup=new FormGroup({
-    name:new FormControl("",[Validators.required]),
-    email:new FormControl("",[Validators.required,Validators.email]),
+    name:new FormControl(this.loginUserName['name'],[Validators.required]),
+    email:new FormControl(this.loginUserName['email'],[Validators.required,Validators.email]),
     phone_number:new FormControl("",[Validators.required]),
   });
   ngOnDestroy() {
@@ -116,7 +117,11 @@ export class CheckoutComponent implements OnInit, OnDestroy, AfterViewInit {
           paymentMethodId:res.trn
           }
         this.webservice.createOrder(payment).subscribe((res)=>{
+          console.log("res",res);
           this.webservice.newOrderId=res.order.id;
+        },
+        (error)=>{
+          console.log("error",error);
         });
         this.bsModalRef = this.modalService.show(PaymentConfirmationComponent, {class: 'modal-dialog-centered'});
         this.bsModalRef.content.closeBtnName = 'Close';

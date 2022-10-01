@@ -7,6 +7,12 @@
 // If you want to add something do it here
 @import "custom";
 
+    .cke_toolbar_last{
+        display: none;
+    }
+#cke_7{
+    display: none;
+}
 .modal-content{
     .modal-title {
         background-repeat: no-repeat;

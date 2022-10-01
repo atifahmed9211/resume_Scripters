@@ -165,7 +165,6 @@ export class HomeComponent implements OnInit {
     if(this.user)
     {
       this.router.navigate(['./checkout'])
-      console.log("package id",pkgId);
       for(let pkg of this.packages)
       {
         if(pkg.id==pkgId)

@@ -51,8 +51,6 @@ export class WebsiteService {
      let token = localStorage.getItem("userToken");
      let headers = new HttpHeaders();
      headers = headers.set('Authorization', `Bearer ${token}`);
-     console.log(headers)
-     console.log(payment)
      return this.http.post<any>(`${this.baseUrl}/create-order`, payment, { headers });
    }
 

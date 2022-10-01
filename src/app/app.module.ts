@@ -14,7 +14,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { SafePipe } from './safe.pipe';
 
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -35,7 +34,7 @@ import { SafePipe } from './safe.pipe';
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })

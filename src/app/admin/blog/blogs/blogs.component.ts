@@ -1,6 +1,5 @@
 import { Component, OnInit ,OnDestroy} from '@angular/core';
 import { Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
 @Component({
@@ -16,8 +15,8 @@ export class BlogsComponent implements OnDestroy, OnInit {
   blogs     : any                 = [];
 
   constructor(
-    private as : AdminService,
-    private httpClient: HttpClient) { }
+    private as : AdminService) 
+    { }
 
   ngOnInit(): void {
 

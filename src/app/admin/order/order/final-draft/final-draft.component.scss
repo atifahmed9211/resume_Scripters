@@ -1,0 +1,25 @@
+.modal-header{
+    border-bottom:none;
+    /*top cross button*/
+    button{
+        background-color: red;
+        color:white;
+        width:30px;
+        height:30px;
+    }
+    .close{
+        padding:0;
+    }
+}
+/*selected files*/
+span {
+    .selectedFiles {
+        color: #0000FF;
+        display: inline;
+    }
+
+    i {
+        color: red;
+        cursor: pointer;
+    }
+}

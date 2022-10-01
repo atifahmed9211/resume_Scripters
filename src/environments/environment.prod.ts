@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  baseUrl:"http://api.topcareerresume.com/api",
-  mediaUrl:"http://api.topcareerresume.com/",
+  baseUrl:"http://api.resumescripters.com/api",
+  mediaUrl:"http://api.resumescripters.com/public/",
   pusher: {
     key: 'eb822e2261f4f9a0b85d',
   }

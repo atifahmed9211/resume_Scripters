@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { UserService } from '../../user.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-orders',
@@ -18,6 +19,7 @@ export class OrdersComponent implements OnDestroy,OnInit {
   list_of_orders;
   package_title=[];
   service_type=[];
+  user_order_status=environment.user_status;
 
   constructor(
     private as:UserService

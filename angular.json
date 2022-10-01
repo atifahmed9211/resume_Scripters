@@ -103,7 +103,8 @@
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/aos/dist/aos.js",
               "node_modules/datatables.net/js/jquery.dataTables.js",
-              "node_modules/pusher-js/dist/web/pusher.min.js"
+              "node_modules/pusher-js/dist/web/pusher.min.js",
+              "node_modules/tinymce/tinymce.min.js"
             ],
             "styles": [
               "node_modules/@coreui/icons/css/free.css",

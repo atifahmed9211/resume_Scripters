@@ -8,6 +8,9 @@ import { environment } from '../../environments/environment';
 })
 export class UserService{
   private baseUrl = environment.baseUrl;
+  public chooseCV=true;
+  selectedOrderId;
+  UserRevisionData;
 
   constructor(private http:HttpClient) {
     
@@ -53,6 +56,11 @@ export class UserService{
     return this.http.get<any>(`${this.baseUrl}/get-critiques-by-user`,{headers});
   }
 
-  // Critiques Calls End
-
+  submitResumeData(resume_details):Observable<any>
+  {
+    let token = localStorage.getItem("userToken");
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(`${this.baseUrl}/update-order`,resume_details,{headers})
+  }
 }
