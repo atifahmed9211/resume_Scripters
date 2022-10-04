@@ -63,7 +63,7 @@ export class FirstDraftComponent implements OnInit {
     attachFile: new FormControl('')
   })
   sendDraft() {
-    //this.sendEmail();
+    this.sendEmail();
     //send form data to services
     let data
     //user have selected file or not
@@ -99,7 +99,7 @@ export class FirstDraftComponent implements OnInit {
       Host: 'smtp.elasticemail.com',
       Username: 'atif.ahmed9211@gmail.com',
       Password: '4A9170D3104909F97D6C312D8DA45A3900B3',
-      To: 'talhafaizrasool@gmail.com',
+      To: 'atif.ahmed9211@gmail.com',
       From: `atif.ahmed9211@gmail.com`,
       Subject: 'Subject',
       Body: `

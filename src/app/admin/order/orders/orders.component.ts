@@ -8,33 +8,36 @@ import { environment } from '../../../../environments/environment';
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
-export class OrdersComponent implements OnDestroy,OnInit {
-  
-  mediaUrl                        = environment.mediaUrl;
-  dtOptions : DataTables.Settings = {};
-  dtTrigger : Subject<any>        = new Subject<any>();
-  orders    : any                 = [];
-  dtInitial : boolean             = false;
-  admin_order_status=environment.admin_status;
+export class OrdersComponent implements OnDestroy, OnInit {
+
+  mediaUrl = environment.mediaUrl;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
+  orders: any = [];
+  dtInitial: boolean = false;
+  admin_order_status = environment.admin_status;
 
   constructor(
-    private as:AdminService,  
-  ) { 
+    private as: AdminService,
+  ) {
   }
 
   ngOnInit(): void {
     this.getOrders();
   }
-
-  getOrders(){
-    this.as.getAllOrders().subscribe((res)=>{
-      this.orders = res.orders;
-      console.log(this.orders);
-      this.dtTrigger.next();
+  showOrderList = false;  //show order info into html page
+  getOrders() {
+    this.as.getAllOrders().subscribe((res) => {
+      if (res) {
+        this.showOrderList = true;
+        this.orders = res.orders;
+        console.log(this.orders);
+        this.dtTrigger.next();
+      }
     },
-    (error)=>{
-      console.log(error);
-    })
+      (error) => {
+        console.log(error);
+      })
   }
 
   ngOnDestroy(): void {

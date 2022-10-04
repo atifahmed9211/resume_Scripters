@@ -44,12 +44,15 @@ export class OrderComponent implements OnInit {
   firstDraftSend = false;
   selectedOrderId = this.route.snapshot.paramMap.get("id");
   ckContent = "";
-  draftFiles;
+  allOrderFiles = [];
+  firstDraftFiles = [];
+  adminRevisionFiles = [];
+  finalDraftFiles = [];
   private baseUrl = environment.baseUrl;
 
   @ViewChild('orderTabs', { static: false }) orderTabs: TabsetComponent;
   @ViewChild('chatcontent') chatcontent: ElementRef;
-  @ViewChild('fileMessage') fileMessage:ElementRef;
+  @ViewChild('fileMessage') fileMessage: ElementRef;
 
   scrolltop: number = null;
 
@@ -57,8 +60,8 @@ export class OrderComponent implements OnInit {
   public questionaire_answer = null;
   public questionnaireFIle = null;
   public mediaUrl = environment.mediaUrl;
-  public resume_detail;
-  public admin_status=environment.admin_status;
+  public resumes_detail;
+  public admin_status = environment.admin_status;
 
   constructor(
     private route: ActivatedRoute,
@@ -89,16 +92,42 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.getOrder();
   }
-
+  showOrderInfo = false;  //show order info into html page
   getOrder() {
     this.CreateOrderInFireBase();
     this.as.getOrderById(this.selectedOrderId).subscribe((res) => {
-      console.log(res);
-      this.order = res.order;
-      this.questionaire_answer = JSON.parse(this.order.answers);
-      console.log("answer", this.questionaire_answer);
-      this.resume_detail = JSON.parse(this.order.resume_details);
-      this.draftFiles = JSON.parse(this.order.files);
+      if (res) {
+        this.showOrderInfo = true;
+        console.log(res);
+        this.order = res.order;
+        if (this.order.answers != null) {
+          this.questionaire_answer = JSON.parse(this.order.answers);
+        }
+        console.log("answer", this.questionaire_answer);
+        if (this.order.resume_details) {
+          this.resumes_detail = JSON.parse(this.order.resume_details);
+        }
+        //handling file tab files
+        this.allOrderFiles = JSON.parse(this.order.files);
+        //to remove previous values
+        this.firstDraftFiles = [];
+        this.adminRevisionFiles = [];
+        this.finalDraftFiles = [];
+        if (this.allOrderFiles) {
+          for (let item of this.allOrderFiles) {
+            if (item.file_status == "firstDraft") {
+              this.firstDraftFiles.push(item);
+            }
+            else if (item.file_status == "adminRevision") {
+              this.adminRevisionFiles.push(item);
+            }
+            else if (item.file_status == "finalDraft") {
+              this.finalDraftFiles.push(item);
+            }
+          }
+          console.log("All Order Files", this.allOrderFiles);
+        }
+      }
     },
       (error) => {
         console.log(error);
@@ -148,7 +177,7 @@ export class OrderComponent implements OnInit {
   }
   uploadMessagefile;
   fileIsSelected = false;
-  
+
   //chat multiple file selected code start
   files = [];
   filesResponse = [];
@@ -177,10 +206,10 @@ export class OrderComponent implements OnInit {
     if (res) {
       this.filesResponse.push(res.data);
       this.showLoader = false;
-      this.fileMessage.nativeElement.value=null;
+      this.fileMessage.nativeElement.value = null;
     }
   }
-  deleteItem(i:any) {
+  deleteItem(i: any) {
     console.log("index", i)
     this.files.splice(i, 1);
     console.log(this.filesResponse)
@@ -264,7 +293,7 @@ export class OrderComponent implements OnInit {
     html2pdf().from(content).set(options).save();
   }
   /*--------first draft code start-----------*/
-  firstDraft_uploaded_files=[];
+  firstDraft_uploaded_files = [];
   sendFirstDraft() {
     this.firstDraftSend = true;
     //open first draft model
@@ -318,17 +347,17 @@ export class OrderComponent implements OnInit {
       const newMessage = firebase.database().ref('chats/').push();
       newMessage.set(chat);
     }
-    else{
+    else {
       chat.message = text_message;
       console.log("chat", chat);
       const newMessage = firebase.database().ref('chats/').push();
       newMessage.set(chat);
     }
     //update-order-status
-    let formData=new FormData;
-    formData.append("id",this.selectedOrderId);
-    formData.append("status","3");
-    this.as.updateOrder(formData).subscribe((res)=>{
+    let formData = new FormData;
+    formData.append("id", this.selectedOrderId);
+    formData.append("status", "3");
+    this.as.updateOrder(formData).subscribe((res) => {
       console.log(res);
       this.getOrder();
     }
@@ -337,7 +366,7 @@ export class OrderComponent implements OnInit {
   /*--------first draft code end-----------*/
 
   /*--------Revision code start-----------*/
-  adminRevision_uploaded_files=[];
+  adminRevision_uploaded_files = [];
   sendRevision() {
     //this.firstDraftSend = true;
     //open first draft model
@@ -392,26 +421,26 @@ export class OrderComponent implements OnInit {
       const newMessage = firebase.database().ref('chats/').push();
       newMessage.set(chat);
     }
-    else{
+    else {
       chat.message = text_message;
       console.log("chat", chat);
       const newMessage = firebase.database().ref('chats/').push();
       newMessage.set(chat);
     }
     //update-order-status
-    let formData=new FormData;
-    formData.append("id",this.selectedOrderId);
-    formData.append("status","5");
-    this.as.updateOrder(formData).subscribe((res)=>{
+    let formData = new FormData;
+    formData.append("id", this.selectedOrderId);
+    formData.append("status", "5");
+    this.as.updateOrder(formData).subscribe((res) => {
       console.log(res);
       this.getOrder();
     }
     )
   }
   /*--------Revision code end-----------*/
-  
+
   /*--------Final Draft code start------*/
-  finalDraft_uploaded_files=[];
+  finalDraft_uploaded_files = [];
   sendFinalDraft() {
     //this.firstDraftSend = true;
     //open first draft model
@@ -466,21 +495,21 @@ export class OrderComponent implements OnInit {
       const newMessage = firebase.database().ref('chats/').push();
       newMessage.set(chat);
     }
-    else{
+    else {
       chat.message = text_message;
       console.log("chat", chat);
       const newMessage = firebase.database().ref('chats/').push();
       newMessage.set(chat);
     }
     //update-order-status
-    let formData=new FormData;
-    formData.append("id",this.selectedOrderId);
-    formData.append("status","6");
-    this.as.updateOrder(formData).subscribe((res)=>{
+    let formData = new FormData;
+    formData.append("id", this.selectedOrderId);
+    formData.append("status", "6");
+    this.as.updateOrder(formData).subscribe((res) => {
       console.log(res);
       this.getOrder();
     }
     )
   }
-   /*--------Final Draft code end------*/
+  /*--------Final Draft code end------*/
 }

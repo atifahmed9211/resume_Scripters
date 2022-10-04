@@ -39,7 +39,10 @@ export class OrderComponent implements OnInit, PipeTransform {
   users = [];
   public questionaire_answer = null;
   ckContent = "";
-  draftFiles;
+  allOrderFiles = [];
+  firstDraftFiles = [];
+  adminRevisionFiles = [];
+  finalDraftFiles = [];
   bsModalRef: BsModalRef;
   private baseUrl = environment.baseUrl;
   selectedOrderId = this.route.snapshot.paramMap.get("id");
@@ -50,7 +53,7 @@ export class OrderComponent implements OnInit, PipeTransform {
   @ViewChild('fileMessage') fileMessage: ElementRef;
   scrolltop: number = null;
 
-  public order = null;
+  public order: any = {};
   public questionnaireFIle = null;
   public mediaUrl = environment.mediaUrl;
   public user_status = environment.user_status;
@@ -89,15 +92,37 @@ export class OrderComponent implements OnInit, PipeTransform {
   ngOnInit(): void {
     this.getOrder();
   }
-
+  showOrderInfo=false;  //show order info into html page
   getOrder() {
     this.CreateOrderInFireBase();
     console.log("get order mathed called");
     this.us.getOrderById(this.selectedOrderId).subscribe((res) => {
-      console.log(res);
-      this.order = res.order;
-      this.questionaire_answer = JSON.parse(this.order.answers);
-      this.draftFiles = JSON.parse(this.order.files);
+      if (res) {
+        this.showOrderInfo=true;
+        console.log(res);
+        this.order = res.order;
+        this.questionaire_answer = JSON.parse(this.order.answers);
+        //handling file tab files
+        this.allOrderFiles = JSON.parse(this.order.files);
+        //to remove previous values
+        this.firstDraftFiles = [];
+        this.adminRevisionFiles = [];
+        this.finalDraftFiles = [];
+        if (this.allOrderFiles) {
+          for (let item of this.allOrderFiles) {
+            if (item.file_status == "firstDraft") {
+              this.firstDraftFiles.push(item);
+            }
+            else if (item.file_status == "adminRevision") {
+              this.adminRevisionFiles.push(item);
+            }
+            else if (item.file_status == "finalDraft") {
+              this.finalDraftFiles.push(item);
+            }
+          }
+          console.log("All Order Files", this.allOrderFiles);
+        }
+      }
     },
       (error) => {
         console.log(error);
@@ -337,42 +362,42 @@ export class OrderComponent implements OnInit, PipeTransform {
     }
   }
 
-    //send user revision message in chat
-    displayRevisionMessage(uploaded_files) {
-      //let orderId = this.route.snapshot.paramMap.get("id");
-      const chat = this.us.UserRevisionData.userRevision;
-      chat.orderId = this.selectedOrderId;
-      chat.nickname = this.nickname;
-      chat.date = this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
-      chat.type = 'userRevisionMessage';
-      console.log("chat", chat);
-      let text_message: string = chat.message;
-      //check whether the file is selected or not
-      if (uploaded_files.length >= 1) {
-        let files_message;
-        console.log("uploaded files", uploaded_files[0])
-        console.log("item", uploaded_files.length);
-        for (let i = 0; i < uploaded_files.length; i++) {
-          console.log(i, uploaded_files[i])
-          if (i > 0) {
-            files_message += "<a href='" + this.mediaUrl + "" + uploaded_files[i].file_path + "'target='_blank'>" + uploaded_files[i].file + "</a><br/>";
-            console.log(files_message);
-          }
-          else {
-            files_message = "<a href='" + this.mediaUrl + "" + uploaded_files[i].file_path + "'target='_blank'>" + uploaded_files[i].file + "</a><br/>";
-          }
+  //send user revision message in chat
+  displayRevisionMessage(uploaded_files) {
+    //let orderId = this.route.snapshot.paramMap.get("id");
+    const chat = this.us.UserRevisionData.userRevision;
+    chat.orderId = this.selectedOrderId;
+    chat.nickname = this.nickname;
+    chat.date = this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
+    chat.type = 'userRevisionMessage';
+    console.log("chat", chat);
+    let text_message: string = chat.message;
+    //check whether the file is selected or not
+    if (uploaded_files.length >= 1) {
+      let files_message;
+      console.log("uploaded files", uploaded_files[0])
+      console.log("item", uploaded_files.length);
+      for (let i = 0; i < uploaded_files.length; i++) {
+        console.log(i, uploaded_files[i])
+        if (i > 0) {
+          files_message += "<a href='" + this.mediaUrl + "" + uploaded_files[i].file_path + "'target='_blank'>" + uploaded_files[i].file + "</a><br/>";
+          console.log(files_message);
         }
-        chat.message = text_message + "<br/>" + files_message;
-        console.log("chat", chat);
-        const newMessage = firebase.database().ref('chats/').push();
-        newMessage.set(chat);
+        else {
+          files_message = "<a href='" + this.mediaUrl + "" + uploaded_files[i].file_path + "'target='_blank'>" + uploaded_files[i].file + "</a><br/>";
+        }
       }
-      else {
-        chat.message = text_message;
-        console.log("chat", chat);
-        const newMessage = firebase.database().ref('chats/').push();
-        newMessage.set(chat);
-      }
+      chat.message = text_message + "<br/>" + files_message;
+      console.log("chat", chat);
+      const newMessage = firebase.database().ref('chats/').push();
+      newMessage.set(chat);
+    }
+    else {
+      chat.message = text_message;
+      console.log("chat", chat);
+      const newMessage = firebase.database().ref('chats/').push();
+      newMessage.set(chat);
     }
   }
+}
   //---------user revision code end---------//

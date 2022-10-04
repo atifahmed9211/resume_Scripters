@@ -1,14 +1,25 @@
 <div class="row" [ngClass]="{blur:firstDraftSend}">
     <div class="col-12">
-        <tabset #orderTabs>
-            <button *ngIf="order?.status==2" (click)="sendFirstDraft()" style="position:absolute;right:0"
-                class="mt-2 mr-4 btn btn-primary">Send First Draft</button>
-            <button *ngIf="order?.status==5 || order?.status==8" (click)="sendRevision()" style="position:absolute;right:0"
-                class="mt-2 mr-4 btn btn-primary">Send Revision</button>
-            <button *ngIf="order?.status==4" (click)="sendFinalDraft()" style="position:absolute;right:0"
-                class="mt-2 mr-4 btn btn-primary">Send Final Draft</button>
+        <!--loading start-->
+        <div *ngIf="!showOrderInfo" class="content">
+            <div class="load-wrapp">
+                <div class="load-3">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+        <!--loading end-->
+        <tabset *ngIf="showOrderInfo" #orderTabs>
             <tab heading="Order Info">
-                <div class="d-flex">
+                <button *ngIf="order?.status==2" (click)="sendFirstDraft()" style="position:absolute;right:0;"
+                    class="mt-2 mr-4 btn btn-primary">Send First Draft</button>
+                <button *ngIf="order?.status==5" (click)="sendRevision()" style="position:absolute;right:0"
+                    class="mt-2 mr-4 btn btn-primary">Send Revision</button>
+                <button *ngIf="order?.status==4" (click)="sendFinalDraft()" style="position:absolute;right:0"
+                    class="mt-2 mr-4 btn btn-primary">Send Final Draft</button>
+                <div class="mt-4 d-flex">
                     <div class=" flex-fill">
                         <h2>Customer Detail :</h2>
                         <div class="d-flex flex-column">
@@ -17,7 +28,7 @@
                         </div>
                         <h2>Order Detail :</h2>
                         <div class="d-flex flex-column">
-                            <p class="mx-5"><b>Price :</b> {{ order?.price | currency }}</p>
+                            <!-- <p class="mx-5"><b>Price :</b> {{ order?.price | currency }}</p> -->
                             <p class="mx-5"><b>Status :</b> {{ admin_status[order?.status] }}</p>
                             <p class="mx-5"><b>Date :</b> {{ order?.created_at | date }}</p>
                         </div>
@@ -35,49 +46,49 @@
                         <div *ngIf="order?.status == 1">
                             <h2>No Questionaire Completed</h2>
                         </div>
-                        <div *ngIf="order?.status!=1">
+                        <div *ngIf="order.status!=1">
                             <div class="mb-3">
                                 <label class="form-label">
                                     1) Kindly paste the link(s) of at least two jobs for which you are actively applying
                                     for</label>
-                                <p>{{questionaire_answer.q1}}</p>
+                                <p *ngIf="questionaire_answer">{{questionaire_answer.q1}}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">
                                     2) Do you want to have a general resume that can be applicable for several job
                                     postings, or a specific resume targeted to one particular position?</label>
-                                <p>{{questionaire_answer.q2}}</p>
+                                <p *ngIf="questionaire_answer">{{questionaire_answer.q2}}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">
                                     3) What is your targeted industry?</label>
-                                <p>{{questionaire_answer.q3}}</p>
+                                <p *ngIf="questionaire_answer">{{questionaire_answer.q3}}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">
                                     4) What are the areas of expertise that you would like to mention in your resume as
                                     keywords?</label>
-                                <p>{{questionaire_answer.q4}}</p>
+                                <p *ngIf="questionaire_answer">{{questionaire_answer.q4}}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">
                                     5) What have been the biggest accomplishments during your career?</label>
-                                <p>{{questionaire_answer.q5}}</p>
+                                <p *ngIf="questionaire_answer">{{questionaire_answer.q5}}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">
                                     6) Have you received any honors or awards? What are they?</label>
-                                <p>{{questionaire_answer.q6}}</p>
+                                <p *ngIf="questionaire_answer">{{questionaire_answer.q6}}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">
                                     7) Do you have any special certifications/training to include in the resume?</label>
-                                <p>{{questionaire_answer.q7}}</p>
+                                <p *ngIf="questionaire_answer">{{questionaire_answer.q7}}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">
                                     8) What is your LinkedIn URL?</label>
-                                <p>{{questionaire_answer.q8}}</p>
+                                <p *ngIf="questionaire_answer">{{questionaire_answer.q8}}</p>
                             </div>
                             <div class="mb-3">
                                 <a href="{{mediaUrl}}answers_files/{{order?.answers_file}}"
@@ -149,7 +160,7 @@
                                     <label for="fileMessage" class="input-group-text attach_btn"><i
                                             class="fas fa-paperclip"></i></label>
                                     <input #fileMessage id="fileMessage" type="file" class="" style="display:none"
-                                        formControlName="attachFile" (change)="onFileChange($event)" multiple/>
+                                        formControlName="attachFile" (change)="onFileChange($event)" multiple />
                                 </div>
                                 <div class="col-lg-11 col-md-10 col-sm-9 col-8" style="padding:0">
                                     <ckeditor [(ngModel)]="ckContent" formControlName="message"
@@ -172,10 +183,12 @@
                                         <p class="selectedFiles">
                                             {{item.name}}
                                         </p>
-                                            <div *ngIf="showLoader && item==files[files.length-1]" class="spinner-border spinner-border-sm" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                        <i *ngIf="!showLoader || !(item==files[files.length-1])" (click)="deleteItem(i)" class="fal fa-times-circle"></i>
+                                        <div *ngIf="showLoader && item==files[files.length-1]"
+                                            class="spinner-border spinner-border-sm" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <i *ngIf="!showLoader || !(item==files[files.length-1])" (click)="deleteItem(i)"
+                                            class="fal fa-times-circle"></i>
                                         &nbsp;&nbsp;&nbsp;
                                     </span>
                                 </div>
@@ -185,52 +198,79 @@
                 </div>
             </tab>
             <tab heading="Files">
-                <div class="firstDraft">
-                    <H2>First Draft</H2>
-                    <div *ngFor="let item of draftFiles">
-                        <div *ngIf="item.file_status=='firstDraft'">
-                            {{item.date}}
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="{{mediaUrl}}{{item.file_path}}" download="{{item.file}}"
-                                target="_blank">{{item.file}}<i class="fas fa-arrow-to-bottom"></i></a>
-                        </div>
+                <div *ngIf="allOrderFiles else elseBlock">
+                    <div *ngIf="firstDraftFiles.length>=1">
+                        <H2>First Draft</H2>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td>Name</td>
+                                    <td>Date</td>
+                                    <td>Download</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of firstDraftFiles; let i=index">
+                                    <td>{{i+1}}</td>
+                                    <td>{{item.file}}</td>
+                                    <td>{{item.date}}</td>
+                                    <td><a href="{{mediaUrl}}{{item.file_path}}" download="{{item.file}}"
+                                            target="_blank"><i class="fas fa-arrow-to-bottom"></i></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div *ngIf="adminRevisionFiles.length>=1">
+                        <H2>Revision</H2>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td>Name</td>
+                                    <td>Date</td>
+                                    <td>Download</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of adminRevisionFiles; let i=index">
+                                    <td>{{i+1}}</td>
+                                    <td>{{item.file}}</td>
+                                    <td>{{item.date}}</td>
+                                    <td><a href="{{mediaUrl}}{{item.file_path}}" download="{{item.file}}"
+                                            target="_blank"><i class="fas fa-arrow-to-bottom"></i></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div *ngIf="finalDraftFiles.length>=1">
+                        <H2>Final Draft</H2>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td>Name</td>
+                                    <td>Date</td>
+                                    <td>Download</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of finalDraftFiles; let i=index">
+                                    <td>{{i+1}}</td>
+                                    <td>{{item.file}}</td>
+                                    <td>{{item.date}}</td>
+                                    <td><a href="{{mediaUrl}}{{item.file_path}}" download="{{item.file}}"
+                                            target="_blank"><i class="fas fa-arrow-to-bottom"></i></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="firstDraft">
-                    <H2>Revision</H2>
-                    <div *ngFor="let item of draftFiles">
-                        <div *ngIf="item.file_status=='revision'">
-                            {{item.date}}
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="{{mediaUrl}}files/{{order.id}}/{{item.file}}" target="_blank"
-                                download="{{item.file}}">{{item.file}}<i class="fas fa-arrow-to-bottom"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="firstDraft">
-                    <H2>Final Draft</H2>
-                    <div *ngFor="let item of draftFiles">
-                        <div *ngIf="item.file_status=='finalDraft'">
-                            {{item.date}}
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="{{mediaUrl}}files/{{order.id}}/{{item.file}}" target="_blank"
-                                download="{{item.file}}">{{item.file}}<i class="fas fa-arrow-to-bottom"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="firstDraft">
-                    <H2>Other Files</H2>
-                    <div *ngFor="let item of draftFiles">
-                        <div *ngIf="item.file_status=='others'">
-                            {{item.date}}
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="{{mediaUrl}}files/{{order.id}}/{{item.file}}" target="_blank"
-                                download="{{item.file}}">{{item.file}}<i class="fas fa-arrow-to-bottom"></i></a>
-                        </div>
-                    </div>
-                </div>
+                <ng-template #elseBlock>
+                    <p class="no-data-available text-center">No Selected Files!</p>
+                </ng-template>
             </tab>
-            <tab *ngIf="resume_detail" heading="Resume Data" id="resume_data">
+            <tab *ngIf="resumes_detail" heading="Resume Data" id="resume_data">
                 <fieldset>
                     <legend><span class="number">1</span> Your Basic Info</legend>
                     <table class="table">
@@ -243,68 +283,81 @@
                             <th>Linkdin Profile URL</th>
                         </tr>
                         <tr>
-                            <td>{{resume_detail.firstName}}</td>
-                            <td>{{resume_detail.middleName}}</td>
-                            <td>{{resume_detail.lastName}}</td>
-                            <td>{{resume_detail.phoneNumber}}</td>
-                            <td>{{resume_detail.email}}</td>
-                            <td>{{resume_detail.linkdin_url}}</td>
+                            <td *ngIf="resumes_detail.firstName!=null">{{resumes_detail.firstName}}</td>
+                            <td *ngIf="resumes_detail.middleName!=null">{{resumes_detail.middleName}}</td>
+                            <td *ngIf="resumes_detail.lastName!=null">{{resumes_detail.lastName}}</td>
+                            <td *ngIf="resumes_detail.phoneNumber!=null">{{resumes_detail.phoneNumber}}</td>
+                            <td *ngIf="resumes_detail.email!=null">{{resumes_detail.email}}</td>
+                            <td *ngIf="resumes_detail.linkdin_url!=null">{{resumes_detail.linkdin_url}}</td>
                         </tr>
                     </table>
                     <div>
                         <b>Current Postal Address:</b>
-                        <p>
-                            {{resume_detail.address}}
+                        <p *ngIf="resumes_detail.address!=null">
+                            {{resumes_detail.address}}
                         </p>
                     </div>
                 </fieldset>
                 <fieldset>
                     <legend><span class="number">2</span>Languages</legend>
                     <table class="table">
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Proficiency</th>
-                        </tr>
-                        <tr *ngFor="let item of resume_detail.languages; let i=index">
-                            <td>{{i+1}}</td>
-                            <td>{{item.language_name}}</td>
-                            <td>{{item.proficiency_level}}</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Proficiency</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="resumes_detail.languages!=null">
+                            <tr *ngFor="let item of resumes_detail.languages; let i=index">
+                                <td>{{i+1}}</td>
+                                <td>{{item.language_name}}</td>
+                                <td>{{item.proficiency_level}}</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </fieldset>
                 <fieldset>
                     <legend><span class="number">3</span>Technical Skills</legend>
                     <table class="table">
-                        <tr>
-                            <th>Computer Skill</th>
-                            <th>Interpersonal Skill</th>
-                        </tr>
-                        <tr>
-                            <td>{{resume_detail.computer_skill}}</td>
-                            <td>{{resume_detail.interpersonal_skill}}</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>Computer Skill</th>
+                                <th>Interpersonal Skill</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td *ngIf="resumes_detail.computer_skill!=null">{{resumes_detail.computer_skill}}</td>
+                                <td *ngIf="resumes_detail.interpersonal_skill!=null">
+                                    {{resumes_detail.interpersonal_skill}}</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </fieldset>
                 <fieldset>
                     <legend><span class="number">4</span>Desired Position</legend>
                     <table class="table">
-                        <tr>
-                            <th>#</th>
-                            <th>Country Targeted</th>
-                            <th>Position Title</th>
-                            <th>Description</th>
-                            <th>Link</th>
-                            <th>Expected Salary</th>
-                        </tr>
-                        <tr *ngFor="let item of resume_detail.positions; let i=index">
-                            <td>{{i+1}}</td>
-                            <td>{{item.country_targeted}}</td>
-                            <td>{{item.position_title}}</td>
-                            <td>{{item.description}}</td>
-                            <td>{{item.position_link}}</td>
-                            <td>{{item.salary}}</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Country Targeted</th>
+                                <th>Position Title</th>
+                                <th>Description</th>
+                                <th>Link</th>
+                                <th>Expected Salary</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="resumes_detail.positions!=null">
+                            <tr *ngFor="let item of resumes_detail.positions; let i=index">
+                                <td>{{i+1}}</td>
+                                <td>{{item.country_targeted}}</td>
+                                <td>{{item.position_title}}</td>
+                                <td>{{item.description}}</td>
+                                <td>{{item.position_link}}</td>
+                                <td>{{item.salary}}</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </fieldset>
                 <fieldset>
@@ -314,8 +367,8 @@
                         Please tell us about any/ all awards, honours or acknowledgements you have
                         received.
                     </b>
-                    <p>
-                        {{resume_detail.expertise1}}
+                    <p *ngIf="resumes_detail.expertise1!=null">
+                        {{resumes_detail.expertise1}}
                     </p>
                     <div class="html2pdf__page-break"></div>
                     <b>
@@ -324,31 +377,35 @@
                         yourself an
                         expert.
                     </b>
-                    <p>
-                        {{resume_detail.expertise2}}
+                    <p *ngIf="resumes_detail.expertise2!=null">
+                        {{resumes_detail.expertise2}}
                     </p>
                 </fieldset>
                 <fieldset>
                     <legend><span class="number">6</span> Academic Degrees</legend>
                     <table class="table">
-                        <tr>
-                            <th>#</th>
-                            <th>Name of Educational Institute</th>
-                            <th>Name of Degree</th>
-                            <th>State</th>
-                            <th>City</th>
-                            <th>Starting Date</th>
-                            <th>Ending Date</th>
-                        </tr>
-                        <tr *ngFor="let item of resume_detail.academic_degrees; let i=index">
-                            <td>{{i+1}}</td>
-                            <td>{{item.name_of_institute}}</td>
-                            <td>{{item.name_of_degree}}</td>
-                            <td>{{item.state}}</td>
-                            <td>{{item.city}}</td>
-                            <td>{{item.starting_date}}</td>
-                            <td>{{item.ending_date}}</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name of Educational Institute</th>
+                                <th>Name of Degree</th>
+                                <th>State</th>
+                                <th>City</th>
+                                <th>Starting Date</th>
+                                <th>Ending Date</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="resumes_detail.academic_degrees!=null">
+                            <tr *ngFor="let item of resumes_detail.academic_degrees; let i=index">
+                                <td>{{i+1}}</td>
+                                <td>{{item.name_of_institute}}</td>
+                                <td>{{item.name_of_degree}}</td>
+                                <td>{{item.state}}</td>
+                                <td>{{item.city}}</td>
+                                <td>{{item.starting_date}}</td>
+                                <td>{{item.ending_date}}</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </fieldset>
                 <fieldset>
@@ -356,24 +413,28 @@
                         Training & Certificates Professional training only
                     </legend>
                     <table class="table">
-                        <tr>
-                            <th>#</th>
-                            <th>Institution/Organization</th>
-                            <th>Name of Course</th>
-                            <th>State</th>
-                            <th>City</th>
-                            <th>Starting Date</th>
-                            <th>Ending Date</th>
-                        </tr>
-                        <tr *ngFor="let item of resume_detail.certifications; let i=index">
-                            <td>{{i+1}}</td>
-                            <td>{{item.name_of_institute}}</td>
-                            <td>{{item.name_of_course}}</td>
-                            <td>{{item.state}}</td>
-                            <td>{{item.city}}</td>
-                            <td>{{item.starting_date}}</td>
-                            <td>{{item.ending_date}}</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Institution/Organization</th>
+                                <th>Name of Course</th>
+                                <th>State</th>
+                                <th>City</th>
+                                <th>Starting Date</th>
+                                <th>Ending Date</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="resumes_detail.certifications!=null">
+                            <tr *ngFor="let item of resumes_detail.certifications; let i=index">
+                                <td>{{i+1}}</td>
+                                <td>{{item.name_of_institute}}</td>
+                                <td>{{item.name_of_course}}</td>
+                                <td>{{item.state}}</td>
+                                <td>{{item.city}}</td>
+                                <td>{{item.starting_date}}</td>
+                                <td>{{item.ending_date}}</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </fieldset>
                 <fieldset>
@@ -381,24 +442,28 @@
                         Professional Membership [active and past]
                     </legend>
                     <table class="table">
-                        <tr>
-                            <th>#</th>
-                            <th>Name of Institute</th>
-                            <th>Explanation[if applicable]</th>
-                            <th>State</th>
-                            <th>City</th>
-                            <th>Starting Date</th>
-                            <th>Ending Date</th>
-                        </tr>
-                        <tr *ngFor="let item of resume_detail.memberships; let i=index">
-                            <td>{{i+1}}</td>
-                            <td>{{item.name_of_institute}}</td>
-                            <td>{{item.explanation}}</td>
-                            <td>{{item.state}}</td>
-                            <td>{{item.city}}</td>
-                            <td>{{item.starting_date}}</td>
-                            <td>{{item.ending_date}}</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name of Institute</th>
+                                <th>Explanation[if applicable]</th>
+                                <th>State</th>
+                                <th>City</th>
+                                <th>Starting Date</th>
+                                <th>Ending Date</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="resumes_detail.certifications!=null">
+                            <tr *ngFor="let item of resumes_detail.memberships; let i=index">
+                                <td>{{i+1}}</td>
+                                <td>{{item.name_of_institute}}</td>
+                                <td>{{item.explanation}}</td>
+                                <td>{{item.state}}</td>
+                                <td>{{item.city}}</td>
+                                <td>{{item.starting_date}}</td>
+                                <td>{{item.ending_date}}</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </fieldset>
                 <div class="html2pdf__page-break"></div>
@@ -407,40 +472,48 @@
                         Employment History
                     </legend>
                     <table class="table">
-                        <tr>
-                            <th>#</th>
-                            <th>Name of Organization/Institution:</th>
-                            <th>Your Position Name</th>
-                            <th>Starting Date</th>
-                            <th>Ending Date</th>
-                            <th>State</th>
-                            <th>City</th>
-                        </tr>
-                        <tr *ngFor="let item of resume_detail.experience; let i=index">
-                            <td>{{i+1}}</td>
-                            <td>{{item.name_of_institute}}</td>
-                            <td>{{item.position}}</td>
-                            <td>{{item.starting_date}}</td>
-                            <td>{{item.ending_date}}</td>
-                            <td>{{item.state}}</td>
-                            <td>{{item.city}}</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name of Organization/Institution:</th>
+                                <th>Your Position Name</th>
+                                <th>Starting Date</th>
+                                <th>Ending Date</th>
+                                <th>State</th>
+                                <th>City</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="resumes_detail.experience!=null">
+                            <tr *ngFor="let item of resumes_detail.experience; let i=index">
+                                <td>{{i+1}}</td>
+                                <td>{{item.name_of_institute}}</td>
+                                <td>{{item.position}}</td>
+                                <td>{{item.starting_date}}</td>
+                                <td>{{item.ending_date}}</td>
+                                <td>{{item.state}}</td>
+                                <td>{{item.city}}</td>
+                            </tr>
+                        </tbody>
                     </table>
                     <table class="table">
-                        <tr>
-                            <th>#</th>
-                            <th>Duties/Contributions</th>
-                            <th>Achievements</th>
-                        </tr>
-                        <tr *ngFor="let item of resume_detail.experience; let i=index">
-                            <td>{{i+1}}</td>
-                            <td>{{item.duties}}</td>
-                            <td>{{item.achievements}}</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Duties/Contributions</th>
+                                <th>Achievements</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="resumes_detail.experience!=null">
+                            <tr *ngFor="let item of resumes_detail.experience; let i=index">
+                                <td>{{i+1}}</td>
+                                <td>{{item.duties}}</td>
+                                <td>{{item.achievements}}</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </fieldset>
+                <button class="btn btn-success" (click)="downloadResumeData()">Download Resume Detail</button>
             </tab>
-            <button class="btn btn-success" (click)="downloadResumeData()">Download Resume Detail</button>
         </tabset>
     </div>
 </div>

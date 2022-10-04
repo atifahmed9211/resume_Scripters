@@ -1,12 +1,9 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Email } from '../../../../../assets/email/smtp.js';
-import * as firebase from 'firebase'
-import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AdminService } from '../../../admin.service';
 import { __await } from 'tslib';
-import { identifierModuleUrl } from '@angular/compiler';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
 
@@ -26,7 +23,6 @@ export class FinalDraftComponent implements OnInit {
   private baseUrl = environment.baseUrl;
   constructor(
     public bsModalRef: BsModalRef,
-    private route: ActivatedRoute,
     private as: AdminService,
     private http: HttpClient,
 
@@ -46,7 +42,7 @@ export class FinalDraftComponent implements OnInit {
     let formdata = new FormData;
     formdata.append("id", this.as.selectedOrderId);
     formdata.append("file", file);
-    formdata.append("fileStatus", "firstDraft");
+    formdata.append("fileStatus", "finalDraft");
     let token = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', `Bearer ${token}`);
@@ -67,7 +63,7 @@ export class FinalDraftComponent implements OnInit {
     attachFile: new FormControl('')
   })
   sendFinalDraft() {
-    //this.sendEmail();
+    this.sendEmail();
     //send form data to services
     let data
     //user have selected file or not
@@ -103,11 +99,11 @@ export class FinalDraftComponent implements OnInit {
       Host: 'smtp.elasticemail.com',
       Username: 'atif.ahmed9211@gmail.com',
       Password: '4A9170D3104909F97D6C312D8DA45A3900B3',
-      To: 'talhafaizrasool@gmail.com',
+      To: 'atif.ahmed9211@gmail.com',
       From: `atif.ahmed9211@gmail.com`,
       Subject: 'Subject',
       Body: `
-      <i>Hi! user, your First Draft has been sent.</b> `
+      <i>Hi! user, your Final Draft has been sent.</b> `
     }).then(message => { console.log(message); });
   }
   // in case use cancelled the modal
