@@ -1,0 +1,32 @@
+.col-sm-12 {
+    padding: 0 !important;
+
+    table {
+        text-align: center;
+        width: 100% !important;
+
+        tr {
+            background-color: transparent !important;
+
+            td {
+                vertical-align: middle;
+            }
+        }
+
+        @media(max-width:890px) {
+            .description {
+                display: none;
+            }
+        }
+
+        @media(max-width:700px) {
+            .services {
+                display: none;
+            }
+
+            .sr_no {
+                display: none;
+            }
+        }
+    }
+}

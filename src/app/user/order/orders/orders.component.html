@@ -1,63 +1,50 @@
+<!--loading start-->
+<div *ngIf="!showOrderList" class="content col-sm-12">
+  <app-loading></app-loading>
+</div>
+<!--loading end-->
 <div class="animated fadeIn">
-    <div class="row">
-      <!--loading start-->
-      <div *ngIf="!showOrderList" class="content col-sm-12">
-        <div class="load-wrapp">
-            <div class="load-3">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-sm-12" style="height:832px">
+      <div class="table-responsive-sm">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
+          <thead *ngIf="showOrderList">
+            <tr>
+              <th class="sr_no">#</th>
+              <th>Id</th>
+              <th class="user_name">User Name</th>
+              <th>Package</th>
+              <th class="service_type">Service Type</th>
+              <th class="price">Price</th>
+              <th class="status">Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="orders?.length != 0 && showOrderList">
+            <tr *ngFor="let order of list_of_orders; let i=index">
+              <td class="sr_no">{{ i + 1 }}</td>
+              <td>{{order.id}}</td>
+              <td class="user_name">{{ userName }}</td>
+              <td>{{ package_title[i] }}</td>
+              <td class="service_type">{{ service_type[i] }}</td>
+              <td class="price">{{ order.price | currency }}</td>
+              <td class="status">
+                <span class="order_status" [ngStyle]="{backgroundColor:order_status_color[order?.status]}">
+                  {{ user_order_status[order.status] }}
+                </span>
+              </td>
+              <td>
+                <a routerLink="../order/{{order.id}}" class="btn btn-success">View</a>
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="orders?.length == 0 && showOrderList">
+            <tr>
+              <td colspan="6" class="no-data-available text-center">No data!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <!--loading end-->
-        <div *ngIf="showOrderList" class="col-sm-12">
-            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>User Name</th>
-                    <th>User Email</th>
-                    <th>Service/Package Name</th>
-                    <th>Service Type</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody *ngIf="orders?.length != 0">
-                  <tr *ngFor="let order of orders[0].orders; let i=index">
-                      <td>{{ i + 1 }}</td>
-                      <td>{{ userName }}</td>
-                      <td>{{ email }}</td>
-                      <td>{{ package_title[i] }}</td>
-                      <td>{{ service_type[i] }}</td>
-                      <td>{{ order.price | currency }}</td>
-                      <td>{{ user_order_status[order.status] }}</td>
-                      <td>
-                        <a routerLink="../order/{{order.id}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
-                      </td>
-                  </tr>
-                  <!-- <tr *ngFor="let order of orders[0].orders; let i = index">
-                    <td>{{ i + 1 }}</td> -->
-                    <!-- <td>{{ order.name }}</td>
-                    <td>{{ order.email }}</td> -->
-                    <!-- <td *ngIf="order.services.length > 0">{{ order.services[0].title }}</td>
-                    <td *ngIf="order.packages.length > 0">{{ order.packages[0].title }}</td>
-                    <td>{{ order.service_types[0].name }}</td>
-                    <td>{{ order.price | currency }}</td>
-                    <td>{{ order.status }}</td>
-                    <td>
-                        <a routerLink="../order/{{order.id}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
-                    </td>
-                  </tr> -->
-                </tbody>
-                <!-- <tbody *ngIf="orders?.length == 0">
-                    <tr>
-                        <td colspan="6" class="no-data-available text-center">No data!</td>
-                    </tr>
-                </tbody> -->
-            </table>
-        </div>
-    </div>
+  </div>
 </div>

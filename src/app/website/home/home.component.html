@@ -1,16 +1,24 @@
-<div class="banner">
-    <app-header [logoSrc] = "homeLogo" [navbarClass] = "navbarClass"></app-header>
-    <div class="banner-content">
+<app-header></app-header>
+<div class="banner" [ngClass]="{blur:showModal}">
+    <video id="banner-video" [muted]="true" autoplay playsinline loop="true">
+        <source src="../../../assets/pexels-tima-miroshnichenko-5442621.mp4" type="video/mp4">
+    </video>
+    <div class="banner-content" style="background: rgba(0, 0, 0, 0.5);">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <!--loading start-->
+                <div *ngIf="showLoading" class="content">
+                    <app-loading></app-loading>
+                </div>
+                <!--loading end-->
+                <div *ngIf="!showLoading" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="content">
                         <h1 data-aos="fade-right">Transform your resume into a job-seeking missile</h1>
                         <p>
                             Upload your <span>resume</span> for a free expert review
                         </p>
                         <div class="upload-btn-wrapper">
-                                <div style="position:relative;">
+                            <div style="position:relative;">
                                 <div>
                                     <label for="file-upload" *ngIf="!showLoader">
                                         <span class="resume-upload-image rounded-circle">
@@ -18,24 +26,27 @@
                                         </span>
                                     </label>
                                     <span *ngIf="showLoader" class="tickIcon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor" class="bi bi-check2-all" viewBox="0 0 16 16">
-                                            <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"/>
-                                            <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150"
+                                            fill="currentColor" class="bi bi-check2-all" viewBox="0 0 16 16">
+                                            <path
+                                                d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z" />
+                                            <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z" />
                                         </svg>
                                         <i class="bi bi-check2-all"></i>
                                     </span>
                                 </div>
-                                    <div id="loadingCircle" *ngIf="showLoader">
-                                        <circle-progress #circleProgress [animation]="true">
-                                        </circle-progress>
-                                    </div>
+                                <div id="loadingCircle" *ngIf="showLoader">
+                                    <circle-progress [animation]="true">
+                                    </circle-progress>
                                 </div>
-                            <br/>
+                            </div>
+                            <br />
                             <label *ngIf="!showLoader" for="file-upload" data-aos-duration="1000" class="more-btn">
-                                upload your resume
+                                Upload Your Resume
                             </label>
-                            <br/><br/><br/><br/>
-                            <input id="file-upload" type="file" name="myfile" (change)="uploadResume($event)"/>
+                            <br /><br />
+                            <input #file_upload id="file-upload" type="file" name="myfile"
+                                (change)="uploadResume($event)" />
                         </div>
                     </div>
                 </div>
@@ -46,19 +57,22 @@
 </div>
 
 <section class="section-one">
-    <svg class="oval-animation" version="1.1" xmlns="http://www.w3.org/2000/svg" style="fill:#fff3d3;" x="0px" y="0px" viewBox="0 0 180 180"> 
-        <path d="M 81.3389 11.3784 c -4.53142 3 -9.17604 10.6149 -17.4389 25.1216 c -5.96443 9.56943 -7.39085 12.0826 -11.7082 18.9009 C 45.4166 65.7496 42.0687 70.8843 38.0373 75.1942 C 26.6736 87.0628 18.1289 84.8676 11.923 92.799 c -8.5067 10.3562 -5.09179 34.5679 7.2066 49.9795 c 17.4588 21.5654 49.5218 19.6694 55.4673 19.0925 c 1.95698 0.523113 8.90151 1.66849 16.1031 -0.491794 c 7.09585 -1.86774 10.1604 -3.74122 13.0306 -5.16349 c 13.7347 -2.83547 30.1909 -11.744 41.0306 -22.6308 c 4.8016 -4.53057 11.5429 -13.6016 14.5273 -25.271 c 0.928114 -3.73802 0.504151 -4.03472 1.49094 -7.85538 c 3.67443 -13.9248 10.6909 -16.7446 13.029 -24.8264 c 4.52811 -15.4653 -11.9934 -39.1323 -29.629 -44.8736 c -5.07934 -1.6033 -7.21075 -0.8 -12.7 -3.7 c -11.3578 -5.87934 -10.7438 -13.9488 -19.0851 -18.6876 C 102.922 3.21151 89.6529 5.83047 81.3389 11.3784 Z"> 
-            <animate repeatCount="indefinite" attributeName="d" dur="10s" values=" M78.8,23.2c-3.5,3-8.7,7.6-14.9,13.3c-8.9,8.3-13.5,12.4-17.5,16.6c-5,5.3-10.5,11-15.9,19c-4.9,7.2-11.9,17.7-14.5,32.8 c-1.4,8.1-3.6,21.1,3.3,34.2c7.9,14.9,22.7,20.5,30.2,23.3c14.7,5.5,27.3,4.4,36,3.5c17.8-1.8,30.5-8.1,37-11.4 c14.4-7.4,22.8-15.7,24.8-17.7c7-7.1,16.6-16.8,15.4-29c-0.3-3.1-1.2-5.6-2-7.3c-3.8-7.8-12-10.7-19.7-21.8c-9.7-13.9,9-32.9,3-47.9 c-2.7-6.7-8.7-10.3-10.8-11.8c-9.6-6.7-19.7-6.7-24-6.7C95.2,12.3,84.5,18.3,78.8,23.2z; M78.8,23.2c-3.5,3-8.7,7.6-14.9,13.3c-8.9,8.3-13.5,12.4-17.5,16.6c-8.6,9-12.9,13.5-15.9,19c-7,12.9-6.5,25.7-6.2,32.6 c0.3,7.5,0.7,18.7,8,30.7C40,148,50.8,153.8,55,156c6.4,3.3,23.5,12.3,35.7,5.3c9-5.2,5.4-13.5,14.3-20c13.1-9.5,26.7,4.6,42.3-4.7 c9.8-5.8,16.7-18.6,15.4-29c-0.5-3.5-1.4-3.4-2-7.3c-1.8-12.1,7.2-17.3,9.3-28c3.1-16.1-11.2-35.8-25.9-41.7c-5-2-6.1-0.8-12.7-3.7 c-13.5-5.8-13.6-12.6-22.1-14.8C98.4,9.4,86.4,16.7,78.8,23.2z; M82,8.3c-4.8,3-9.3,11.4-18.1,28.2c-5.2,9.9-5.8,12-10.2,19.5C47.4,66.7,44.3,72,40,76C27.5,87.6,16.6,81.5,8.7,89.7 c-10.8,11.1-6.6,38.7,7,55c20,23.9,57.6,20,64,18.7c0.8-0.2,5.1-1.1,11-2c6.6-1,11.4-1.2,12.7-1.3c13.9-1.1,31.1-16,40.7-27.3 c3.5-4.2,10.2-12.3,14.3-24.3c1.3-3.8,1-4.2,2.4-8c5.1-14.4,11.6-16.6,14-24c4.9-15.3-12.2-40-30.6-45.7c-5.1-1.5-7.5-0.8-12.7-3.7 c-10.8-5.9-10-14.3-18.3-19.7C104.1,1.6,90.5,3,82,8.3z; M78.8,23.2c-3.5,3-8.7,7.6-14.9,13.3c-8.9,8.3-13.5,12.4-17.5,16.6c-5,5.3-10.5,11-15.9,19c-4.9,7.2-11.9,17.7-14.5,32.8 c-1.4,8.1-3.6,21.1,3.3,34.2c7.9,14.9,22.7,20.5,30.2,23.3c14.7,5.5,27.3,4.4,36,3.5c17.8-1.8,30.5-8.1,37-11.4 c14.4-7.4,22.8-15.7,24.8-17.7c7-7.1,16.6-16.8,15.4-29c-0.3-3.1-1.2-5.6-2-7.3c-3.8-7.8-12-10.7-19.7-21.8c-9.7-13.9,9-32.9,3-47.9 c-2.7-6.7-8.7-10.3-10.8-11.8c-9.6-6.7-19.7-6.7-24-6.7C95.2,12.3,84.5,18.3,78.8,23.2z">
+    <svg class="oval-animation" version="1.1" xmlns="http://www.w3.org/2000/svg" style="fill:#fff3d3;" x="0px" y="0px"
+        viewBox="0 0 180 180">
+        <path
+            d="M 81.3389 11.3784 c -4.53142 3 -9.17604 10.6149 -17.4389 25.1216 c -5.96443 9.56943 -7.39085 12.0826 -11.7082 18.9009 C 45.4166 65.7496 42.0687 70.8843 38.0373 75.1942 C 26.6736 87.0628 18.1289 84.8676 11.923 92.799 c -8.5067 10.3562 -5.09179 34.5679 7.2066 49.9795 c 17.4588 21.5654 49.5218 19.6694 55.4673 19.0925 c 1.95698 0.523113 8.90151 1.66849 16.1031 -0.491794 c 7.09585 -1.86774 10.1604 -3.74122 13.0306 -5.16349 c 13.7347 -2.83547 30.1909 -11.744 41.0306 -22.6308 c 4.8016 -4.53057 11.5429 -13.6016 14.5273 -25.271 c 0.928114 -3.73802 0.504151 -4.03472 1.49094 -7.85538 c 3.67443 -13.9248 10.6909 -16.7446 13.029 -24.8264 c 4.52811 -15.4653 -11.9934 -39.1323 -29.629 -44.8736 c -5.07934 -1.6033 -7.21075 -0.8 -12.7 -3.7 c -11.3578 -5.87934 -10.7438 -13.9488 -19.0851 -18.6876 C 102.922 3.21151 89.6529 5.83047 81.3389 11.3784 Z">
+            <animate repeatCount="indefinite" attributeName="d" dur="10s"
+                values=" M78.8,23.2c-3.5,3-8.7,7.6-14.9,13.3c-8.9,8.3-13.5,12.4-17.5,16.6c-5,5.3-10.5,11-15.9,19c-4.9,7.2-11.9,17.7-14.5,32.8 c-1.4,8.1-3.6,21.1,3.3,34.2c7.9,14.9,22.7,20.5,30.2,23.3c14.7,5.5,27.3,4.4,36,3.5c17.8-1.8,30.5-8.1,37-11.4 c14.4-7.4,22.8-15.7,24.8-17.7c7-7.1,16.6-16.8,15.4-29c-0.3-3.1-1.2-5.6-2-7.3c-3.8-7.8-12-10.7-19.7-21.8c-9.7-13.9,9-32.9,3-47.9 c-2.7-6.7-8.7-10.3-10.8-11.8c-9.6-6.7-19.7-6.7-24-6.7C95.2,12.3,84.5,18.3,78.8,23.2z; M78.8,23.2c-3.5,3-8.7,7.6-14.9,13.3c-8.9,8.3-13.5,12.4-17.5,16.6c-8.6,9-12.9,13.5-15.9,19c-7,12.9-6.5,25.7-6.2,32.6 c0.3,7.5,0.7,18.7,8,30.7C40,148,50.8,153.8,55,156c6.4,3.3,23.5,12.3,35.7,5.3c9-5.2,5.4-13.5,14.3-20c13.1-9.5,26.7,4.6,42.3-4.7 c9.8-5.8,16.7-18.6,15.4-29c-0.5-3.5-1.4-3.4-2-7.3c-1.8-12.1,7.2-17.3,9.3-28c3.1-16.1-11.2-35.8-25.9-41.7c-5-2-6.1-0.8-12.7-3.7 c-13.5-5.8-13.6-12.6-22.1-14.8C98.4,9.4,86.4,16.7,78.8,23.2z; M82,8.3c-4.8,3-9.3,11.4-18.1,28.2c-5.2,9.9-5.8,12-10.2,19.5C47.4,66.7,44.3,72,40,76C27.5,87.6,16.6,81.5,8.7,89.7 c-10.8,11.1-6.6,38.7,7,55c20,23.9,57.6,20,64,18.7c0.8-0.2,5.1-1.1,11-2c6.6-1,11.4-1.2,12.7-1.3c13.9-1.1,31.1-16,40.7-27.3 c3.5-4.2,10.2-12.3,14.3-24.3c1.3-3.8,1-4.2,2.4-8c5.1-14.4,11.6-16.6,14-24c4.9-15.3-12.2-40-30.6-45.7c-5.1-1.5-7.5-0.8-12.7-3.7 c-10.8-5.9-10-14.3-18.3-19.7C104.1,1.6,90.5,3,82,8.3z; M78.8,23.2c-3.5,3-8.7,7.6-14.9,13.3c-8.9,8.3-13.5,12.4-17.5,16.6c-5,5.3-10.5,11-15.9,19c-4.9,7.2-11.9,17.7-14.5,32.8 c-1.4,8.1-3.6,21.1,3.3,34.2c7.9,14.9,22.7,20.5,30.2,23.3c14.7,5.5,27.3,4.4,36,3.5c17.8-1.8,30.5-8.1,37-11.4 c14.4-7.4,22.8-15.7,24.8-17.7c7-7.1,16.6-16.8,15.4-29c-0.3-3.1-1.2-5.6-2-7.3c-3.8-7.8-12-10.7-19.7-21.8c-9.7-13.9,9-32.9,3-47.9 c-2.7-6.7-8.7-10.3-10.8-11.8c-9.6-6.7-19.7-6.7-24-6.7C95.2,12.3,84.5,18.3,78.8,23.2z">
 
-            </animate> 
-        </path> 
+            </animate>
+        </path>
     </svg>
-    
-    <div class="container">
+
+    <div class="container-fluid">
         <div class="row first">
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-7 col-md-8">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="box-lin-one">
                             <div class="box" data-aos="fade-down" data-aos-duration="1000">
                                 <div class="box-inner">
@@ -80,7 +94,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 d-flex align-items-center">
+                    <div class="col-lg-6 col-md-6 col-sm-6 align-items-center">
                         <div class="box-line-two">
                             <div class="box" data-aos="fade-down" data-aos-duration="1000">
                                 <div class="box-inner">
@@ -98,15 +112,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 d-flex align-items-center">
+            <div class="col-lg-5 col-md-4 d-flex align-items-center">
                 <div class="content">
                     <h1 data-aos="fade-down" data-aos-duration="1000">Why Choose Us</h1>
                     <p data-aos="fade-down" data-aos-duration="1000">
-                        Our mission is to provide job seekers with the most effective and trusted source 
-                        of resume writing services. When you work with us, you’re investing in a quicker 
+                        Our mission is to provide job seekers with the most effective and trusted source
+                        of resume writing services. When you work with us, you’re investing in a quicker
                         job search, and a more fruitful and satisfying career.
                     </p>
-                    <a routerLink="/about-us" data-aos="fade-down" data-aos-duration="1000" class="more-btn" >More</a>
+                    <a routerLink="/about-us" data-aos="fade-down" data-aos-duration="1000" class="more-btn">More</a>
                 </div>
             </div>
         </div>
@@ -118,23 +132,26 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <img data-aos="fade-down" data-aos-duration="1000" class="right-arrow" src="../../../assets/images/right_arrow.png">
+                <!-- <img data-aos="fade-down" data-aos-duration="1000" class="right-arrow"
+                    src="../../../assets/images/right_arrow.png"> -->
                 <div data-aos="fade-down" data-aos-duration="1000" class="price-heading">
                     <h1>Your Plan, Your Choice!</h1>
-                    <h3>Over half of Career Scripters customers find their next job within 90 days of receiving their completed resume.</h3>
-                    
+                    <h3>Over half of Resume Scripters customers find their next job within 90 days of receiving
+                        their
+                        completed resume.</h3>
+
                 </div>
             </div>
         </div>
         <div class="row position-relative" style="z-index: 1;">
             <img class="dot" src="../../../assets/images/dot.png">
-            <div class="col-lg-3 col-md-6 col-sm-12 mt-5" *ngFor="let pkg of packages; let i = index;">
+            <div class="col-lg-4 col-md-6 col-sm-12 mt-5" *ngFor="let pkg of packages; let i = index;">
                 <div class="card" data-aos="fade-down" data-aos-duration="1000">
                     <div class="card-title pt-2">
                         <span>{{pkg.title}}</span><span class="float-right mr-3">{{pkg.price | currency}}</span>
                     </div>
                     <div class="card-body">
-                            <!-- <p class="card-price">$100</p> -->
+                        <!-- <p class="card-price">$100</p> -->
                         <h3>{{pkg.description}}</h3>
 
                         <div class="true" *ngFor="let service of pkg.services; let j = index;">
@@ -145,65 +162,188 @@
                                 <i class="fa fa-check" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <div class="w-100 text-center mt-3">
-                            <a routerLink="#" class="more-btn" (click)="BuyNow(pkg.id)">Buy Now</a>
+                        <div class="w-100 text-center mt-3" style="position: absolute;bottom: 0;left: 0;padding: 15px;">
+                            <a routerLink="#" class="btn btn-primary more-btn" (click)="BuyNow(pkg.id)">Buy Now</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <img class="triangle" src="../../../assets/images/triangle.png">
+    <img class="triangle img-fluid" src="../../../assets/images/triangle.png">
 </div>
 <!-- Price Packaging section end here -->
+
+<!--Resume Sample-->
+<section class="res__gallery">
+    <!--Here we are displaying all categories list-->
+    <ul class="category_list">
+        <!--uaha par ham data-filter or data-item attribute ki jagha id ke 
+        attribute ke through data filter kare ge -->
+        <li class="list active" id="all">Alles</li>
+        <li *ngFor="let item of categories" class="list" id="{{item.id}}">
+            {{item.name}}
+        </li>
+    </ul>
+    <div class="container">
+        <div id="fws_633e00426e794" data-midnight="dark" data-top-percent="3%" data-bottom-percent="3%"
+            data-bg-mobile-hidden="" class="wpb_row vc_row-fluid vc_row standard_section "
+            style="padding-top: calc(100vw * 0.03); padding-bottom: calc(100vw * 0.03); ">
+            <div class="row-bg-wrap" data-bg-animation="none">
+                <div class="inner-wrap">
+                    <div class="row-bg" style=""></div>
+                </div>
+                <div class="row-bg-overlay"></div>
+            </div>
+            <div class="product">
+                <!--Row 1-->
+                <div class="row">
+                    <div *ngFor="let sample of samples" class="col-sm-6 itembox" data-t-w-inherits="default"
+                        data-border-radius="none" data-shadow="none" data-border-animation=""
+                        data-border-animation-delay="" data-border-width="none" data-border-style="solid"
+                        data-border-color="" data-bg-cover="" data-padding-pos="all" data-has-bg-color="false"
+                        data-bg-color="" data-bg-opacity="1" data-hover-bg="" data-hover-bg-opacity="1"
+                        data-animation="" data-delay="0" id="{{sample.category}}">
+                        <div class="column-bg-overlay"></div>
+                        <div class="vc_column-inner">
+                            <div class="wpb_wrapper">
+                                <h2 style="text-align: center;font-family:Open Sans;font-weight:600;font-style:normal"
+                                    class="vc_custom_heading">{{sample.name}}</h2>
+                                <div class="wpb_gallery wpb_content_element clearfix">
+                                    <div class="wpb_wrapper">
+                                        <div class="wpb_gallery_slides wpb_flexslider flex-gallery flexslider"
+                                            data-onclick="link_no" data-interval="5" data-flex_fx="fade">
+                                            <ul #SampleDiv1 class="slides">
+                                                <!--Here we are getting list of images of specific sample, and then we will assign a dynamic id (sample_id + pic_name) to each pic  -->
+                                                <li *ngFor="let pic of stringifyToJSON(sample.samples); let i=index"
+                                                    #Row1Div1SampleImg1 id="{{sample.id+pic}}"
+                                                    style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; z-index:1; ">
+                                                    <img decoding="async" src="{{mediaUrl}}/sample_files/{{pic}}"
+                                                        class="skip-lazy attachment-full img-fluid"
+                                                        alt="creative_resumes_professional_resume_writing_service"
+                                                        srcset="" sizes="(max-width: 1080px) 100vw, 1080px"
+                                                        title="Account-Manager-Resume-Sample - Creative Resume Writing Services"
+                                                        draggable="false"><noscript><img data-lazy-fallback="1"
+                                                            src="{{mediaUrl}}/sample_files/{{pic}}"
+                                                            class="skip-lazy attachment-full img-fluid"
+                                                            alt="creative_resumes_professional_resume_writing_service"
+                                                            loading="lazy" srcset=""
+                                                            sizes="(max-width: 1080px) 100vw, 1080px"
+                                                            title="Account-Manager-Resume-Sample - Creative Resume Writing Services" /></noscript>
+                                                    <ol class="flex-control-nav flex-control-paging"></ol>
+                                                    <!--change Image button will appear only if there is more than one image inside a sample-->
+                                                    <ul *ngIf="stringifyToJSON(sample.samples).length>1"
+                                                        class="flex-direction-nav">
+                                                        <!--Inside changeImage Function we will send sample id and list of images inside that sample-->
+                                                        <li><a id="abc" class="flex-prev flex-disabled"
+                                                                (click)="changeImage(sample.id,stringifyToJSON(sample.samples))"
+                                                                tabindex="-1"><i class="fa fa-angle-left"></i></a>
+                                                        </li>
+                                                        <li><a id="abc" class="flex-next flex-disabled"
+                                                                (click)="changeImage(sample.id,stringifyToJSON(sample.samples))"
+                                                                tabindex="-1"><i class="fa fa-angle-right"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 text-center">
+        <a routerLink="/resume_samples" class="more-btn">View More Samples</a>
+    </div>
+    <br clear="all">
+</section>
+<!--Resume Sample end-->
+
 
 <div class="container howWorksCont">
     <div class="row">
         <div class="col-lg-12">
-            <div data-aos="fade-down" data-aos-duration="1000" class="price-heading text-center">
-                <h1>How CareerScripters Works</h1>
-                <h3>4 Easy Steps to Follow</h3>
-                
+            <div class="price-heading text-center">
+                <h1>How Resume Scripters Works</h1>
+                <h3>Easy Steps to Follow</h3>
             </div>
         </div>
     </div>
 </div>
 
-<div class="cPanelContainer">
-    <!--  Content  -->
-    <div class="cPanelContent">  
-        <!--  Section 01  -->
-        <div class="cPanelSection">
-            <div>
-                <div class="cPanelArrowPulse"></div>
-                <h5>Register and Purchase</h5>
-                <p>Register by providing your contact and billing information. Then choose the package that suits you the best</p>
+<div class="container brand-resume" style="margin-bottom: 70px;">
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-6 mt-4 mb-4">
+            <div class="box p-4 text-center" style="height:100%">
+                <div class="icon">
+                    <i class="fas fa-user-edit"></i>
+                </div>
+
+                <h3>Register and Purchase</h3>
+                <p>Register by providing your contact and billing information. Then choose the package that suits
+                    you
+                    the best</p>
             </div>
         </div>
-    
-        <!--  Section 02  -->
-        <div class="cPanelSection">
-            <div>
-                <div class="cPanelArrowPulse"></div>
-                <h5>Tell Us About Yourself</h5>
-                <p>Provide information about your job history, motivations, strong career points and jobs of interest through a thorough questionnaire.</p>
+        <div class="col-lg-4 col-md-6 col-sm-6 mt-4 mb-4">
+            <div class="box p-4 text-center" style="height:100%">
+                <div class="icon">
+                    <i class="fas fa-user-friends"></i>
+                </div>
+
+                <h3>Tell Us About Yourself</h3>
+                <p>Provide information about your job history, motivations, strong career points and jobs of
+                    interest
+                    through a thorough questionnaire.</p>
             </div>
         </div>
-        
-        <!--  Section 03  -->
-        <div class="cPanelSection">
-            <div>
-                <div class="cPanelArrowPulse"></div>
-                <h5>One-on-One With Writer</h5>
-                <p>Our expert Resume Writer will help you draft the resume, which you can constantly review and suggest changes to. Your suggestions ensure that the final product is tailored to your needs.</p>
+        <div class="col-lg-4 col-md-6 col-sm-6 mt-4 mb-4">
+            <div class="box p-4 text-center" style="height:100%">
+                <div class="icon">
+                    <i class="fas fa-book-reader"></i>
+                </div>
+
+                <h3>Chat With Us</h3>
+                <p>Our expert Resume Writer will help you draft the resume, which you can constantly review and
+                    suggest
+                    changes to. Your suggestions ensure that the final product is tailored to your needs.</p>
             </div>
         </div>
-    
-        <!--  Section 04  -->
-        <div class="cPanelSection">
-            <div>
-                <h5>Your Resume Is Done!</h5>
-                <p>Walk away extremely satisfied with the best version of your resume and boost your confidence. We'll wait for you to get discovered and shortlisted.</p>
+        <div class="col-lg-4 col-md-6 col-sm-6 mt-4 mb-4">
+            <div class="box p-4 text-center" style="height:100%">
+                <div class="icon">
+                    <i class="fas fa-user-edit"></i>
+                </div>
+
+                <h3>Your Resume Is Done!</h3>
+                <p>Walk away extremely satisfied with the best version of your resume and boost your confidence.
+                    We'll
+                    wait for you to get discovered and shortlisted.</p>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-6 mt-4 mb-4">
+            <div class="box p-4 text-center" style="height:100%">
+                <div class="icon">
+                    <i class="fas fa-user-edit"></i>
+                </div>
+                <h3>Unlimited Revisions</h3>
+                <p>We offer unlimited revisions until you approve the resume </p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6 mt-4 mb-4">
+            <div class="box p-4 text-center" style="height:100%">
+                <div class="icon">
+                    <i class="fas fa-user-edit"></i>
+                </div>
+
+                <h3>Give Feedback</h3>
+                <p>Receive a resume proof and provide your feedback via your client portal</p>
             </div>
         </div>
     </div>
@@ -214,232 +354,279 @@
     <img class="rectangal" src="../../../assets/images/rectangle.png">
     <div class="container position-relative">
         <div class="row">
-            <div class="col-lg-12 mb-4">
-                <img class="right-arrow" data-aos="fade-down" data-aos-duration="1000" src="../../../assets/images/right_arrow.png">
+            <div class="col-md-12 mb-4">
+                <!-- <img class="right-arrow" data-aos="fade-down" data-aos-duration="1000"
+                    src="../../../assets/images/right_arrow.png"> -->
                 <div class="price-heading" data-aos="fade-down" data-aos-duration="1000">
                     <h1>Client Testimonials</h1>
                 </div>
             </div>
         </div>
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <table class="table table-responsive">
-                        <tr class="border-bottom">
-                            <td class="border-top-0 border-right">
-                                <div class="client-name">
-                                    <div class="">
-                                        <img src="../../../assets/images/reviews/Client 10.jfif"/>
+        <div class="row">
+            <div id="carouselExampleIndicators" class="col-sm-12 carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-interval="2000">
+                        <table class="table table-responsive">
+                            <tr class="border-bottom">
+                                <td class="border-top-0 border-right">
+                                    <div class="client-name">
+                                        <div class="">
+                                            <img src="../../../assets/images/reviews/Client 10.jfif" />
+                                        </div>
+                                        <div class="text-left mt-2">
+                                            <h2>Nardin Shamleh</h2><br />
+                                            <p class="font-weight-bold">CPM Hospitality Project</p>
+                                        </div>
                                     </div>
-                                    <div class="text-left mt-2">
-                                        <h2>Nardin Shamleh</h2>
-                                        <p class="font-weight-bold">CPM Hospitality Project</p>
+                                </td>
+                                <td class="border-top-0 border-right">
+                                    <div class="client-name">
+                                        <div class="text-left mt-2">
+                                            <h2>Profession</h2><br />
+                                            <p>Design Manager</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="border-top-0 border-right">
-                                <div class="client-name">
-                                    <div class="text-left mt-2">
-                                        <h2>Profession</h2>
-                                        <p>Design Manager</p>
+                                </td>
+                                <td class="border-top-0 border-right">
+                                    <div class="client-name">
+                                        <div class="text-left mt-2">
+                                            <h2>Experience</h2><br />
+                                            <p>8 Years</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="border-top-0 border-right">
-                                <div class="client-name">
-                                    <div class="text-left mt-2">
-                                        <h2>Experience</h2>
-                                        <p>8 Years</p>
+                                </td>
+                                <td class="border-top-0">
+                                    <div class="client-name">
+                                        <div class="text-left mt-2">
+                                            <h2>Purchased</h2><br />
+                                            <p class="plan">Silver Package</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="border-top-0">
-                                <div class="client-name">
-                                    <div class="text-left mt-2">
-                                        <h2>Purchased</h2>
-                                        <p class="plan">Silver Package</p>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border-top-0" colspan="4">
-                                <p class="client-text">When I first contacted CareerScripters, I was employed but looking 
-                                    to grow in my career. I had been applying to jobs over the course of about a year and 
-                                    a half, but I wasn’t getting any responses. I’m so glad I finally decided to work 
-                                    with them, because the difference was remarkable.
-                                </p>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="border-top-0" colspan="4">
+                                    <p class="client-text text-justify">When I first contacted ResumeScripters, I
+                                        was
+                                        employed but
+                                        looking
+                                        to grow in my career. I had been applying to jobs over the course of about a
+                                        year
+                                        and
+                                        a half, but I wasn’t getting any responses.
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
 
-                <div class="carousel-item">
-                    <table class="table table-responsive">
-                        <tr class="border-bottom">
-                            <td class="border-top-0 border-right">
-                                <div class="client-name">
-                                    <div class="">
-                                        <img src="../../../assets/images/reviews/Client 9.jfif"/>
+                    <div class="carousel-item" data-interval="2000">
+                        <table class="table table-responsive">
+                            <tr class="border-bottom">
+                                <td class="border-top-0 border-right">
+                                    <div class="client-name">
+                                        <div class="">
+                                            <img src="../../../assets/images/reviews/Client 9.jfif" />
+                                        </div>
+                                        <div class="text-left mt-2">
+                                            <h2>Matteo Lai</h2><br />
+                                            <p>Central Bank Of Ireland</p>
+                                        </div>
                                     </div>
-                                    <div class="text-left mt-2">
-                                        <h2>Matteo Lai</h2>
-                                        <p>Central Bank Of Ireland</p>
+                                </td>
+                                <td class="border-top-0 border-right">
+                                    <div class="client-name">
+                                        <div class="text-left mt-2">
+                                            <h2>Profession</h2><br />
+                                            <p>Investment Banker</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="border-top-0 border-right">
-                                <div class="client-name">
-                                    <div class="text-left mt-2">
-                                        <h2>Profession</h2>
-                                        <p>Investment Banker</p>
+                                </td>
+                                <td class="border-top-0 border-right">
+                                    <div class="client-name">
+                                        <div class="text-left mt-2">
+                                            <h2>Experience</h2><br />
+                                            <p>7+ Years</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="border-top-0 border-right">
-                                <div class="client-name">
-                                    <div class="text-left mt-2">
-                                        <h2>Experience</h2>
-                                        <p>7+ Years</p>
+                                </td>
+                                <td class="border-top-0">
+                                    <div class="client-name">
+                                        <div class="text-left mt-2">
+                                            <h2>Purchased</h2><br />
+                                            <p class="plan">Gold Package</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="border-top-0">
-                                <div class="client-name">
-                                    <div class="text-left mt-2">
-                                        <h2>Purchased</h2>
-                                        <p class="plan">Gold Package</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="border-top-0" colspan="4">
+                                    <p class="client-text text-justify">I retained Resume Scripters for my
+                                        resume-writing service. My resume writer
+                                        listened
+                                        to feedback, was quick to respond and had great communication throughout the
+                                        process.</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="carousel-item" data-interval="2000">
+                        <table class="table table-responsive">
+                            <tr class="border-bottom">
+                                <td class="border-top-0 border-right">
+                                    <span class="client-name">
+                                        <div class="">
+                                            <img src="../../../assets/images/reviews/Client 6.png" />
+                                        </div>
+                                        <div class="text-left mt-2">
+                                            <h2>Kathie Barrett</h2><br />
+                                            <p>TechHeck</p>
+                                        </div>
+                                    </span>
+                                </td>
+                                <td class="border-top-0 border-right">
+                                    <div class="client-name">
+                                        <div class="text-left mt-2">
+                                            <h2>Profession</h2><br />
+                                            <p>CEO</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border-top-0" colspan="4">
-                                <p class="client-text">I retained Career Scripters for my resume-writing service because I knew I needed to invest wisely in my next career move. My resume writer listened to feedback, was quick to respond and had great communication throughout the process.</p>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                
-                <div class="carousel-item">
-                    <table class="table table-responsive">
-                        <tr class="border-bottom">
-                            <td class="border-top-0 border-right">
-                                <div class="client-name">
-                                    <div class="">
-                                        <img src="../../../assets/images/reviews/Client 6.png"/>
+                                </td>
+                                <td class="border-top-0 border-right">
+                                    <div class="client-name">
+                                        <div class="text-left mt-2">
+                                            <h2>Experience</h2><br />
+                                            <p>20+ Years</p>
+                                        </div>
                                     </div>
-                                    <div class="text-left mt-2">
-                                        <h2>Kathie Barrett</h2>
-                                        <p>TechHeck</p>
+                                </td>
+                                <td class="border-top-0">
+                                    <div class="client-name">
+                                        <div class="text-left mt-2">
+                                            <h2>Purchased</h2><br />
+                                            <p class="plan">Platinum Package</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="border-top-0 border-right">
-                                <div class="client-name">
-                                    <div class="text-left mt-2">
-                                        <h2>Profession</h2>
-                                        <p>CEO</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="border-top-0 border-right">
-                                <div class="client-name">
-                                    <div class="text-left mt-2">
-                                        <h2>Experience</h2>
-                                        <p>20+ Years</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="border-top-0">
-                                <div class="client-name">
-                                    <div class="text-left mt-2">
-                                        <h2>Purchased</h2>
-                                        <p class="plan">Platinum Package</p>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr> 
-                            <td class="border-top-0" colspan="4">
-                                <p class="client-text">I sent my resume to Catherine and her turnaround time was super quick! Overall, I was impressed with the final product and would highly recommend Career Scripters.</p>
-                            </td>
-                        </tr>
-                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="border-top-0" colspan="4">
+                                    <p class="client-text text-justify">I sent my resume to Catherine and her
+                                        turnaround
+                                        time was
+                                        super
+                                        quick! Overall, I was impressed with the final product and would highly
+                                        recommend
+                                        Resume Scripters.</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
-
-
-            <!-- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a> -->
-            
         </div>
         <img class="dot" src="../../../assets/images/dot.png">
     </div>
 </section>
 <!-- Client Testimonials section end here -->
-
 <section class="sectionThree">
     <div class="w-100" data-aos="fade-down" data-aos-duration="2000">
         <img class="left-triangle" src="../../../assets/images/left_triangle.png">
     </div>
-    <div class="container">
-        <div class="row position-relative" data-aos="fade-down" data-aos-duration="2000">
-            <div class="col-12 mt-5">
-                <div class="heading">
-                    <h1>Trusted by professionals from!</h1>
-                </div>
+    <div class="row position-relative" data-aos="fade-down" data-aos-duration="2000"
+        style="background-color:#fff;margin:0">
+        <div class="col-12 mt-5">
+            <div class="heading">
+                <h1>Trusted by professionals from!</h1>
             </div>
-            <div class="company mt-5">
-                <div class="bran-images">
-                    <img class="img" src="../../../assets/images/brands/netflix.png">
-                    <img class="img-hover" src="../../../assets/images/brands/netflix-hover.png">
-                </div>
-                <div class="bran-images">
-                    <img class="img" src="../../../assets/images/brands/amazon.png">
-                    <img class="img-hover" src="../../../assets/images/brands/amazon-hover.jpg">
-                </div>
-                <div class="bran-images">
-                    <img class="img" src="../../../assets/images/brands/google.png">
-                    <img class="img-hover" src="../../../assets/images/brands/google-hover.png">
-                </div>
-                <div class="bran-images">
-                    <img class="img" src="../../../assets/images/brands/oracle.png">
-                    <img class="img-hover" src="../../../assets/images/brands/oracle-hover.png">
-                </div>
-                <div class="bran-images">
-                    <img class="img" src="../../../assets/images/brands/john-hover.png">
-                    <img class="img-hover" src="../../../assets/images/brands/john.png">
-                </div>
-                <div class="bran-images">
-                    <img class="img" src="../../../assets/images/brands/microsoft.png">
-                    <img class="img-hover" src="../../../assets/images/brands/microsoft-hover.png">
-                </div>
-            </div>
-            <img class="dot" src="../../../assets/images/dot.png">
-        </div>
-    </div>
-    
-</section>
+            <div id="infinite" class="highway-slider">
+                <div class="highway-barrier">
+                    <ul class="highway-lane">
+                        <li class="highway-car"><img src="../../../assets/images/brands/Meta.png" alt=""
+                                style="width:150px;height:auto"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/salesforce.png" alt=""
+                                style="width:100px;height:100px"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/apple.png" alt=""
+                                style="width:100px;height:100px"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/ibm.png" alt=""
+                                style="height:50px;width:100px;"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/america.png" alt=""
+                                style="width:150px;height:auto"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/city-bank.png" alt=""
+                                style="width:100px;height:100px"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/netflix-hover.png" alt=""
+                                style="width:100px;height:100px"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/amazon.png"
+                                style="margin-top:15px;width:180px;height:auto" alt=""></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/oracle-hover.png" alt=""
+                                style="width:150px;height:auto"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/microsoft-hover.png" alt=""
+                                style="width:100px;height:auto"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/tiktok.png" alt=""
+                                style="width:100px;height:100px"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/john.png" alt=""
+                                style="width:100px;height:auto"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/cisco.png" alt=""
+                                style="height:70px"></li>
+                        <li class="highway-car">
+                            <img src="../../../assets/images/brands/google-hover.png" alt=""
+                                style="width:150px;height:auto">
+                        </li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/disney.png" alt=""
+                                style="height:60px"></li>
 
+                        <li class="highway-car"><img src="../../../assets/images/brands/Meta.png" alt=""
+                                style="width:150px;height:auto"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/salesforce.png" alt=""
+                                style="width:100px;height:100px"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/apple.png" alt=""
+                                style="width:100px;height:100px"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/ibm.png" alt=""
+                                style="height:50px;width:100px"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/america.png" alt=""
+                                style="width:150px;height:auto"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/city-bank.png" alt=""
+                                style="width:100px;height:100px"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/netflix-hover.png" alt=""
+                                style="width:100px;height:100px"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/amazon.png"
+                                style="margin-top:15px;width:180px;height:auto" alt=""></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/oracle-hover.png" alt=""
+                                style="width:150px;height:auto"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/microsoft-hover.png" alt=""
+                                style="width:100px;height:auto"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/tiktok.png" alt=""
+                                style="width:100px;height:100px"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/john.png" alt=""
+                                style="width:100px;height:auto"></li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/cisco.png" alt=""
+                                style="height:70px"></li>
+                        <li class="highway-car">
+                            <img src="../../../assets/images/brands/google-hover.png" alt=""
+                                style="width:150px;height:auto">
+                        </li>
+                        <li class="highway-car"><img src="../../../assets/images/brands/disney.png" alt=""
+                                style="height:60px"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- <img class="dot" src="../../../assets/images/dot.png" style="z-index:-1"> -->
+    </div>
+</section>
 <!-- Client Testimonials section end here -->
 
 <!-- Meet Our Writers section start from here -->
 
 <section class="sectionFour">
     <div class="w-100">
-        <img class="right-triangle" src="../../../assets/images/right_triangle.png">
+        <img class="right-triangle" src="../../../assets/images/right_triangle.png" style="z-index:-1">
     </div>
     <div class="container">
         <div class="row align-items-center">
@@ -448,8 +635,8 @@
             </div>
             <div class="col-lg-9 col-md-9 col-sm-9 col-12 mt-5">
                 <div class="heading" data-aos="fade-down" data-aos-duration="1000">
-                    <h1>Wondering who are the writers behind your resume?</h1>
-                    <a class="more-btn mt-4" routerLink="/writers">Meet Our Writers</a>
+                    <h1 class="text-center">Wondering who are the writers behind your resume?</h1>
+                    <a class="more-btn mt-4" style="margin:auto" routerLink="/writers">Meet Our Writers</a>
                 </div>
             </div>
             <!-- <div class="col-lg-6" data-aos="fade-down" data-aos-duration="1000">
@@ -490,38 +677,38 @@
     </div>
 </section>
 
-<!-- Why Career Scripters -->
-<div class="container brand-resume">
+<!-- Why Resume Scripters -->
+<div class="container brand-resume" style="margin-bottom: 70px;">
     <div class="row">
         <div class="col-lg-12 text-center" data-aos="fade-down" data-aos-duration="1000">
-            <h1 class="mb-5">Why CareerScripters</h1>
+            <h1 class="mb-5">Why ResumeScripters</h1>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 mt-4 mb-4" data-aos="fade-down" data-aos-duration="1000">
-            <div class="box p-4 text-center">
+            <div class="box p-4 text-center" style="height:100%">
                 <div class="icon">
                     <i class="fas fa-user-edit"></i>
                 </div>
-                
+
                 <h3>Real Professional Editing</h3>
                 <p>We will analyze your current resume and convert it to align with your dream job</p>
             </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 mt-4 mb-4" data-aos="fade-down" data-aos-duration="1000">
-            <div class="box p-4 text-center">
+            <div class="box p-4 text-center" style="height:100%">
                 <div class="icon">
                     <i class="fas fa-user-friends"></i>
                 </div>
-                
+
                 <h3>Real Humans</h3>
                 <p>We cater your job seeking goals in order to achive 100% customer satisfaction</p>
             </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 mt-4 mb-4" data-aos="fade-down" data-aos-duration="1000">
-            <div class="box p-4 text-center">
+            <div class="box p-4 text-center" style="height:100%">
                 <div class="icon">
                     <i class="fas fa-book-reader"></i>
                 </div>
-                
+
                 <h3>Real Results</h3>
                 <p>We are results driven and our goals is for you to land more interviews starting now</p>
             </div>
@@ -531,14 +718,17 @@
 
 <!-- In Association with! section start from here -->
 <section class="section-five">
-    <svg class="oval-animation" version="1.1" xmlns="http://www.w3.org/2000/svg" style="fill:#fff3d3;" x="0px" y="0px" viewBox="0 0 180 180"> 
-        <path d="M 81.3389 11.3784 c -4.53142 3 -9.17604 10.6149 -17.4389 25.1216 c -5.96443 9.56943 -7.39085 12.0826 -11.7082 18.9009 C 45.4166 65.7496 42.0687 70.8843 38.0373 75.1942 C 26.6736 87.0628 18.1289 84.8676 11.923 92.799 c -8.5067 10.3562 -5.09179 34.5679 7.2066 49.9795 c 17.4588 21.5654 49.5218 19.6694 55.4673 19.0925 c 1.95698 0.523113 8.90151 1.66849 16.1031 -0.491794 c 7.09585 -1.86774 10.1604 -3.74122 13.0306 -5.16349 c 13.7347 -2.83547 30.1909 -11.744 41.0306 -22.6308 c 4.8016 -4.53057 11.5429 -13.6016 14.5273 -25.271 c 0.928114 -3.73802 0.504151 -4.03472 1.49094 -7.85538 c 3.67443 -13.9248 10.6909 -16.7446 13.029 -24.8264 c 4.52811 -15.4653 -11.9934 -39.1323 -29.629 -44.8736 c -5.07934 -1.6033 -7.21075 -0.8 -12.7 -3.7 c -11.3578 -5.87934 -10.7438 -13.9488 -19.0851 -18.6876 C 102.922 3.21151 89.6529 5.83047 81.3389 11.3784 Z"> 
-            <animate repeatCount="indefinite" attributeName="d" dur="10s" values=" M78.8,23.2c-3.5,3-8.7,7.6-14.9,13.3c-8.9,8.3-13.5,12.4-17.5,16.6c-5,5.3-10.5,11-15.9,19c-4.9,7.2-11.9,17.7-14.5,32.8 c-1.4,8.1-3.6,21.1,3.3,34.2c7.9,14.9,22.7,20.5,30.2,23.3c14.7,5.5,27.3,4.4,36,3.5c17.8-1.8,30.5-8.1,37-11.4 c14.4-7.4,22.8-15.7,24.8-17.7c7-7.1,16.6-16.8,15.4-29c-0.3-3.1-1.2-5.6-2-7.3c-3.8-7.8-12-10.7-19.7-21.8c-9.7-13.9,9-32.9,3-47.9 c-2.7-6.7-8.7-10.3-10.8-11.8c-9.6-6.7-19.7-6.7-24-6.7C95.2,12.3,84.5,18.3,78.8,23.2z; M78.8,23.2c-3.5,3-8.7,7.6-14.9,13.3c-8.9,8.3-13.5,12.4-17.5,16.6c-8.6,9-12.9,13.5-15.9,19c-7,12.9-6.5,25.7-6.2,32.6 c0.3,7.5,0.7,18.7,8,30.7C40,148,50.8,153.8,55,156c6.4,3.3,23.5,12.3,35.7,5.3c9-5.2,5.4-13.5,14.3-20c13.1-9.5,26.7,4.6,42.3-4.7 c9.8-5.8,16.7-18.6,15.4-29c-0.5-3.5-1.4-3.4-2-7.3c-1.8-12.1,7.2-17.3,9.3-28c3.1-16.1-11.2-35.8-25.9-41.7c-5-2-6.1-0.8-12.7-3.7 c-13.5-5.8-13.6-12.6-22.1-14.8C98.4,9.4,86.4,16.7,78.8,23.2z; M82,8.3c-4.8,3-9.3,11.4-18.1,28.2c-5.2,9.9-5.8,12-10.2,19.5C47.4,66.7,44.3,72,40,76C27.5,87.6,16.6,81.5,8.7,89.7 c-10.8,11.1-6.6,38.7,7,55c20,23.9,57.6,20,64,18.7c0.8-0.2,5.1-1.1,11-2c6.6-1,11.4-1.2,12.7-1.3c13.9-1.1,31.1-16,40.7-27.3 c3.5-4.2,10.2-12.3,14.3-24.3c1.3-3.8,1-4.2,2.4-8c5.1-14.4,11.6-16.6,14-24c4.9-15.3-12.2-40-30.6-45.7c-5.1-1.5-7.5-0.8-12.7-3.7 c-10.8-5.9-10-14.3-18.3-19.7C104.1,1.6,90.5,3,82,8.3z; M78.8,23.2c-3.5,3-8.7,7.6-14.9,13.3c-8.9,8.3-13.5,12.4-17.5,16.6c-5,5.3-10.5,11-15.9,19c-4.9,7.2-11.9,17.7-14.5,32.8 c-1.4,8.1-3.6,21.1,3.3,34.2c7.9,14.9,22.7,20.5,30.2,23.3c14.7,5.5,27.3,4.4,36,3.5c17.8-1.8,30.5-8.1,37-11.4 c14.4-7.4,22.8-15.7,24.8-17.7c7-7.1,16.6-16.8,15.4-29c-0.3-3.1-1.2-5.6-2-7.3c-3.8-7.8-12-10.7-19.7-21.8c-9.7-13.9,9-32.9,3-47.9 c-2.7-6.7-8.7-10.3-10.8-11.8c-9.6-6.7-19.7-6.7-24-6.7C95.2,12.3,84.5,18.3,78.8,23.2z">
+    <svg class="oval-animation" version="1.1" xmlns="http://www.w3.org/2000/svg" style="fill:#fff3d3;" x="0px" y="0px"
+        viewBox="0 0 180 180">
+        <path
+            d="M 81.3389 11.3784 c -4.53142 3 -9.17604 10.6149 -17.4389 25.1216 c -5.96443 9.56943 -7.39085 12.0826 -11.7082 18.9009 C 45.4166 65.7496 42.0687 70.8843 38.0373 75.1942 C 26.6736 87.0628 18.1289 84.8676 11.923 92.799 c -8.5067 10.3562 -5.09179 34.5679 7.2066 49.9795 c 17.4588 21.5654 49.5218 19.6694 55.4673 19.0925 c 1.95698 0.523113 8.90151 1.66849 16.1031 -0.491794 c 7.09585 -1.86774 10.1604 -3.74122 13.0306 -5.16349 c 13.7347 -2.83547 30.1909 -11.744 41.0306 -22.6308 c 4.8016 -4.53057 11.5429 -13.6016 14.5273 -25.271 c 0.928114 -3.73802 0.504151 -4.03472 1.49094 -7.85538 c 3.67443 -13.9248 10.6909 -16.7446 13.029 -24.8264 c 4.52811 -15.4653 -11.9934 -39.1323 -29.629 -44.8736 c -5.07934 -1.6033 -7.21075 -0.8 -12.7 -3.7 c -11.3578 -5.87934 -10.7438 -13.9488 -19.0851 -18.6876 C 102.922 3.21151 89.6529 5.83047 81.3389 11.3784 Z">
+            <animate repeatCount="indefinite" attributeName="d" dur="10s"
+                values=" M78.8,23.2c-3.5,3-8.7,7.6-14.9,13.3c-8.9,8.3-13.5,12.4-17.5,16.6c-5,5.3-10.5,11-15.9,19c-4.9,7.2-11.9,17.7-14.5,32.8 c-1.4,8.1-3.6,21.1,3.3,34.2c7.9,14.9,22.7,20.5,30.2,23.3c14.7,5.5,27.3,4.4,36,3.5c17.8-1.8,30.5-8.1,37-11.4 c14.4-7.4,22.8-15.7,24.8-17.7c7-7.1,16.6-16.8,15.4-29c-0.3-3.1-1.2-5.6-2-7.3c-3.8-7.8-12-10.7-19.7-21.8c-9.7-13.9,9-32.9,3-47.9 c-2.7-6.7-8.7-10.3-10.8-11.8c-9.6-6.7-19.7-6.7-24-6.7C95.2,12.3,84.5,18.3,78.8,23.2z; M78.8,23.2c-3.5,3-8.7,7.6-14.9,13.3c-8.9,8.3-13.5,12.4-17.5,16.6c-8.6,9-12.9,13.5-15.9,19c-7,12.9-6.5,25.7-6.2,32.6 c0.3,7.5,0.7,18.7,8,30.7C40,148,50.8,153.8,55,156c6.4,3.3,23.5,12.3,35.7,5.3c9-5.2,5.4-13.5,14.3-20c13.1-9.5,26.7,4.6,42.3-4.7 c9.8-5.8,16.7-18.6,15.4-29c-0.5-3.5-1.4-3.4-2-7.3c-1.8-12.1,7.2-17.3,9.3-28c3.1-16.1-11.2-35.8-25.9-41.7c-5-2-6.1-0.8-12.7-3.7 c-13.5-5.8-13.6-12.6-22.1-14.8C98.4,9.4,86.4,16.7,78.8,23.2z; M82,8.3c-4.8,3-9.3,11.4-18.1,28.2c-5.2,9.9-5.8,12-10.2,19.5C47.4,66.7,44.3,72,40,76C27.5,87.6,16.6,81.5,8.7,89.7 c-10.8,11.1-6.6,38.7,7,55c20,23.9,57.6,20,64,18.7c0.8-0.2,5.1-1.1,11-2c6.6-1,11.4-1.2,12.7-1.3c13.9-1.1,31.1-16,40.7-27.3 c3.5-4.2,10.2-12.3,14.3-24.3c1.3-3.8,1-4.2,2.4-8c5.1-14.4,11.6-16.6,14-24c4.9-15.3-12.2-40-30.6-45.7c-5.1-1.5-7.5-0.8-12.7-3.7 c-10.8-5.9-10-14.3-18.3-19.7C104.1,1.6,90.5,3,82,8.3z; M78.8,23.2c-3.5,3-8.7,7.6-14.9,13.3c-8.9,8.3-13.5,12.4-17.5,16.6c-5,5.3-10.5,11-15.9,19c-4.9,7.2-11.9,17.7-14.5,32.8 c-1.4,8.1-3.6,21.1,3.3,34.2c7.9,14.9,22.7,20.5,30.2,23.3c14.7,5.5,27.3,4.4,36,3.5c17.8-1.8,30.5-8.1,37-11.4 c14.4-7.4,22.8-15.7,24.8-17.7c7-7.1,16.6-16.8,15.4-29c-0.3-3.1-1.2-5.6-2-7.3c-3.8-7.8-12-10.7-19.7-21.8c-9.7-13.9,9-32.9,3-47.9 c-2.7-6.7-8.7-10.3-10.8-11.8c-9.6-6.7-19.7-6.7-24-6.7C95.2,12.3,84.5,18.3,78.8,23.2z">
 
-            </animate> 
-        </path> 
+            </animate>
+        </path>
     </svg>
-    
+
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6 mt-5 d-flex align-items-center">
@@ -549,41 +739,41 @@
             <div class="col-lg-6 col-md-6" data-aos="fade-down" data-aos-duration="1000">
                 <div class="position">
                     <div class="cube-container-outter">
-                      <div class="cube-container-inner">
-                        <div class="cube">
-                          <div class="front">
-                            <div class="image-container">
-                              <img src="./../../../assets/images/rectangle/box-5.png">
+                        <div class="cube-container-inner">
+                            <div class="cube">
+                                <div class="front">
+                                    <div class="image-container">
+                                        <img src="./../../../assets/images/rectangle/box-5.png">
+                                    </div>
+                                </div>
+                                <div class="back">
+                                    <div class="image-container">
+                                        <img src="./../../../assets/images/rectangle/box-2.png">
+                                    </div>
+                                </div>
+                                <div class="left">
+                                    <div class="image-container">
+                                        <img src="./../../../assets/images/rectangle/box-1.png">
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <div class="image-container">
+                                        <img src="./../../../assets/images/rectangle/box-4.png">
+                                    </div>
+                                </div>
+                                <div class="top">
+                                    <div class="image-container">
+                                        <img src="./../../../assets/images/rectangle/box-3.png">
+                                    </div>
+                                </div>
+                                <div class="bottom">
+                                    <div class="image-container">
+                                        <img src="./../../../assets/images/rectangle/box-3.png">
+                                    </div>
+                                </div>
+                                <div class="shadow"></div>
                             </div>
-                          </div>
-                          <div class="back">
-                            <div class="image-container">
-                              <img src="./../../../assets/images/rectangle/box-2.png">
-                            </div>
-                          </div>
-                          <div class="left">
-                            <div class="image-container">
-                              <img src="./../../../assets/images/rectangle/box-1.png">
-                            </div>
-                          </div>
-                          <div class="right">
-                            <div class="image-container">
-                              <img src="./../../../assets/images/rectangle/box-4.png">
-                            </div>
-                          </div>
-                          <div class="top">
-                            <div class="image-container">
-                              <img src="./../../../assets/images/rectangle/box-3.png">
-                            </div>
-                          </div>
-                          <div class="bottom">
-                            <div class="image-container">
-                              <img src="./../../../assets/images/rectangle/box-3.png">
-                            </div>
-                          </div>
-                          <div class="shadow"></div>
                         </div>
-                      </div>
                     </div>
                 </div>
             </div>
@@ -592,52 +782,40 @@
 </section>
 
 <!-- Counter Section section start from here -->
-<section class="sectionSix mt-5">
-    <div class="container">
-        <div class="row position-relative">
-            <img class="dot" src="../../../assets/images/dot.png">
-            <div class="main">
-                <h1 data-aos="fade-down" data-aos-duration="1000">What Our Customers Say</h1>
-            </div>
-            <div class="col-lg-4">
-                <div class="box" data-aos="fade-down" data-aos-duration="1000">
-                    <div class="icon">
-                        <i class="fas fa-tasks"></i>
-                    </div>
-                    <h1 class="counterUp" data-count="550">0+</h1>
-                    <h2>Secured Interviews</h2>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="box" data-aos="fade-down" data-aos-duration="2000">
-                    <div class="icon">
-                        <i class="fas fa-smile"></i>
-                    </div>
-                    <h1 class="counterUp" data-count="1235">0+</h1>
-                    <h2>Satisfied Customers</h2>
-                </div>
-            </div>
-            <!-- <div class="col-lg-3">
+<div class="sectiontitle">
+    <h1 data-aos="fade-down" data-aos-duration="1000">What Our Customers Say</h1>
+    <span class="headerLine"></span>
+</div>
+<div id="projectFacts" class="sectionClass">
+    <div class="fullWidth eight columns">
+        <div class="projectFactsWrap ">
+            <div class="col-sm-4 item wow fadeInUpBig animated animated" data-number="246" style="visibility: visible;">
                 <div class="box" data-aos="fade-down" data-aos-duration="3000">
-                    <div class="icon">
-                        <i class="fab fa-affiliatetheme"></i>
-                    </div>
-                    <h1 class="counterUp" data-count="15">0+</h1>
-                    <h2></h2>
+                    <i class="fas fa-tasks"></i>
+                    <p class="counterUp number" data-count="550">0+</p>
+                    <span></span>
+                    <p>Secured Interviews</p>
                 </div>
-            </div> -->
-            <div class="col-lg-4">
+            </div>
+            <div class="col-sm-4 item wow fadeInUpBig animated animated" data-number="246" style="visibility: visible;">
                 <div class="box" data-aos="fade-down" data-aos-duration="3000">
-                    <div class="icon">
-                        <i class="fas fa-award"></i>
-                    </div>
-                    <h1 class="counterUp" data-count="9.5">0+</h1>
-                    <h2>Customer Ratings</h2>
+                    <i class="fas fa-smile"></i>
+                    <p class="counterUp number" data-count="1235">0+</p>
+                    <span></span>
+                    <p>Satisfied Customers</p>
+                </div>
+            </div>
+            <div class="col-sm-4 item wow fadeInUpBig animated animated" data-number="246" style="visibility: visible;">
+                <div class="box" data-aos="fade-down" data-aos-duration="3000">
+                    <i class="fas fa-award"></i>
+                    <p class="counterUp number" data-count="9.5">0+</p>
+                    <span></span>
+                    <p>Customer Ratings</p>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 
 <!-- Career Advice start from here -->
 <section class="sectionSeven">
@@ -645,58 +823,61 @@
         <div class="row position-relative">
             <div class="w-100 text-center mb-3 heading">
                 <h1 data-aos="fade-down" data-aos-duration="1000">Career Advice</h1>
-                <img data-aos="fade-down" data-aos-duration="1000" src="../../../assets/images/right_arrow.png">
+                <!-- <img data-aos="fade-down" data-aos-duration="1000" src="../../../assets/images/right_arrow.png"> -->
             </div>
-            <div class="col-lg-4" *ngFor = "let blog of blogs; let i = index;">
+        </div>
+
+        <div class="row">
+            <div *ngFor="let blog of blogs; let i = index;" class="col-md-6 col-lg-4">
                 <div *ngIf="i<3" class="box" data-aos="fade-down" data-aos-duration="1000">
-                    <img class="w-100" src="{{mediaUrl}}blogs_imgs/{{blog.img}}" />
-                    <div class="box-content">
-                        <h2>{{blog.title}}</h2>
-                        <p>{{blog.created_at | date}}</p>
-                        <h3>
-                            <a type="button" class="" routerLink="/blog-detail/{{blog.id}}">More</a>
-                        </h3>
+                    <div class="card p-1 border shadow-none" style="border-radius:15px">
+                        <div class="p-3">
+                            <h5><a (click)="getSpecificBlog(blog.id)"
+                                    class="text-dark">{{getTrimText(blog.title,9)}}</a></h5>
+                            <p class="text-muted mb-0">{{blog.created_at | date}}</p>
+                        </div>
+
+                        <div class="position-relative" style="margin:auto">
+                            <img src="{{mediaUrl}}blogs_imgs/{{blog.img}}" alt="" class="img-thumbnail"
+                                style="height:200px" />
+                        </div>
+
+                        <div class="p-3">
+                            <ul class="list-inline">
+                                <li class="list-inline-item me-3">
+                                    <a href="javascript: void(0);" class="text-muted">
+                                        <i class="bx bx-purchase-tag-alt align-middle text-muted me-1"></i> Project
+                                    </a>
+                                </li>
+                                <li class="list-inline-item me-3">
+                                    <a href="javascript: void(0);" class="text-muted">
+                                        <i class="bx bx-comment-dots align-middle text-muted me-1"></i> 12 Comments
+                                    </a>
+                                </li>
+                            </ul>
+                            <p style="font-size:0.9rem;height:45px;" [innerHTML]="getTrimText(blog.description,8)">
+                            </p>
+
+                            <div style="text-align:center">
+                                <a class="btn" (click)="getSpecificBlog(blog.id)">More<i
+                                        class="mdi mdi-arrow-right"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- <div class="col-lg-4">
-                <div class="box" data-aos="fade-up" data-aos-duration="2000">
-                    <img class="w-100" src="./../../../assets/images/blog1.jfif" />
-                    <div class="box-content">
-                        <h2>Reasons why you should hire a professional resume writer</h2>
-                        <p>10 Oct 2020</p>
-                        <h3>Looking to accelerate your professional growth? There are many 
-                            benefits of working with a professional resume writer.<a type="button" class="">More</a>
-                        </h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 position-relative">
-                <div class="box" data-aos="fade-down" data-aos-duration="1000">
-                    <img class="w-100" src="./../../../assets/images/blog1.jfif" />
-                    <div class="box-content">
-                        <h2>How to personalize your cover letter for each job</h2>
-                        <p>10 Oct 2020</p>
-                        <h3>Cover letters are your first chance to get noticed. Make sure yours 
-                            is tailored to the exact job on offer. Most employers still do...<a type="button" class="">More</a>
-                        </h3>
-                    </div>
-                </div>
-            </div> -->
-            <img class="dot" src="../../../assets/images/dot.png">
-            <div class="col-lg-12 text-center mt-5">
-                <a routerLink="/blog" class="more-btn">View our blog</a>
-            </div>
+        </div>
+        <img class="dot" src="../../../assets/images/dot.png">
+        <div class="col-lg-12 text-center mt-5">
+            <a routerLink="/blog" class="more-btn">View our blog</a>
         </div>
     </div>
 </section>
 
-
 <div class="mt-5"></div>
 <app-footer></app-footer>
 
-<div class="modal fade" bsModal #modal="bs-modal"
-     tabindex="-1" role="dialog" aria-labelledby="dialog-events-name">
+<div class="modal fade" bsModal #modal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="dialog-events-name">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">

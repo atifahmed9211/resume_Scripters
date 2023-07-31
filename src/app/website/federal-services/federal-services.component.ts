@@ -1,68 +1,64 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { StripeComponent } from '../shared-components/stripe/stripe.component';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { WebsiteService } from '../website.service';
-import { ToastrService } from 'ngx-toastr';
-import { LoginCheckModalComponent } from '../shared-components/login-check-modal/login-check-modal.component';
+
 @Component({
   selector: 'app-federal-services',
   templateUrl: './federal-services.component.html',
   styleUrls: ['./federal-services.component.scss']
 })
+
 export class FederalServicesComponent implements OnInit {
+
   services = [];
   packages = [];
   bsModalRef: BsModalRef;
-  navbarClass = "navbar2";
-  amount      = null;
+  amount = null;
+  public user = null;
 
   constructor(
-    private modalService: BsModalService,
-    private webService  : WebsiteService,
-    private router      : Router,
-    
-    ) { }
-  
-    buy(amount,id,type){
-      if(localStorage.getItem("userToken")){
-        const initialState = {
-          amount:amount,
-          id:id,
-          service_type_id:1,
-          type:type
-        };
-        this.bsModalRef = this.modalService.show(StripeComponent, {class: 'modal-dialog-centered',initialState});
-        this.bsModalRef.content.closeBtnName = 'Close';
-      }else{
-        this.bsModalRef = this.modalService.show(LoginCheckModalComponent, {class: 'modal-dialog-centered'});
-        this.bsModalRef.content.closeBtnName = 'Close';
-      }
-      
-    }
+    private webService: WebsiteService,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
     this.getServices();
+    if (localStorage.getItem("user")) {
+      this.user = JSON.parse(localStorage.getItem("user"))
+    }
   }
 
-  getServices(){
-    this.webService.getAllServices("Federal").subscribe((res)=>{
-      console.log(res);
+  buyService(id) {
+    if (this.user) {
+      this.router.navigate(['./checkout'])
+      for (let service of this.services) {
+        if (service.id == id) {
+          //in case user reload page then to save data as a backup
+          localStorage.setItem("selectedPackage", JSON.stringify(service))
+        }
+      }
+    }
+    else {
+      this.router.navigate(['./login'])
+    }
+  }
+
+  getServices() {
+    this.webService.getAllServices("Federal").subscribe((res) => {
       this.services = res.service[0].services;
     },
-    (error)=>{
-      console.log(error);
-    })
+      (error) => {
+        console.log(error);
+      })
   }
 
-  getPackages(){
-    this.webService.getAllPackages("Federal").subscribe((res)=>{
-      console.log(res);
+  getPackages() {
+    this.webService.getAllPackages("Federal").subscribe((res) => {
       this.packages = res.packages;
     },
-    (error)=>{
-      console.log(error);
-    })
+      (error) => {
+        console.log(error);
+      })
   }
-
 }

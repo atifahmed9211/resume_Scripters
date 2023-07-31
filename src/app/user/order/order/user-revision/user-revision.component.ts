@@ -7,27 +7,67 @@ import { UserService } from '../../../user.service';
 import { __await } from 'tslib';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
+import { Router } from '@angular/router';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-user-revision',
   templateUrl: './user-revision.component.html',
   styleUrls: ['./user-revision.component.scss']
 })
+
 export class UserRevisionComponent implements OnInit {
 
   @ViewChild('fileMessage') fileMessage: ElementRef;
+
+  UserRevision = new FormGroup({
+    message: new FormControl(''),
+    attachFile: new FormControl('')
+  })
 
   files = [];
   filesResponse = [];
   ckContent = ""
   showLoader;
   private baseUrl = environment.baseUrl;
+  //for chat editor 
+  public Editor = ClassicEditor;
+  public config = {
+    toolbar: {
+      items: [
+        "heading",
+        "|",
+        "bold",
+        "italic",
+        "link",
+        "bulletedList",
+        "numberedList",
+        "|",
+        "indent",
+        "outdent",
+        "|",
+        "blockQuote",
+        "insertTable",
+        "undo",
+        "redo"
+      ]
+    },
+    table: {
+      contentToolbar: [
+        "tableColumn",
+        "tableRow",
+        "mergeTableCells"
+      ]
+    },
+    language: "en",
+  }
+
   constructor(
     public bsModalRef: BsModalRef,
     private route: ActivatedRoute,
     private us: UserService,
     private http: HttpClient,
-
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -40,30 +80,36 @@ export class UserRevisionComponent implements OnInit {
       this.sendFilesToAPI(event.target.files[i])
     }
   }
+
   async sendFilesToAPI(file) {
     let formdata = new FormData;
     formdata.append("id", this.us.selectedOrderId);
     formdata.append("file", file);
     formdata.append("fileStatus", "userRevision");
-    let token = localStorage.getItem("userToken");
-    let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    const res = await this.http.post<any>(`${this.baseUrl}/update-order`, formdata, { headers }).toPromise();
-    console.log("res", res);
-    if (res) {
-      this.filesResponse.push(res.data);
-      this.showLoader = false;
-      this.fileMessage.nativeElement.value = null;
+    /* we cannot initialize usertoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */
+    let usertoken = localStorage.getItem("userToken");
+    //in case we delete token from browser(Application)
+    if (usertoken != null) {
+      let headers = new HttpHeaders();
+      headers = headers.set('Authorization', `Bearer ${usertoken}`);
+      const res = await this.http.post<any>(`${this.baseUrl}/update-order`, formdata, { headers }).toPromise();
+      if (res) {
+        this.filesResponse.push(res.data);
+        this.showLoader = false;
+        this.fileMessage.nativeElement.value = null;
+      }
+    } else {
+      this.router.navigateByUrl('login');
     }
   }
+
   deleteItem(i) {
     this.files.splice(i, 1);
     this.filesResponse.splice(i, 1);
   }
-  UserRevision = new FormGroup({
-    message: new FormControl(''),
-    attachFile: new FormControl('')
-  })
+
   sendRevision() {
     this.sendEmail();
     //send form data to services
@@ -96,6 +142,7 @@ export class UserRevisionComponent implements OnInit {
       this.hideModal();
     }
   }
+
   sendEmail() {
     Email.send({
       Host: 'smtp.elasticemail.com',
@@ -106,8 +153,9 @@ export class UserRevisionComponent implements OnInit {
       Subject: 'Subject',
       Body: `
       <i>Hi! user, your revision has been submitted.</b> `
-    }).then(message => { console.log(message); });
+    }).then(message => { console.log(); });
   }
+
   // in case use cancelled the modal
   hideModal() {
     this.bsModalRef.hide();

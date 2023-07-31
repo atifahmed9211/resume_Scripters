@@ -1,78 +1,104 @@
-@font-face{
+@font-face {
     font-family: Roboto-Regular;
     src: url(../../../assets/fonts/Roboto-Regular.ttf);
 }
-@font-face{
+
+@font-face {
     font-family: Roboto-Medium;
     src: url(../../../assets/fonts/Roboto-Medium.ttf);
 }
-@font-face{
+
+@font-face {
     font-family: Roboto-Bold;
     src: url(../../../assets/fonts/Roboto-Bold.ttf);
 }
 
-h1{
-    margin-bottom: 12px;
-    font-size: 50px;
-    font-weight: 600;
+h1 {
     color: #282a41;
+    font-weight: 600;
+    margin-bottom: 12px;
 }
 
-.banner{
-    background-color: #00a67d;
-    padding: 20px 35px;
-    height: 315px;
-    display: flex;
+.banner {
     align-items: center;
+    background-color: #00a67d;
+    //padding: 20px 35px;
+    //height: 315px;
+    //display: flex;
 
-    .banner-text{
-        h1{
-            text-align: center;
+    .banner_img {
+        height: 150px;
+        margin: auto;
+        text-align: center;
+        width: 100%;
+    }
+
+    @media(min-width:495px) {
+        .banner_img {
+            height: 150px;
+        }
+
+        img {
+            margin-top: 5px;
+        }
+    }
+
+    @media(max-width:495px) {
+        .banner_img {
+            height: 175px;
+            margin-top: 0px;
+        }
+    }
+
+    .banner-text {
+        h1 {
             color: #ffffff;
-            line-height: 1.4;
             font-weight: 600;
-            font-size: 60px;
+            line-height: 1.4;
+            text-align: center;
         }
-        p{
-            font-size: 25px;
+
+        p {
             color: #ffffff;
         }
+
+        @media(min-width:830px) {
+            p {
+                position: absolute;
+            }
+        }
     }
 }
 
-.introduction{
+.introduction {
     margin-top: 50px;
-    h1{
-        
-        margin-bottom: 12px;
-        font-size: 50px;
+
+    h1 {
         color: #282a41;
+        margin-bottom: 12px;
     }
-    p{
-        
+
+    p {
         color: #7a7b86;
         line-height: 2;
-        font-size: 20px;
     }
-    ol li{
+
+    ol li {
         color: #7a7b86;
-        line-height: 2;
         font-size: 20px;
+        line-height: 2;
     }
 }
 
-.terms_conditions{
-    margin-top: 50px;
-    h1{
-        
-        margin-bottom: 12px;
-        font-size: 50px;
+.terms_conditions {
+
+    h1 {
         color: #282a41;
+        margin-bottom: 12px;
     }
-    p{
-        
+
+    p {
         color: #7a7b86;
         line-height: 2;
-        font-size: 20px;
     }
 }

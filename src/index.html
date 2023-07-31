@@ -7,38 +7,59 @@
 * Licensed under MIT (https://coreui.io/license)
 -->
 <html lang="en">
+
 <head>
-  <base href="./">
+  <base href="/">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="CoreUI - Free Angular Admin Template">
+  <meta name="description" content="Resume For Your Next Career Move">
   <meta name="author" content="Łukasz Holeczek">
   <meta name="keyword" content="Bootstrap,Admin,Template,Free,Angular,Dashboard,Typescript">
-	<link rel="shortcut icon" href="assets/favicon.jpeg">
-	<title>Career Scripters</title>
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  <link rel="shortcut icon" href="assets/favicon.jpeg">
+  <title>Resume Scripters</title>
+  <!--Font Awesome-->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <!-- Skota Theme Start -->
+  <!-- Icons Css -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.0.96/css/materialdesignicons.min.css"
+    rel="stylesheet" />
+  <!-- App Css-->
+  <link href="assets/skote/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+  <!-- Skota Theme End -->
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     // Shared ID
     gtag('config', 'UA-118965717-3');
     // Angular ID
     gtag('config', 'UA-118965717-4');
   </script>
+  <!--For Google Analytics Start-->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BD47ZH1408"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-BD47ZH1408');
+  </script>
+  <!--End-->
 </head>
+
 <body class="app">
   <!-- App Loading... -->
 
   <!--Stripe Payment Gateway-->
   <script src="https://js.stripe.com/v3/"></script>
-    <script type="text/javascript">
-      const stripe   = Stripe('pk_test_51GsRqCHBOqdNhpQrY94gN4SCPGkQtbljzIkj3mtFOjlmjHdkr0MBngoOUfwtVdFYY5qskLFH1hsLZmlAKQeBt2zj00t1PR5rft');
-      const elements = stripe.elements();
-    </script>
+  <script type="text/javascript">
+    const stripe = Stripe('pk_test_51GsRqCHBOqdNhpQrY94gN4SCPGkQtbljzIkj3mtFOjlmjHdkr0MBngoOUfwtVdFYY5qskLFH1hsLZmlAKQeBt2zj00t1PR5rft');
+    const elements = stripe.elements();
+  </script>
 
   <!--Start of Tawk.to Script-->
   <!-- <script type="text/javascript">
@@ -55,5 +76,14 @@
   <!--End of Tawk.to Script-->
   <script src="https://cdn.ckeditor.com/4.19.1/basic/ckeditor.js">
   </script>
+  <!--Resume Sample-->
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+  <!-- Skote JAVASCRIPT -->
+  <script src="assets/skote/js/jquery/jquery.min.js"></script>
+  <script src="assets/skote/js/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/skote/js/metismenu/metisMenu.min.js"></script>
+  <script src="assets/skote/js/simplebar/simplebar.min.js"></script>
+  <script src="assets/skote/js/node-waves/waves.min.js"></script>
 </body>
+
 </html>

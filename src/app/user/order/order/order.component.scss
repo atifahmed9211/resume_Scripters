@@ -1,3 +1,15 @@
+@media(max-width:992px) {
+    .sidebar_card {
+        width: 100%;
+    }
+}
+
+@media(max-width:575px) {
+    .user_description {
+        padding: 15px;
+    }
+}
+
 form textarea {
     border: 1px solid black;
     border-radius: 20px;
@@ -6,11 +18,6 @@ form textarea {
 .chat {
     margin-top: auto;
     margin-bottom: auto;
-}
-
-.card {
-    //height: 500px;
-    // background-color: rgba(0,0,0,0.4) !important;
 }
 
 .msg_card_body {
@@ -22,23 +29,28 @@ form textarea {
     border-bottom: 0 !important;
 }
 
+.questionaire {
+    background-color: #00a67d;
+    color: #ffffff;
+}
+
 .card-footer {
     border-radius: 0 0 15px 15px !important;
     border-top: 0 !important;
     background-color: #FFFFFF;
-    padding: 30px;
+    padding: 0px 0px 30px 0px;
 }
 
 .attach_btn {
-    border-radius: 15px 0 0 15px !important;
-    background-color: rgba(0, 0, 0, 0.3) !important;
-    border: 0 !important;
+    border-radius: 0 0 0 15px !important;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 0;
     color: white !important;
     cursor: pointer;
 }
 
 .send_btn {
-    border-radius: 0 15px 15px 0 !important;
+    border-radius: 0 0 15px 0 !important;
     background-color: #4cd137 !important;
     border: 0 !important;
     color: white !important;
@@ -46,22 +58,20 @@ form textarea {
 }
 
 .user_img {
+    border: 1.5px solid #f5f6fa;
     height: 70px;
     width: 70px;
-    border: 1.5px solid #f5f6fa;
-
 }
 
 .user_img_msg {
+    border: 1.5px solid #f5f6fa;
     height: 40px;
     width: 40px;
-    border: 1.5px solid #f5f6fa;
-
 }
 
 .img_cont {
-    position: relative;
     height: 70px;
+    position: relative;
     width: 70px;
 }
 
@@ -71,52 +81,48 @@ form textarea {
 }
 
 .online_icon {
-    position: absolute;
-    height: 15px;
-    width: 15px;
     background-color: #4cd137;
     border-radius: 50%;
+    border: 1.5px solid white;
+    height: 15px;
+    position: absolute;
     bottom: 0.2em;
     right: 0.4em;
-    border: 1.5px solid white;
-}
-
-.offline {
-    background-color: #c23616 !important;
+    width: 15px;
 }
 
 .user_info {
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 15px;
-}
 
-.user_info span {
-    font-size: 20px;
-    color: #000;
-}
+    span {
+        color: #000;
+        font-size: 20px;
+    }
 
-.user_info p {
-    font-size: 10px;
-    color: #000
+    p {
+        color: #000;
+        font-size: 10px;
+    }
 }
 
 .msg_cotainer {
+    border-radius: 25px;
+    background-color: #82ccdd;
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 10px;
-    border-radius: 25px;
-    background-color: #82ccdd;
     padding: 10px;
     position: relative;
 }
 
 .msg_cotainer_send {
+    border-radius: 25px;
+    background-color: #78e08f;
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 10px;
-    border-radius: 25px;
-    background-color: #78e08f;
     padding: 10px;
     position: relative;
 }
@@ -126,41 +132,42 @@ form textarea {
 }
 
 #action_menu_btn {
-    position: absolute;
-    right: 10px;
-    top: 10px;
     color: white;
     cursor: pointer;
     font-size: 20px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
 .chat-content {
-    overflow-y: scroll;
-    height: 600px;
+    height: 420px;
+    //overflow-y: scroll;
+    border: 1px solid #c8ced3;
 
     .message-box {
         float: left;
-        width: 98%;
         margin: 5px 0 0 2%;
+        width: 98%;
     }
 
     .chat-message {
-        width: 80%;
         min-height: 40px;
+        width: 80%;
 
         .right-bubble {
-            position: relative;
             background: #dcf8c6;
             border-top-left-radius: .4em;
             border-bottom-left-radius: .4em;
             border-bottom-right-radius: .4em;
             padding: 5px 10px 10px;
+            position: relative;
             left: 15%;
 
             span.msg-name {
+                color: green;
                 font-size: 12px;
                 font-weight: bold;
-                color: green;
             }
 
             span.msg-date {
@@ -169,27 +176,27 @@ form textarea {
         }
 
         .right-bubble:after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 13px;
-            width: 0;
-            height: 0;
             border: 27px solid transparent;
             border-left-color: #dcf8c6;
             border-right: 0;
             border-top: 0;
+            content: '';
+            height: 0;
             margin-top: -13.5px;
             margin-right: -27px;
+            position: absolute;
+            right: 0;
+            top: 13px;
+            width: 0;
         }
 
         .left-bubble {
-            position: relative;
             background: lightblue;
             border-top-right-radius: .4em;
             border-bottom-left-radius: .4em;
             border-bottom-right-radius: .4em;
             padding: 5px 10px 10px;
+            position: relative;
             left: 5%;
 
             span.msg-date {
@@ -197,61 +204,137 @@ form textarea {
             }
 
             span.msg-name {
+                color: blue;
                 font-size: 12px;
                 font-weight: bold;
-                color: blue;
             }
         }
 
         .left-bubble:after {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 13px;
-            width: 0;
-            height: 0;
             border: 27px solid transparent;
             border-right-color: lightblue;
             border-left: 0;
             border-top: 0;
+            content: '';
+            height: 0;
             margin-top: -13.5px;
             margin-left: -27px;
+            position: absolute;
+            left: 0;
+            top: 13px;
+            width: 0;
         }
+
+        .firstDraftMessage-bubble {
+            background: #ffc107;
+            border-top-right-radius: .4em;
+            border-bottom-left-radius: .4em;
+            border-bottom-right-radius: .4em;
+            padding: 5px 10px 10px;
+            position: relative;
+            left: 5%;
+
+            span.msg-date {
+                font-size: 10px;
+            }
+
+            span.msg-name {
+                color: blue;
+                font-size: 12px;
+                font-weight: bold;
+            }
+        }
+
+        .adminRevisionMessage-bubble {
+            background: #FF0000;
+            border-top-right-radius: .4em;
+            border-bottom-left-radius: .4em;
+            border-bottom-right-radius: .4em;
+            padding: 5px 10px 10px;
+            position: relative;
+            left: 5%;
+
+            span.msg-date {
+                color: #fff;
+                font-size: 10px;
+            }
+
+            span.msg-name {
+                color: #fff;
+                font-size: 12px;
+                font-weight: bold;
+            }
+        }
+
+        .finalDraftMessage-bubble {
+            background-color: rgb(0, 166, 125);
+            border-top-right-radius: .4em;
+            border-bottom-left-radius: .4em;
+            border-bottom-right-radius: .4em;
+            padding: 5px 10px 10px;
+            position: relative;
+            left: 5%;
+
+            span.msg-date {
+                color: #fff;
+                font-size: 10px;
+            }
+
+            span.msg-name {
+                color: #fff;
+                font-size: 12px;
+                font-weight: bold;
+            }
+
+            p {
+                color: #fff;
+
+                a {
+                    color: #fff !important;
+
+                    &:hover {
+                        color: #fff;
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+
 
         .chat-status {
             min-height: 49px;
 
             .chat-content-center {
-                padding: 5px 10px;
                 background-color: #e1e1f7;
                 border-radius: 6px;
-                font-size: 12px;
                 color: #555;
+                font-size: 12px;
                 height: 34px;
                 left: 10%;
+                padding: 5px 10px;
                 right: 10%;
             }
 
             .chat-date {
+                color: #fff;
                 display: block;
                 font-size: 10px;
                 font-style: italic;
-                color: #fff;
-                text-shadow: 0px -1px 0px #222, 0px 1px 0px #aaa;
                 height: 15px;
                 left: 10%;
                 right: 10%;
+                text-shadow: 0px -1px 0px #222, 0px 1px 0px #aaa;
             }
         }
     }
 
     .message_File_Download_Link {
         color: #20a8d8;
-    }
 
-    .message_File_Download_Link:hover {
-        color: #0056b3;
-        text-decoration: underline;
+        &:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
     }
 }
 
@@ -268,51 +351,367 @@ span {
     }
 }
 
-//loading page
 .content {
-    padding: 15px;
     overflow: hidden;
-  }
-  .load-wrapp {
-    float: left;
-    width: 100%;
-    height: 100px;
-    margin: 0 10px 10px 0;
-    padding: 20px 20px 20px;
-    border-radius: 5px;
-    text-align: center;
-    position: relative;
-	top: 50%;
-  }
+    padding: 15px;
+}
 
-  .load-wrapp:last-child {
-    margin-right: 0;
-  }
-  
-  .line {
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    border-radius: 15px;
-    background-color: #4b9cdb;
-  }
-  .load-3 .line:nth-last-child(1) {
-    animation: loadingC 0.6s 0.1s linear infinite;
-  }
-  .load-3 .line:nth-last-child(2) {
-    animation: loadingC 0.6s 0.2s linear infinite;
-  }
-  .load-3 .line:nth-last-child(3) {
-    animation: loadingC 0.6s 0.3s linear infinite;
-  }
-  @keyframes loadingC {
-    0% {
-      transform: translate(0, 0);
+.blur {
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+}
+
+.tab-chat {
+
+    .card {
+        border: none;
     }
-    50% {
-      transform: translate(0, 15px);
+}
+
+@media(max-width:562px) {
+    .col-12 {
+        padding: 0;
     }
-    100% {
-      transform: translate(0, 0);
+
+    .tab-chat {
+        padding: 0;
+
+        .card {
+            border: none;
+
+            .card-body {
+                padding: 0;
+            }
+
+            .card-footer {
+                padding: 0px 20px;
+            }
+
+            .input-group-append {
+                .input-group-text {
+                    padding: 0.2rem 0.5rem;
+                }
+            }
+        }
     }
-  }
+}
+
+table {
+    text-align: center;
+
+    tr {
+        @media(max-width:430px) {
+            .file_no {
+                display: none;
+            }
+        }
+    }
+}
+
+//ngx-doc-viewer start
+@media(min-width:992px) {
+    ngx-doc-viewer {
+        height: 40vh;
+        width: 100%;
+    }
+}
+
+@media(max-width:991px) {
+    ngx-doc-viewer {
+        height: 74vh;
+        width: 100%;
+    }
+}
+
+@media(max-width:825px) {
+    ngx-doc-viewer {
+        height: 59vh;
+        width: 100%;
+    }
+}
+
+@media(min-width:576px) and (max-width:680px) {
+    ngx-doc-viewer {
+        height: 46vh !important;
+        width: 100%;
+    }
+}
+
+@media(max-width:576px) {
+    ngx-doc-viewer {
+        height: 102vh;
+        width: 100%;
+    }
+}
+
+@media(max-width:468px) {
+    ngx-doc-viewer {
+        height: 75vh;
+        width: 100%;
+    }
+}
+
+@media(max-width:436px) {
+    ngx-doc-viewer {
+        height: 75vh;
+        width: 100%;
+    }
+}
+
+@media(max-width:416px) {
+    ngx-doc-viewer {
+        height: 71vh;
+        width: 100%;
+    }
+}
+
+@media(max-width:390px) {
+    ngx-doc-viewer {
+        height: 65vh;
+        width: 100%;
+    }
+}
+
+//end
+.download_btn {
+    background-color: #00a67d;
+    color: #fff;
+}
+
+.order_status {
+    border-radius: 30px;
+    color: #fff;
+    padding: 10px 15px;
+}
+
+//for order info
+.row1 {
+    background-color: #cdeee4;
+    border-radius: 15px 0px 15px 0px;
+    margin: 0 0 15px 0;
+    position: relative;
+}
+
+@media(min-width:461px) {
+    .row1 {
+        padding: 20px;
+    }
+}
+
+@media(max-width:461px) {
+    .row1 {
+        padding: 15px 10px;
+    }
+}
+
+p {
+    font-size: 0.8rem;
+}
+
+.sidebar_card {
+    border: none;
+
+    .card-header {
+        background-color: #00a67d;
+
+        h4 {
+            color: #fff;
+        }
+    }
+
+    .card-body {
+        background-color: #cdeee4;
+        border-radius: 0px 0px 15px 15px;
+    }
+}
+
+.card {
+    border-radius: 15px !important;
+}
+
+.flex-container {
+    display: flex;
+
+    .flex-item {
+        align-items: stretch; //to set flex items height 100%
+
+        .input-group-append {
+            height: 100%;
+
+            .input-group-text {
+                padding: 0.375rem 0.4rem;
+            }
+        }
+    }
+
+    #flex-item-1,
+    #flex-item-3 {
+        flex-basis: 25px;
+        width: 5%;
+    }
+
+    #flex-item-2 {
+        flex-basis: 210px;
+        flex-grow: 1;
+        width: 90%;
+    }
+}
+
+.chat-editor-container {
+    padding: 0 !important;
+}
+
+.chat-popup {
+    position: fixed;
+    bottom: 5px;
+    right: 15px;
+
+    .openChat {
+        background: #00a67d;
+        border-radius: 100%;
+        border: none;
+        color: white;
+        height: 60px;
+        width: 60px;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+
+        i {
+            font-size: 40px;
+            padding: 4px;
+        }
+    }
+
+    .card {
+        max-width: 350px;
+        height:80vh;
+
+        .card-header {
+            background: #00a67d;
+            padding: 0.5rem 1.25rem;
+
+            div {
+                .user_img {
+                    border: 1.5px solid #f5f6fa;
+                    height: 50px;
+                    width: 50px;
+                }
+
+                .img_cont {
+                    height: 50px;
+                    position: relative;
+                    width: 50px;
+                }
+
+                .user_info {
+
+                    span,
+                    p {
+                        color: #ffffff;
+                    }
+
+                    p {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+
+            button {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+
+                span {
+                    font-size: 25px;
+                    color: #ffffff;
+                }
+            }
+        }
+
+        .card-body {
+            background: #cdeee4;
+            border-left: 10px solid #00a67d;
+            border-right: 10px solid #00a67d;
+            box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-footer {
+            form {
+                .row {
+                    margin: 0;
+                    border-left: 10px solid #00a67d;
+                    border-right: 10px solid #00a67d;
+                    border-top: 10px solid #00a67d;
+                }
+
+                .flex-container {
+                    #flex-item-1 {
+                        .input-group-append {
+                            margin-left: 0;
+                        }
+                    }
+
+                    #flex-item-2 {
+                        border-bottom: 10px solid #00a67d;
+                        border-top: 10px solid #00a67d;
+                    }
+                }
+
+                .attach_btn,
+                .input-group-text {
+                    background-color: #00a67d;
+                    color: #fff;
+                    border: none;
+                    border-radius: 0px 0px 15px 0px;
+                }
+            }
+        }
+    }
+}
+
+:host ::ng-deep .ck-editor__editable_inline {
+    height: 70px;
+}
+
+:host ::ng-deep .ck {
+    .ck-reset_all {
+        .ck-sticky-panel__content .ck-toolbar {
+            background-color: #00a67d;
+
+            .ck-toolbar__items button {
+                color: white;
+
+                &:hover {
+                    color: #000000;
+                    background-color: #cdeee4;
+                }
+            }
+
+            .ck-dropdown {
+                button {
+                    color: white;
+
+                    &:hover {
+                        background-color: #cdeee4;
+                        color: #000000;
+                    }
+                }
+
+                .ck-on {
+                    background-color: #cdeee4;
+                    color: #000;
+                }
+
+                .ck-reset {
+                    .ck-list {
+                        background: #00a67d;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -8,6 +8,8 @@ import { CreateBlogComponent } from './create-blog/create-blog.component';
 import { DataTablesModule } from "angular-datatables";
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FormsModule } from '@angular/forms';
+import { WebsiteModule } from '../../website/website.module';
+
 @NgModule({
   declarations: [BlogsComponent, BlogComponent, CreateBlogComponent],
   imports: [
@@ -15,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     DataTablesModule,
     CKEditorModule,
-    BlogRoutingModule
+    BlogRoutingModule,
+    WebsiteModule
   ]
 })
 export class BlogModule { }

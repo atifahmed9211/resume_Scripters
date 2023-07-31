@@ -3,32 +3,32 @@
         <form [formGroup]="cvForm" (submit)="submitCVForm()">
             <fieldset>
                 <legend><span class="number">1</span> Your Basic Info</legend>
-                <div class="form-row">
-                    <div class="form-group col-2">
+                <div class="form-row row">
+                    <div class="form-group col-lg-3 col-md-4 col-sm-6">
                         <label for="firstName">First Name:</label>
                         <input type="text" id="firstName" class="form-control" placeholder="First Name"
                             formControlName="firstName">
                     </div>
-                    <div class="form-group col-2">
+                    <div class="form-group col-lg-3 col-md-4 col-sm-6">
                         <label for="middleName">Middle Name:</label>
                         <input type="text" id="middleName" class="form-control" placeholder="Middle Name"
                             formControlName="middleName">
                     </div>
-                    <div class="form-group col-2">
+                    <div class="form-group col-lg-3 col-md-4 col-sm-6">
                         <label for="lastName">Last Name:</label>
                         <input type="text" id="lastName" class="form-control" placeholder="Last Name"
                             formControlName="lastName">
                     </div>
-                    <div class="form-group col-2">
+                    <div class="form-group col-lg-3 col-md-4 col-sm-6">
                         <label for="phone_number">Phone Number</label>
                         <input type="number" id="phone_number" class="form-control" placeholder="Phone Number"
                             formControlName="phoneNumber" />
                     </div>
-                    <div class="form-group col-2">
+                    <div class="form-group col-lg-3 col-md-4 col-sm-6">
                         <label for="mail">Email:</label>
                         <input type="email" id="mail" class="form-control" placeholder="Email" formControlName="email">
                     </div>
-                    <div class="form-group col-2">
+                    <div class="form-group col-lg-3 col-md-4 col-sm-6">
                         <label for="linkdin_url">Linkdin Profile URL:</label>
                         <input type="url" id="linkdin_url" class="form-control" placeholder="Linkdin Profile URL"
                             formControlName="linkdin_url">
@@ -47,13 +47,13 @@
                 <div formArrayName="languages">
                     <div *ngFor="let languages of languages.controls; let i=index;">
                         <div formGroupName="{{i}}">
-                            <div class="form-row">
-                                <div class="form-group col-4">
+                            <div class="form-row row">
+                                <div class="form-group col-6">
                                     <label for="language_skill">Name:</label>
                                     <input type="text" id="language_skill" name="language_skill" class="form-control"
                                         placeholder="Name" formControlName="language_name" (input)="getLanguageName(i)">
                                 </div>
-                                <div class="form-group col-4">
+                                <div class="form-group col-6">
                                     <label for="computer_skill">Proficiency:</label>
                                     <select *ngIf="languages.value.language_name" class="form-control"
                                         formControlName="proficiency_level">
@@ -90,13 +90,13 @@
             <fieldset>
                 <legend><span class="number">3</span>Technical Skills</legend>
 
-                <div class="form-row">
-                    <div class="form-group col-4">
+                <div class="form-row row">
+                    <div class="form-group col-6">
                         <label for="computer_skill">Computer Skill:</label>
                         <input type="text" id="computer_skill" class="form-control" placeholder="Computer Skill"
                             formControlName="computer_skill">
                     </div>
-                    <div class="form-group col-4">
+                    <div class="form-group col-6">
                         <label for="Interpersonal_Skill">Interpersonal Skill:</label>
                         <input type="text" id="Interpersonal_Skill" name="Interpersonal_Skill" class="form-control"
                             placeholder="Interpersonal Skill" formControlName="interpersonal_skill">
@@ -108,36 +108,37 @@
                 <div formArrayName="positions">
                     <div *ngFor="let position of positions.controls; let i=index">
                         <div formGroupName="{{i}}">
-                            <div class="form-row">
-                                <div class="form-group col-2">
+                            <div class="form-row row">
+                                <div class="form-group col-lg-3 col-md-4 col-sm-6 col-6">
                                     <label for="country_targeted">Country Targeted:</label>
                                     <input type="text" id="country_targeted" name="country_targeted"
                                         class="form-control" placeholder="Country Targeted"
                                         formControlName="country_targeted" (input)="getPositionValue(i)">
                                 </div>
-                                <div class="form-group col-2">
+                                <div class="form-group col-lg-3 col-md-4 col-sm-6 col-6">
                                     <label for="desired_position">Position Title</label>
                                     <input type="text" id="desired_position" name="desired_position"
                                         class="form-control" placeholder="Position Title"
                                         formControlName="position_title" (input)="getPositionValue(i)">
                                 </div>
-                                <div class="form-group col-4">
+                                <div class="form-group col-lg-3 col-md-4 col-sm-6 col-12">
                                     <label for="desired_position">Description</label>
                                     <textarea id="desired_position" name="desired_position" class="form-control"
                                         placeholder="Description" formControlName="description" (input)="getPositionValue(i)"></textarea>
                                 </div>
-                                <div class="form-group col-2">
+                                <div class="form-group col-lg-3 col-md-4 col-sm-6 col-6">
                                     <label for="position_link">Link</label>
                                     <input type="url" id="position_link" class="form-control" placeholder="link"
                                         formControlName="position_link" (input)="getPositionValue(i)">
                                 </div>
-                                <div class="form-group col-2">
+                                <div class="form-group col-lg-3 col-md-4 col-sm-6 col-6">
                                     <label for="desired_position">Expected Salary</label>
                                     <input type="number" id="desired_position" name="desired_position"
                                         class="form-control" placeholder="Expected Salary" formControlName="salary" (input)="getPositionValue(i)">
                                 </div>
                             </div>
                         </div>
+                        <hr noshade=""/>
                     </div>
                 </div>
                 <button *ngIf="lastIndexPositionValue" type="button" class="btn plusButton" (click)="addPositions()"
@@ -185,39 +186,40 @@
                 <div formArrayName="academic_degrees">
                     <div *ngFor="let degree of academic_degrees.controls; let i=index">
                         <div formGroupName="{{i}}">
-                            <div class="form-row">
-                                <div class="form-group col-3">
+                            <div class="form-row row">
+                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-12">
                                     <label for="">Name of Educational Institute:</label>
                                     <input type="text" id="" name="" class="form-control"
                                         placeholder="Name of Educational Institute" formControlName="name_of_institute" (input)="getAcademicValue(i)">
                                 </div>
-                                <div class="form-group col-3">
+                                <div class="form-group col-lg-3 col-md-4 col-sm-6 col-8">
                                     <label for="">Name of Degree:</label>
                                     <input type="text" id="" name="" class="form-control" placeholder="Name of Degree"
                                         formControlName="name_of_degree" (input)="getAcademicValue(i)">
                                 </div>
-                                <div class="form-group col-1">
+                                <div class="form-group col-lg-3 col-md-4 col-sm-6 col-4">
                                     <label for="">State:</label>
                                     <input type="text" id="" name="" class="form-control" placeholder="State"
                                         formControlName="state" (input)="getAcademicValue(i)">
                                 </div>
-                                <div class="form-group col-1">
+                                <div class="form-group col-lg-2 col-md-4 col-sm-6 col-4">
                                     <label for="">City:</label>
                                     <input type="text" id="" name="" class="form-control" placeholder="City"
                                         formControlName="city" (input)="getAcademicValue(i)">
                                 </div>
-                                <div class="form-group col-2">
+                                <div class="form-group col-lg-3 col-md-4 col-sm-6 col-4">
                                     <label for="">Starting Date</label>
                                     <input type="month" id="" name="" class="form-control" placeholder="From"
                                         formControlName="starting_date" (input)="getAcademicValue(i)">
                                 </div>
-                                <div class="form-group col-2">
+                                <div class="form-group col-lg-3 col-md-4 col-sm-6 col-4">
                                     <label for="">Ending Date</label>
                                     <input type="month" id="" name="" class="form-control" placeholder="To"
                                         formControlName="ending_date" (input)="getAcademicValue(i)">
                                 </div>
                             </div>
                         </div>
+                        <hr noshade=""/>
                     </div>
                 </div>
                 <button *ngIf="lastIndexAcademicValue" type="button" class="btn plusButton" (click)="addDegrees()"
@@ -242,39 +244,40 @@
                 <div formArrayName="certifications">
                     <div *ngFor="let certification of certifications.controls; let i=index">
                         <div formGroupName="{{i}}">
-                            <div class="form-row">
-                                <div class="form-group col-3">
+                            <div class="form-row row">
+                                <div class="form-group col-lg-4 col-md-4 col-sm-6">
                                     <label for="">Institution/Organization:</label>
                                     <input type="text" id="" name="" class="form-control"
                                         placeholder="Institution/Organization:" formControlName="name_of_institute" (input)="getCertificateValue(i)">
                                 </div>
-                                <div class="form-group col-3">
+                                <div class="form-group col-lg-3 col-md-4 col-sm-6">
                                     <label for="">Name of Course:</label>
                                     <input type="text" id="" name="" class="form-control" placeholder="Name of Course"
                                         formControlName="name_of_course" (input)="getCertificateValue(i)">
                                 </div>
-                                <div class="form-group col-1">
+                                <div class="form-group col-lg-3 col-md-4 col-sm-6">
                                     <label for="">State:</label>
                                     <input type="text" id="" name="" class="form-control" placeholder="State"
                                         formControlName="state">
                                 </div>
-                                <div class="form-group col-1">
+                                <div class="form-group col-lg-2 col-md-4 col-sm-6">
                                     <label for="">City:</label>
                                     <input type="text" id="" name="" class="form-control" placeholder="City"
                                         formControlName="city">
                                 </div>
-                                <div class="form-group col-2">
+                                <div class="form-group col-lg-3 col-md-4 col-sm-6">
                                     <label for="">Starting Date</label>
                                     <input type="month" id="" name="" class="form-control" placeholder="From"
                                         formControlName="starting_date">
                                 </div>
-                                <div class="form-group col-2">
+                                <div class="form-group col-lg-3 col-md-4 col-sm-6">
                                     <label for="">Ending Date</label>
                                     <input type="month" id="" name="" class="form-control" placeholder="To"
                                         formControlName="ending_date">
                                 </div>
                             </div>
                         </div>
+                        <hr noshade=""/>
                     </div>
                 </div>
                 <button *ngIf="lastIndexCertificateValue" type="button" class="btn plusButton" (click)="addCertificate()"
@@ -301,39 +304,40 @@
                     <div *ngFor="let membership of memberships.controls let i=index">
                         <div formGroupName="{{i}}">
                             <div class="form-row">
-                                <div class="form-group col-3">
+                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-12">
                                     <label for="">Name of Institute:</label>
                                     <input type="text" id="" name="" class="form-control"
                                         placeholder="Name of Institute" formControlName="name_of_institute" (input)="getMembershipValue(i)">
                                 </div>
-                                <div class="form-group col-3">
+                                <div class="form-group col-lg-5 col-md-4 col-sm-6 col-12">
                                     <label for="">Explanation[if applicable]:</label>
                                     <textarea id="" name="" class="form-control"
                                         placeholder="Explanation[if applicable]"
                                         formControlName="explanation" (input)="getMembershipValue(i)"></textarea>
                                 </div>
-                                <div class="form-group col-1">
+                                <div class="form-group col-lg-3 col-md-4 col-sm-3 col-6">
                                     <label for="">State:</label>
                                     <input type="text" id="" name="" class="form-control" placeholder="State"
                                         formControlName="state">
                                 </div>
-                                <div class="form-group col-1">
+                                <div class="form-group col-lg-4 col-md-4 col-sm-3 col-6">
                                     <label for="">City:</label>
                                     <input type="text" id="" name="" class="form-control" placeholder="City"
                                         formControlName="city">
                                 </div>
-                                <div class="form-group col-2">
+                                <div class="form-group col-lg-4 col-md-4 col-sm-3 col-6">
                                     <label for="">Starting Date</label>
                                     <input type="month" id="" name="" class="form-control" placeholder="From"
                                         formControlName="starting_date">
                                 </div>
-                                <div class="form-group col-2">
+                                <div class="form-group col-lg-4 col-md-4 col-sm-3 col-6">
                                     <label for="">Ending Date</label>
                                     <input type="month" id="" name="" class="form-control" placeholder="To"
                                         formControlName="ending_date">
                                 </div>
                             </div>
                         </div>
+                        <hr noshade=""/>
                     </div>
                 </div>
                 <button *ngIf="lastIndexMembershipValue" type="button" class="btn plusButton" (click)="addMembership()"
@@ -358,50 +362,51 @@
                 <div formArrayName="experience">
                     <div *ngFor="let experience of experience.controls let i=index">
                         <div formGroupName="{{i}}">
-                            <div class="form-row">
-                                <div class="form-group col-3">
+                            <div class="form-row row">
+                                <div class="form-group col-md-4 col-sm-6">
                                     <label for="">Name of Organization/Institution:</label>
                                     <input type="text" id="" name="" class="form-control"
                                         placeholder="Name of Organization/Institution"
                                         formControlName="name_of_institute" (input)="getExperienceValue(i)">
                                 </div>
-                                <div class="form-group col-3">
+                                <div class="form-group col-md-4 col-sm-6">
                                     <label for="">Your Position Name</label>
                                     <input type="text" id="" name="" class="form-control"
                                         placeholder="Your Position Name" formControlName="position" (input)="getExperienceValue(i)">
                                 </div>
-                                <div class="form-group col-2">
+                                <div class="form-group col-md-4 col-sm-3">
                                     <label for="">Starting Date</label>
                                     <input type="month" id="" name="" class="form-control" placeholder="From"
                                         formControlName="starting_date">
                                 </div>
-                                <div class="form-group col-2">
+                                <div class="form-group col-lg-4 col-md-4 col-sm-3">
                                     <label for="">Ending Date</label>
                                     <input type="month" id="" name="" class="form-control" placeholder="To"
                                         formControlName="ending_date">
                                 </div>
-                                <div class="form-group col-1">
+                                <div class="form-group col-lg-4 col-md-4 col-sm-3">
                                     <label for="">State:</label>
                                     <input type="text" id="" name="" class="form-control" placeholder="State"
                                         formControlName="state">
                                 </div>
-                                <div class="form-group col-1">
+                                <div class="form-group col-lg-4 col-md-4 col-sm-3">
                                     <label for="">City:</label>
                                     <input type="text" id="" name="" class="form-control" placeholder="City"
                                         formControlName="city">
                                 </div>
-                                <div class="form-group col-6">
+                                <div class="form-group col-sm-6">
                                     <label for="">Duties/Contributions</label>
                                     <textarea id="" name="" class="form-control" placeholder="Duties/Contributions"
                                         formControlName="duties" (input)="getExperienceValue(i)"></textarea>
                                 </div>
-                                <div class="form-group col-6">
+                                <div class="form-group col-sm-6">
                                     <label for="">Achievements</label>
                                     <textarea id="" name="" class="form-control" placeholder="Achievements"
                                         formControlName="achievements" (input)="getExperienceValue(i)"></textarea>
                                 </div>
                             </div>
                         </div>
+                        <hr noshade=""/>
                     </div>
                 </div>
                 <button *ngIf="lastIndexExperienceValue" type="button" class="btn plusButton" (click)="addExperience()"

@@ -5,12 +5,11 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './faq.component.html',
   styleUrls: ['./faq.component.scss']
 })
+
 export class FaqComponent implements OnInit {
 
-  navbarClass = "navbar2";
   constructor() { }
 
   ngOnInit() {
   }
-
 }

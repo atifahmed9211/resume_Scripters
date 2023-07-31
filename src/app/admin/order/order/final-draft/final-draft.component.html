@@ -10,11 +10,7 @@
         <br />
         <div class="row">
             <div class="col-sm-12">
-                <ckeditor [(ngModel)]="ckContent" formControlName="message"
-                    [config]="{enterMode :2, shiftEnterMode:2,height:100,width:'100%'}">
-                    <ckbutton [name]="'saveButton'" [command]="'saveCmd'" [icon]="'save.png'" [label]="'Save Document'"
-                        [toolbar]="'clipboard,1'">
-                    </ckbutton>
+                <ckeditor [(ngModel)]="ckContent" formControlName="message" [config]="config" [editor]="Editor">
                 </ckeditor>
             </div>
         </div>
@@ -32,10 +28,12 @@
                     <p class="selectedFiles">
                         {{item.name}}
                     </p>
-                    <div *ngIf="showLoader && item==files[files.length-1]" class="spinner-border spinner-border-sm" role="status">
+                    <div *ngIf="showLoader && item==files[files.length-1]" class="spinner-border spinner-border-sm"
+                        role="status">
                         <span class="sr-only">Loading...</span>
                     </div>
-                    <i *ngIf="!showLoader || !(item==files[files.length-1])" (click)="deleteItem(i)" class="fal fa-times-circle"></i>
+                    <i *ngIf="!showLoader || !(item==files[files.length-1])" (click)="deleteItem(i)"
+                        class="fal fa-times-circle"></i>
                     &nbsp;&nbsp;&nbsp;
                 </span>
             </div>

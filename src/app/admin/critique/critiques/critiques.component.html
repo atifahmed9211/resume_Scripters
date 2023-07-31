@@ -1,35 +1,49 @@
 <div class="animated fadeIn">
-    <div class="row">
-        <div class="col-sm-12">
-            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>User Name</th>
-                    <th>User Email</th>
-                    <th>File</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody *ngIf="critiques?.length != 0">
-                  <tr *ngFor="let critique of critiques; let i = index">
-                    <td>{{ i + 1 }}</td>
-                    <td>{{ critique.users[0].name }}</td>
-                    <td>{{ critique.users[0].email }}</td>
-                    <td><a href="{{ mediaUrl }}public/critiques/{{ critique.file }}" download=" {{ critique.file }}"> {{ critique.file }}</a><i class="ml-2 fa fa-download"></i></td>
-                    <td>{{critique.status}}</td>
-                    <td>
-                        <a routerLink="../critique/{{critique.id}}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody *ngIf="critiques?.length == 0">
-                    <tr>
-                        <td colspan="6" class="no-data-available text-center">No data!</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  <div class="row">
+    <!--loading start-->
+    <div *ngIf="!showCritiqueList" class="content col-sm-12">
+      <app-loading></app-loading>
     </div>
+    <!--loading end-->
+    <div class="col-sm-12" style="height: 832px;">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
+        <thead *ngIf="showCritiqueList">
+          <tr>
+            <th class="sr_no">#</th>
+            <th>User Name</th>
+            <th>Email</th>
+            <th class="file">File</th>
+            <th class="status">Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="critiques?.length != 0 && showCritiqueList">
+          <tr *ngFor="let critique of critiques; let i = index">
+            <td class="sr_no">{{ i + 1 }}</td>
+            <td>{{users_name[i]}}</td>
+            <td>{{users_email[i]}}</td>
+            <td class="file"><a href="{{ mediaUrl }}public/critiques/{{ critique.file }}"
+                download=" {{ critique.file }}"> {{ critique.file }}</a><i class="ml-2 fa fa-download"></i></td>
+            <td class="status">
+              <span class="critique_status" [ngStyle]="{backgroundColor:critique.status=='Pending'?'red':'green'}">
+                {{critique.status}}
+              </span>
+            </td>
+            <td>
+              <a *ngIf="critique.status!='Pending' else elseBlock" routerLink="../critique/{{critique.id}}"
+                class="btn btn-success">View</a>
+              <ng-template #elseBlock>
+                <a routerLink="../critique/{{critique.id}}" class="btn btn-success disabled">Pending</a>
+              </ng-template>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="critiques?.length == 0 && showCritiqueList">
+          <tr>
+            <td colspan="6" class="no-data-available text-center">No data!</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

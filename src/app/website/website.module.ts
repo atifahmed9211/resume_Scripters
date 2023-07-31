@@ -6,7 +6,6 @@ import { HomeComponent } from './home/home.component';
 import { BlogComponent } from './blog/blog.component';
 import { TestimonialsComponent } from './testimonials/testimonials.component';
 import { ResumeServicesComponent } from './resume-services/resume-services.component';
-import { CareerAdviceComponent } from './career-advice/career-advice.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { FaqComponent } from './faq/faq.component';
 import { AboutUsComponent } from './about-us/about-us.component';
@@ -27,9 +26,15 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { LoginCheckModalComponent } from './shared-components/login-check-modal/login-check-modal.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { LoginModalComponent } from './login-modal/login-modal.component';
-import { SignupModalComponent } from './signup-modal/signup-modal.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { PaymentConfirmationComponent } from './checkout/payment-confirmation/payment-confirmation.component';
+import { ResumeSamplesComponent } from './resume-samples/resume-samples.component';
+import { FileUploadConfirmationComponent } from './home/file-upload-confirmation/file-upload-confirmation.component';
+import { SubscribeModalComponent } from './subscribe-modal/subscribe-modal.component';
+import { DataTablesModule } from 'angular-datatables';
+import { ReferralsComponent } from './referrals/referrals.component';
+import { LoadingComponent } from './shared-components/loading/loading.component';
+import { PreloaderComponent } from './preloader/preloader.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +42,6 @@ import { PaymentConfirmationComponent } from './checkout/payment-confirmation/pa
     BlogComponent,
     TestimonialsComponent,
     ResumeServicesComponent,
-    CareerAdviceComponent,
     ContactUsComponent,
     FaqComponent,
     AboutUsComponent,
@@ -54,9 +58,14 @@ import { PaymentConfirmationComponent } from './checkout/payment-confirmation/pa
     SignupComponent,
     LoginCheckModalComponent,
     LoginModalComponent,
-    SignupModalComponent,
     CheckoutComponent,
     PaymentConfirmationComponent,
+    ResumeSamplesComponent,
+    FileUploadConfirmationComponent,
+    SubscribeModalComponent,
+    ReferralsComponent,
+    LoadingComponent,
+    PreloaderComponent,
   ],
   imports: [
     CommonModule,
@@ -87,7 +96,11 @@ import { PaymentConfirmationComponent } from './checkout/payment-confirmation/pa
       "responsive": true,
       "lazy": true,
     }),
+    DataTablesModule
   ],
-  entryComponents:[StripeComponent,LoginCheckModalComponent]
+  entryComponents:[StripeComponent,LoginCheckModalComponent],
+  exports:[
+    LoadingComponent
+  ]
 })
 export class WebsiteModule { }

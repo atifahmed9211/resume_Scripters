@@ -11,7 +11,9 @@ import{Router} from '@angular/router'
   templateUrl: './payment-confirmation.component.html',
   styleUrls: ['./payment-confirmation.component.scss']
 })
+
 export class PaymentConfirmationComponent implements OnInit {
+
   public orderId;
   public questionnaireFIle = null;
   public mediaUrl          = environment.mediaUrl;
@@ -27,6 +29,7 @@ export class PaymentConfirmationComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
   redirectToOrder()
   {
     this.bsModalRef.hide()

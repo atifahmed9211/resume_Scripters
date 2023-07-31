@@ -26,9 +26,14 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { TransactionComponent } from './transaction/transaction.component';
+import { TransactionDetailComponent } from './transaction/transaction-detail/transaction-detail.component';
+//import { NotificationComponent } from './notification/notification.component';
+import { DataTablesModule } from 'angular-datatables';
+import { WebsiteModule } from '../website/website.module';
 
 @NgModule({
-  declarations: [AdminComponent,LoginComponent],
+  declarations: [AdminComponent,LoginComponent, TransactionComponent, TransactionDetailComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -45,9 +50,13 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     IconSetModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
+    DataTablesModule,
+    WebsiteModule
   ],
   providers: [
     IconSetService,
   ],
+  exports:[
+  ]
 })
 export class AdminModule { }

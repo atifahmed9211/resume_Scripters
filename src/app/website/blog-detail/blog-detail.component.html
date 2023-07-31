@@ -1,26 +1,264 @@
-<app-header [navbarClass] = "navbarClass"></app-header>
-
+<app-header></app-header>
 <div class="banner">
-    <img src="{{mediaUrl}}blogs_imgs/{{blog?.img}}">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="banner-heading">
-                    <h1>{{blog?.title}}</h1>
-                    <h3>{{blog?.created_at | date}}</h3>
+        <div class="banner_img">
+            <img src="../../../assets/images/hiring.png" class="img-fluid" style="height:100%" />
+        </div>
+        <div class="banner-heading">
+            <div class="row justify-content-center">
+                <div class="col-xl-10">
+                    <div class="text-center">
+                        <h2>{{blog.title}}</h2>
+                        <p class="text-center" style="margin-bottom:0;width:100%">
+                            <i class="mdi mdi-calendar me-1"></i>
+                            {{blog?.created_at | date}}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 170" style="background-color:#fafbf6;">
+        <path fill="#00a67d" fill-opacity="1"
+            d="M0,64L80,90.7C160,117,320,171,480,170.7C640,171,800,117,960,96C1120,75,1280,85,1360,90.7L1440,96L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z">
+        </path>
+    </svg>
 </div>
+<div class="container-fluid" style="padding:0">
+    <div class="">
+        <div class="card" style="margin:0">
+            <div class="row" style="margin:0">
+                <div class="col-sm-8">
+                    <div class="my-5">
+                        <img src="{{mediaUrl}}blogs_imgs/{{blog?.img}}" alt="" class="img-thumbnail mx-auto d-block">
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-10">
+                                <div>
+                                    <div class="text-muted font-size-14">
+                                        <p [innerHtml]="blog?.description">
+                                        </p>
+                                    </div>
+                                    <hr>
+                                    <div class="mt-5">
+                                        <h5 class="font-size-15"><i
+                                                class="bx bx-message-dots text-muted align-middle me-1"></i>
+                                            Comments :</h5>
+                                        <div>
+                                            <div class="d-flex py-3">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar-xs">
+                                                        <div class="avatar-title rounded-circle bg-light text-primary">
+                                                            <i class="bx bxs-user"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h5 class="font-size-14 mb-1">Delores Williams
+                                                        <small class="text-muted float-end">1 hr
+                                                            Ago</small>
+                                                    </h5>
+                                                    <p class="text-muted">If several languages coalesce,
+                                                        the grammar of the resulting language is more
+                                                        simple and regular than that of the individual
+                                                    </p>
+                                                    <div>
+                                                        <a href="javascript: void(0);" class="text-success"><i
+                                                                class="mdi mdi-reply"></i> Reply</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex py-3 border-top">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar-xs">
+                                                        <img src="assets/images/users/avatar-2.jpg" alt=""
+                                                            class="img-fluid d-block rounded-circle">
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h5 class="font-size-14 mb-1">Clarence Smith <small
+                                                            class="text-muted float-end">2 hrs
+                                                            Ago</small></h5>
+                                                    <p class="text-muted">Neque porro quisquam est, qui
+                                                        dolorem ipsum quia dolor sit amet</p>
+                                                    <div>
+                                                        <a href="javascript: void(0);" class="text-success"><i
+                                                                class="mdi mdi-reply"></i> Reply</a>
+                                                    </div>
+                                                    <div class="d-flex pt-3">
+                                                        <div class="flex-shrink-0 me-3">
+                                                            <div class="avatar-xs">
+                                                                <div
+                                                                    class="avatar-title rounded-circle bg-light text-primary">
+                                                                    <i class="bx bxs-user"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex-grow-1">
+                                                            <h5 class="font-size-14 mb-1">Silvia
+                                                                Martinez <small class="text-muted float-end">2
+                                                                    hrs
+                                                                    Ago</small></h5>
+                                                            <p class="text-muted">To take a trivial
+                                                                example, which of us ever undertakes
+                                                                laborious physical exercise</p>
+                                                            <div>
+                                                                <a href="javascript: void(0);" class="text-success"><i
+                                                                        class="mdi mdi-reply"></i>
+                                                                    Reply</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex py-3 border-top">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar-xs">
+                                                        <div class="avatar-title rounded-circle bg-light text-primary">
+                                                            <i class="bx bxs-user"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h5 class="font-size-14 mb-1">Keith McCoy <small
+                                                            class="text-muted float-end">12 Aug</small>
+                                                    </h5>
+                                                    <p class="text-muted">Donec posuere vulputate arcu.
+                                                        phasellus accumsan cursus velit</p>
+                                                    <div>
+                                                        <a href="javascript: void(0);" class="text-success"><i
+                                                                class="mdi mdi-reply"></i> Reply</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h5 class="font-size-16 mb-3">Leave a Message</h5>
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="commentname-input" class="form-label">Name</label>
+                                                        <input type="text" class="form-control" id="commentname-input"
+                                                            placeholder="Enter name">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="commentemail-input" class="form-label">Email</label>
+                                                        <input type="email" class="form-control" id="commentemail-input"
+                                                            placeholder="Enter email">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="commentmessage-input" class="form-label">Message</label>
+                                                <textarea class="form-control" id="commentmessage-input"
+                                                    placeholder="Your message..." rows="3"></textarea>
+                                            </div>
+                                            <div class="text-end">
+                                                <button type="submit" class="btn btn-success w-sm">Submit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card body -->
+                </div>
+                <div class="col-sm-4" style="margin-bottom:15px">
+                    <div style="position:sticky;top:80px">
+                        <div class="my-5">
+                            <div class="ArticlePage_stickyMenu__S_1zg" style="position: sticky;top: 80px;">
+                                <div class=" pl-3 pr-3 bg-visual-green-2 border-rounded-0"
+                                    style="background-color: #cdf0e4;border-radius: 15px;box-shadow: 0 4px 8px rgb(0 0 0 / 10%);padding-top:32px;padding-bottom:32px">
+                                    <div class="h5 m-no p-n">Land Your Dream Job</div>
+                                    <div class="text-label text-sm mt-2 mb-2">Build your resume and cover letter
+                                        using
+                                        Enhancv
+                                        and make job searching a breeze.
+                                    </div>
+                                    <div class="m-auto display-block"><img alt="Resume Builder Quotes Left Image"
+                                            sizes="100vw"
+                                            srcset="https://cdn.enhancv.com/images/430/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vc2lkZWJhcl9jdGFfdmlzdWFsXzQxMGRhZTg3Nzcuc3Zn..svg 430w, https://cdn.enhancv.com/images/540/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vc2lkZWJhcl9jdGFfdmlzdWFsXzQxMGRhZTg3Nzcuc3Zn..svg 640w, https://cdn.enhancv.com/images/540/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vc2lkZWJhcl9jdGFfdmlzdWFsXzQxMGRhZTg3Nzcuc3Zn..svg 750w, https://cdn.enhancv.com/images/540/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vc2lkZWJhcl9jdGFfdmlzdWFsXzQxMGRhZTg3Nzcuc3Zn..svg 828w, https://cdn.enhancv.com/images/540/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vc2lkZWJhcl9jdGFfdmlzdWFsXzQxMGRhZTg3Nzcuc3Zn..svg 1080w, https://cdn.enhancv.com/images/540/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vc2lkZWJhcl9jdGFfdmlzdWFsXzQxMGRhZTg3Nzcuc3Zn..svg 1200w, https://cdn.enhancv.com/images/540/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vc2lkZWJhcl9jdGFfdmlzdWFsXzQxMGRhZTg3Nzcuc3Zn..svg 1920w"
+                                            src="https://cdn.enhancv.com/images/540/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vc2lkZWJhcl9jdGFfdmlzdWFsXzQxMGRhZTg3Nzcuc3Zn..svg"
+                                            width="270" height="130" decoding="async" data-nimg="1" loading="lazy"
+                                            style="color: transparent; width: 100%; height: auto;"></div>
+                                    <div class="flex flex-justify-center"><a routerLink="/Resume-service"
+                                            class="btn btn-primary mt-3 cursor-pointer"
+                                            data-amplitude-event="blog - sidebar cta"
+                                            data-amplitude-prop-button_location="blog - article page">Make Your
+                                            Resume</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end card -->
+        </div>
+        <!-- end col -->
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12 mt-5">
-            <div class="content" [innerHtml]="blog?.description">
+
+    </div>
+    <!-- end row -->
+</div> <!-- container-fluid -->
+<section style="background-color: #eaf9f4">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center m-5">
+                    <div class="h4 p-top-9 m-bottom-1">Continue Reading</div>
+                    <div class="text-md">Check more recommended readings to get the job of your dreams.</div>
+                </div>
             </div>
         </div>
+        <div class="row">
+            <div *ngFor="let blog of blogs; let i = index;" class="col-md-6 col-lg-4">
+                <div *ngIf="i<3" class="box">
+                    <div class="card p-1 border shadow-none" style="border-radius:15px">
+                        <div class="p-3">
+                            <h5><a (click)="getSpecificBlog(blog.id)" routerLink="/blog-detail/{{blog.id}}" class="text-dark">{{getTrimText(blog.title,9)}}</a></h5>
+                            <p class="text-muted mb-0">{{blog.created_at | date}}</p>
+                        </div>
+
+                        <div class="position-relative" style="margin:auto">
+                            <img src="{{mediaUrl}}blogs_imgs/{{blog.img}}" alt="" class="img-thumbnail"
+                                style="height:200px" />
+                        </div>
+
+                        <div class="p-3">
+                            <ul class="list-inline">
+                                <li class="list-inline-item me-3">
+                                    <a href="javascript: void(0);" class="text-muted">
+                                        <i class="bx bx-purchase-tag-alt align-middle text-muted me-1"></i> Project
+                                    </a>
+                                </li>
+                                <li class="list-inline-item me-3">
+                                    <a href="javascript: void(0);" class="text-muted">
+                                        <i class="bx bx-comment-dots align-middle text-muted me-1"></i> 12 Comments
+                                    </a>
+                                </li>
+                            </ul>
+                            <p style="font-size:0.9rem;height:45px;" [innerHTML]="getTrimText(blog.description,8)"></p>
+
+                            <div style="text-align:center">
+                                <a class="btn" (click)="getSpecificBlog(blog.id)" routerLink="/blog-detail/{{blog.id}}">More<i
+                                        class="mdi mdi-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 text-center m-3">
+                <a routerLink="/blog" class="more-btn">View More blogs</a>
+            </div>
+            <br />
+        </div>
     </div>
-</div>
-<div class="mt-5"></div>
+</section>
 <app-footer></app-footer>

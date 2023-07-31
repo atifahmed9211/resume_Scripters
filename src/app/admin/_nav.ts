@@ -9,7 +9,7 @@ export const navItems: INavData[] = [
   {
     name: 'Orders',
     url: '/admin/orders',
-    icon: 'cil-cloudy'
+    icon: 'cil-list-numbered',
   },
   {
     name: 'Critiques',
@@ -25,13 +25,13 @@ export const navItems: INavData[] = [
         name: 'All Blogs',
         url: '/admin/blog/all',
         icon: 'icon-puzzle',
-        attributes:{"class":"pl-4"}
+        attributes: { "class": "pl-4" }
       },
       {
         name: 'Create Blog',
         url: '/admin/blog/create',
         icon: 'icon-puzzle',
-        attributes:{"class":"pl-4"}
+        attributes: { "class": "pl-4" }
       }
     ]
   },
@@ -49,17 +49,17 @@ export const navItems: INavData[] = [
         name: 'All Packages',
         url: '/admin/package/all',
         icon: 'icon-cursor',
-        attributes:{"class":"pl-4"}
+        attributes: { "class": "pl-4" }
       },
       {
         name: 'Create Package',
         url: '/admin/package/create',
         icon: 'icon-cursor',
-        attributes:{"class":"pl-4"}
+        attributes: { "class": "pl-4" }
       }
     ]
   },
-  
+
   {
     name: 'Services',
     url: '/admin/service',
@@ -69,14 +69,44 @@ export const navItems: INavData[] = [
         name: 'All Services',
         url: '/admin/service/all',
         icon: 'icon-star',
-        attributes:{"class":"pl-4"}
+        attributes: { "class": "pl-4" }
       },
       {
         name: 'Create Service',
         url: '/admin/service/create',
         icon: 'icon-star',
-        attributes:{"class":"pl-4"}
+        attributes: { "class": "pl-4" }
       }
     ]
-  }
+  },
+  {
+    name: 'Resume Samples',
+    url: '/admin/samples',
+    icon: 'cil-list-numbered',
+    children: [
+      {
+        name: 'All Categories',
+        url: '/admin/samples/categories_list',
+        icon: 'cil-list-numbered',
+        attributes: { "class": "pl-4" }
+      },
+      {
+        name: 'All Samples',
+        url: '/admin/samples/samples_list',
+        icon: 'cil-list-numbered',
+        attributes: { "class": "pl-4" }
+      },
+      {
+        name: 'Add New Sample',
+        url: '/admin/samples/add_new_samples',
+        icon: 'cil-list-numbered',
+        attributes: { "class": "pl-4" }
+      },
+    ]
+  },
+  {
+    name: 'Transaction',
+    url: '/admin/transaction',
+    icon: 'cil-cash'
+  },
 ];

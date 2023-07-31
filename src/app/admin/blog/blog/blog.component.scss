@@ -1,92 +1,35 @@
-@font-face{
-    font-family: Roboto-Regular;
-    src: url(../../../../assets/fonts/Roboto-Regular.ttf);
-}
-@font-face{
+@mixin font-face{
     font-family: Roboto-Medium;
     src: url(../../../../assets/fonts/Roboto-Medium.ttf);
 }
-@font-face{
+@mixin font-face{
     font-family: Roboto-Bold;
     src: url(../../../../assets/fonts/Roboto-Bold.ttf);
 }
 h2{
-    font-family: Roboto-Bold;
+    @include font-face;
     color: #282a41;
-    font-size: 50px;
 }
-
 
 .banner{
     background: rgb(6 6 6);
     position: relative;
     img{
-
-        width: 100%;
         height: 450px;
         object-fit: cover;
         opacity: 0.6;
+        width: 100%;
     }
     .banner-heading{
         position: absolute;
         bottom: 50px;
         h1{
-            font-family: Roboto-Bold;
             color: #ffffff;
-            font-size: 50px;
+            font-family: Roboto-Bold;
         }
         h3{
-            font-family: Roboto-Bold;
             color: #ffffff;
-            font-size: 20px;
+            font-family: Roboto-Bold;
         }
-    }
-}
-
-.content{
-    .heading{
-        display: flex;
-        justify-content: space-between;
-        
-        .upload-btn-wrapper {
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-            margin-top: 20px;
-            cursor: pointer;
-            
-            img{
-                position: absolute;
-                margin-left: 15%;
-                margin-top: 8%;
-                width: 25px;
-            }
-            .foo {
-                box-shadow: -12px 10px 0px 0px #ffe08f;
-                -webkit-box-shadow: -12px 10px 0px 0px #ffe08f;
-                -moz-box-shadow: -12px 10px 0px 0px #ffe08f;
-                background-color: #00a67d;
-                border-radius: 0px;
-                color: #ffffff;
-                font-size: 20px;
-                cursor: pointer;
-                width: 300px;
-                height: 70px;
-                border: none;
-            }
-            input[type=file] {
-                font-size: 100px;
-                position: absolute;
-                left: 0;
-                top: 0;
-                opacity: 0;
-            }
-        }
-    }
-    p{
-        font-family: Roboto-Medium;
-        color: #777882;
-        line-height: 1.6;
-        font-size: 25px;
     }
 }

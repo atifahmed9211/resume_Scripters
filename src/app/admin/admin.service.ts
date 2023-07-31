@@ -13,229 +13,318 @@ export class AdminService {
   adminRevisionData;
   finalDraftData;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
   // Authentications Calls
-  login(user):Observable<any>{
-    return this.http.post<any>(`${this.baseUrl}/login`,user);
+  login(user): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/login`, user);
   }
 
-  getAdmin():Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  getAdmin(): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.baseUrl}/user`,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.get<any>(`${this.baseUrl}/user`, { headers });
   }
   // Authentications Calls End
 
   // Blogs Calls
-  createBlog(blog):Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  createBlog(blog): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.post<any>(`${this.baseUrl}/create-blog`,blog,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.post<any>(`${this.baseUrl}/create-blog`, blog, { headers });
+    }
+
+  updateBlog(blog): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.post<any>(`${this.baseUrl}/update-blog`, blog, { headers });
   }
 
-  updateBlog(blog):Observable<any>{
-    let token = localStorage.getItem("adminToken");
-    let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.post<any>(`${this.baseUrl}/update-blog`,blog,{headers});
-  }
-
-  getAllBlogs():Observable<any>{
+  getAllBlogs(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/get-blogs`);
   }
 
-  getBlogById(id):Observable<any>{
+  getBlogById(id): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/get-blog/${id}`);
   }
 
-  deleteBlogById(id):Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  deleteBlogById(id): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.baseUrl}/delete-blog/${id}`,{headers});
-  }
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.get<any>(`${this.baseUrl}/delete-blog/${id}`, { headers });
+    }
   // Blogs Calls End
 
   // Services Calls
-  createService(service):Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  createService(service): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.post<any>(`${this.baseUrl}/create-service`,service,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.post<any>(`${this.baseUrl}/create-service`, service, { headers });
   }
 
-  updateService(service):Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  updateService(service): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.post<any>(`${this.baseUrl}/update-service`,service,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.post<any>(`${this.baseUrl}/update-service`, service, { headers });
+    }
+
+  getAllServices(): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.get<any>(`${this.baseUrl}/get-services`, { headers });
   }
 
-  getAllServices():Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  getServiceById(id): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.baseUrl}/get-services`,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.get<any>(`${this.baseUrl}/get-service/${id}`, { headers });
   }
 
-  getServiceById(id):Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  deleteServiceById(id): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.baseUrl}/get-service/${id}`,{headers});
-  }
-
-  deleteServiceById(id):Observable<any>{
-    let token = localStorage.getItem("adminToken");
-    let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.baseUrl}/delete-service/${id}`,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.get<any>(`${this.baseUrl}/delete-service/${id}`, { headers });
   }
   // Services Calls End
 
   // Packages Calls
-  createPackage(pkg):Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  createPackage(pkg): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.post<any>(`${this.baseUrl}/create-package`,pkg,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.post<any>(`${this.baseUrl}/create-package`, pkg, { headers });
   }
 
-  updatePackage(pkg):Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  updatePackage(pkg): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.post<any>(`${this.baseUrl}/update-package`,pkg,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.post<any>(`${this.baseUrl}/update-package`, pkg, { headers });
   }
 
-  getAllPackages():Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  getAllPackages(): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.baseUrl}/get-packages`,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.get<any>(`${this.baseUrl}/get-packages`, { headers });
   }
 
-  getPackageById(id):Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  getPackageById(id): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.baseUrl}/get-package/${id}`,{headers});
-  }
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.get<any>(`${this.baseUrl}/get-package/${id}`, { headers });
+    }
 
-  deletePackageById(id):Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  deletePackageById(id): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.baseUrl}/delete-package/${id}`,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.get<any>(`${this.baseUrl}/delete-package/${id}`, { headers });
   }
   // Packages Calls End
 
   // Testimonials Calls
-  createTestimonial(testimonial):Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  createTestimonial(testimonial): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.post<any>(`${this.baseUrl}/create-testimonial`,testimonial,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.post<any>(`${this.baseUrl}/create-testimonial`, testimonial, { headers });
   }
 
-  updateTestimonial(testimonial):Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  updateTestimonial(testimonial): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.post<any>(`${this.baseUrl}/update-testimonial`,testimonial,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.post<any>(`${this.baseUrl}/update-testimonial`, testimonial, { headers });
   }
 
-  getAllTestimonials():Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  getAllTestimonials(): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.baseUrl}/get-testimonials`,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.get<any>(`${this.baseUrl}/get-testimonials`, { headers });
   }
 
-  getTestimonialById(id):Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  getTestimonialById(id): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.baseUrl}/get-testimonial/${id}`,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.get<any>(`${this.baseUrl}/get-testimonial/${id}`, { headers });
   }
 
-  deleteTestimonialById(id):Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  deleteTestimonialById(id): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.baseUrl}/delete-testimonial/${id}`,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.get<any>(`${this.baseUrl}/delete-testimonial/${id}`, { headers });
   }
   // Testimonials Calls End
 
   // Orders Calls
 
-  getAllOrders():Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  getAllOrders(): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.get(`${this.baseUrl}/get-orders`,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.get(`${this.baseUrl}/get-orders`, { headers });
   }
 
-  getOrderById(id):Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  getOrderById(id): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.baseUrl}/get-order/${id}`,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.get<any>(`${this.baseUrl}/get-order/${id}`, { headers });
   }
 
-  uploadQuestionFile(order):Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  uploadQuestionFile(order): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.post<any>(`${this.baseUrl}/upload-questions`,order,{headers})
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.post<any>(`${this.baseUrl}/upload-questions`, order, { headers })
   }
-  
-  updateOrder(order):Observable<any>{
-    let token = localStorage.getItem("adminToken");
+
+  updateOrder(order): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.post<any>(`${this.baseUrl}/update-order`,order,{headers})
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.post<any>(`${this.baseUrl}/update-order`, order, { headers })
   }
   // Orders Calls End
 
   // Orders Calls
 
-  getAllCritiques():Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  getAllCritiques(): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.get(`${this.baseUrl}/get-critiques`,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.get(`${this.baseUrl}/get-critiques`, { headers });
   }
 
-  getCritiqueById(id):Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  getCritiqueById(id): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.baseUrl}/get-critique/${id}`,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.get<any>(`${this.baseUrl}/get-critique/${id}`, { headers });
   }
 
-  getCritiquesByUser():Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  getCritiquesByUser(): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.baseUrl}/get-critiques-by-user`,{headers});
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.get<any>(`${this.baseUrl}/get-critiques-by-user`, { headers });
   }
 
-  updateCritique(critique):Observable<any>{
-    let token = localStorage.getItem("adminToken");
+  updateCritique(critique): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.post<any>(`${this.baseUrl}/update-critique`,critique,{headers})
+    headers = headers.set('Authorization', `Bearer ${admintoken}`);
+    return this.http.post<any>(`${this.baseUrl}/update-critique`, critique, { headers })
   }
   // Orders Calls End
 
-uploadDraftFiles(order):Observable<any>
-  {
-    let token = localStorage.getItem("adminToken");
-    let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.post<any>(`${this.baseUrl}/update-order`,order,{headers})
-  }
+  uploadDraftFiles(order): Observable<any> {
+    /* we cannot initialize admintoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let admintoken = localStorage.getItem("adminToken");
+      let headers = new HttpHeaders();
+      headers = headers.set('Authorization', `Bearer ${admintoken}`);
+      return this.http.post<any>(`${this.baseUrl}/update-order`, order, { headers })
+    }
+    getUSer(): Observable<any> {
+      let token = localStorage.getItem("userToken");
+      let headers = new HttpHeaders();
+      headers = headers.set('Authorization', `Bearer ${token}`);
+      return this.http.get<any>(`${this.baseUrl}/user`, { headers });
+    }
 }

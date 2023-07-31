@@ -5,11 +5,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './terms-conditions.component.html',
   styleUrls: ['./terms-conditions.component.scss']
 })
+
 export class TermsConditionsComponent implements OnInit {
-  navbarClass = "navbar2";
+
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

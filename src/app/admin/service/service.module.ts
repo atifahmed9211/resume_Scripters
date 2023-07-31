@@ -6,7 +6,7 @@ import { CreateServiceComponent } from './create-service/create-service.componen
 import { ServicesComponent } from './services/services.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataTablesModule } from "angular-datatables";
-
+import { WebsiteModule } from '../../website/website.module';
 
 @NgModule({
   declarations: [CreateServiceComponent, ServicesComponent],
@@ -15,7 +15,8 @@ import { DataTablesModule } from "angular-datatables";
     FormsModule,
     ReactiveFormsModule,
     DataTablesModule,
-    ServiceRoutingModule
+    ServiceRoutingModule,
+    WebsiteModule
   ]
 })
 export class ServiceModule { }

@@ -1,65 +1,123 @@
-<app-header [navbarClass]= "navbarClass"></app-header>
- <!-- Contact Us form -->
- <div class="banner">
+<app-header></app-header>
+<!-- Contact Us form -->
+<div class="banner">
     <div class="container">
+        <div class="banner_img">
+            <img src="../../../assets/images/hiring.png" class="img-fluid" style="height:100%" />
+        </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="banner-text">
-                    <h1>Contact Us</h1>
-                    <h2>Have any questions? Reach out to our team.</h2>
+                    <h2>Contact Us</h2>
+                    <p style="margin-bottom:0;width:100%">Have any questions? Reach out to our team.</p>
                 </div>
             </div>
         </div>
     </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 170" style="background-color:#fafbf6;">
+        <path fill="#00a67d" fill-opacity="1"
+            d="M0,64L80,90.7C160,117,320,171,480,170.7C640,171,800,117,960,96C1120,75,1280,85,1360,90.7L1440,96L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z">
+        </path>
+    </svg>
 </div>
-<div class="contact-us-form">
-    <div class="container">
-        <div class="row">
-            <div class="contact-form">
-                <div class="row">
-                    <div class="col-lg-6 border-r p-5">
-                        <form>
-                            <div class="form-group">
-                                <label for="fullname">Enter Your Full Name</label>
-                                <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Full name...">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Enter Your Email</label>
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Email...">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Message</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Write message..."></textarea>
-                            </div>
-                            <h2>We normally reply within 24 hours or less. If you haven’t
-                                received an email, check your spam folder
-                            </h2>
-                            <button type="submit" class="btn btn-primary w-100">Submit</button>
-                        </form>
-                    </div>
+<div class="contact-us-form" style="position:relative">
+    <div style="position: absolute;left: 45%;top: 40%;z-index:1">
+        <div class="col-12 content" *ngIf="display_loading">
+            <div class="load-wrapp">
+                <div class="load-3">
                     <div class="line"></div>
-                    <div class="col-lg-6 p-5">
-                        <div>
-                            <label>Email us at</label>
-                            <h2>For Customer Support</h2>
-                            <h1>support@careerscripters.com</h1>
-                            
-                            <h2 class="mt-5">For Inquiries</h2>
-                            <h1>careerscripters@gmail.com</h1>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container contact-form" [ngClass]="{blur:display_loading}">
+        <div class="row">
+            <div class="col-12">
+                <h2>GET IN TOUCH</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-7 col-md-6">
+                <div class="form">
+                    <h3 class="form-headline">Send us a message</h3>
+                    <form [formGroup]="contact_form" id="submit-form" action="" (ngSubmit)="sendMessage()">
+                        <div class="row">
+                            <p class="col-lg-6">
+                                <input formControlName="name" id="name" class="form-input" type="text"
+                                    placeholder="Your Name*">
+                                <span *ngIf="name && name.touched && name.invalid" class="error px-2">This field is
+                                    required</span>
+                            </p>
+                            <p class="col-lg-6">
+                                <input formControlName="email" id="email" class="form-input" type="email"
+                                    placeholder="Your Email*" (keyup)="resetError()">
+                                <span *ngIf="email && email.touched && email.invalid" class="error px-2">This field is
+                                    invalid</span>
+                                <span *ngIf="!emailexist" class="error px-3">Email does not exist</span>
+                            </p>
                         </div>
-                        <!-- <div>
-                            <label>Call us on</label>
-                            <h1>(+92) 0321 12 345 67</h1>
-                            <h2>Mon - Fri , 9 am to 6 pm</h2>
-                        </div> -->
-                        <hr>
-                        <div>
-                            <label>We are social</label>
-                            <div class="social-icons">
-                                <a href="https://www.facebook.com/careerscripters" class="mr-2"><i class="fab fa-facebook-f"></i></a>
-                                <a href="javascript:;" class="mx-2"><i class="fab fa-youtube"></i></a>
-                                <a href="https://www.linkedin.com/company/careerscripters/" class="mx-2"><i class="fab fa-linkedin"></i></a>
-                           </div>
+                        <div class="row">
+                            <p class="col-12">
+                                <input formControlName="subject" id="company-name" class="form-input" type="text"
+                                    placeholder="Subject">
+                            </p>
+                        </div>
+                        <div class="row">
+                            <p class="col-12">
+                                <textarea formControlName="message" id="message" cols="30" rows="7"
+                                    placeholder="Your Message*"></textarea>
+                                <span *ngIf="message && message.touched && message.invalid" class="error px-2">This
+                                    field is
+                                    required</span>
+                            </p>
+                        </div>
+                        <div class="row">
+                            <p class="col-12">
+                                <input type="checkbox" id="checkbox" name="checkbox" checked> Yes, I would like
+                                to
+                                receive communications by call / email about Company's services.
+                            </p>
+                        </div>
+                        <div clss="row" style="padding:0">
+                            <p class="col-12" style="padding:0">
+                                <input type="submit" class="submit-btn mb-4" value="Submit"
+                                    onclick="checkValidations()" [disabled]="!contact_form.valid">
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-6">
+                <div class="contacts contact-wrapper">
+                    <ul>
+                        <h3 class="form-headline">Email us at</h3>
+                        <span class="hightlight-contact-info">
+                            <li class="email-info">
+                                <h3>For Customer Support</h3>
+                                <i class="fas fa-envelope icon_class" style="text-align:center"></i>
+                                support@resumescripters.com
+                            </li>
+                            <li class="email-info">
+                                <h3>For Inquiries</h3>
+                                <i class="fas fa-envelope icon_class" style="text-align:center"></i>
+                                resumescripters@gmail.com
+                            </li>
+                        </span>
+                    </ul>
+                    <div>
+                        <h3>We are social</h3>
+                        <div class="social-icons">
+                            <div class="row" style="margin:0">
+                                <a href="https://www.facebook.com/resumescripters" class="mr-2"><i
+                                        class="fab fa-facebook-f icon_class"></i></a>
+                                <a href="javascript:;" class="mx-2"><i class="fab fa-youtube icon_class"></i></a>
+                                <a href="https://www.linkedin.com/company/resumescripters/" class="mx-2"><i
+                                        class="fab fa-linkedin icon_class"></i></a>
+                                <a href="" class="mx-2"><i class="fab fa-instagram icon_class"></i></a>
+                                <a href="" class="mx-2"><i class="fab fa-twitter icon_class"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>

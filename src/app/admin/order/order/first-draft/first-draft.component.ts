@@ -6,26 +6,64 @@ import { AdminService } from '../../../admin.service';
 import { __await } from 'tslib';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-first-draft',
   templateUrl: './first-draft.component.html',
   styleUrls: ['./first-draft.component.scss']
 })
+
 export class FirstDraftComponent implements OnInit {
 
   @ViewChild('fileMessage') fileMessage: ElementRef;
+
+  firstDraft = new FormGroup({
+    message: new FormControl(''),
+    attachFile: new FormControl('')
+  })
 
   files = [];
   filesResponse = [];
   ckContent = ""
   showLoader;
   private baseUrl = environment.baseUrl;
+  //for chat editor 
+  public Editor = ClassicEditor;
+  public config = {
+    toolbar: {
+      items: [
+        "heading",
+        "|",
+        "bold",
+        "italic",
+        "link",
+        "bulletedList",
+        "numberedList",
+        "|",
+        "indent",
+        "outdent",
+        "|",
+        "blockQuote",
+        "insertTable",
+        "undo",
+        "redo"
+      ]
+    },
+    table: {
+      contentToolbar: [
+        "tableColumn",
+        "tableRow",
+        "mergeTableCells"
+      ]
+    },
+    language: "en"
+  }
+
   constructor(
     public bsModalRef: BsModalRef,
     private as: AdminService,
     private http: HttpClient,
-
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +76,7 @@ export class FirstDraftComponent implements OnInit {
       this.sendFilesToAPI(event.target.files[i])
     }
   }
+
   async sendFilesToAPI(file) {
     let formdata = new FormData;
     formdata.append("id", this.as.selectedOrderId);
@@ -47,21 +86,18 @@ export class FirstDraftComponent implements OnInit {
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', `Bearer ${token}`);
     const res = await this.http.post<any>(`${this.baseUrl}/update-order`, formdata, { headers }).toPromise();
-    console.log("res", res);
     if (res) {
       this.filesResponse.push(res.data);
       this.showLoader = false;
       this.fileMessage.nativeElement.value = null;
     }
   }
+
   deleteItem(i) {
     this.files.splice(i, 1);
     this.filesResponse.splice(i, 1);
   }
-  firstDraft = new FormGroup({
-    message: new FormControl(''),
-    attachFile: new FormControl('')
-  })
+
   sendDraft() {
     this.sendEmail();
     //send form data to services
@@ -94,6 +130,7 @@ export class FirstDraftComponent implements OnInit {
       this.hideModal();
     }
   }
+
   sendEmail() {
     Email.send({
       Host: 'smtp.elasticemail.com',
@@ -104,8 +141,9 @@ export class FirstDraftComponent implements OnInit {
       Subject: 'Subject',
       Body: `
       <i>Hi! user, your First Draft has been sent.</b> `
-    }).then(message => { console.log(message); });
+    }).then(message => { console.log(); });
   }
+  
   // in case use cancelled the modal
   hideModal() {
     this.bsModalRef.hide();

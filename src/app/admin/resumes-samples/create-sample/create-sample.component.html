@@ -1,0 +1,101 @@
+<!--loading start-->
+<div *ngIf="sampleResponse" class="content col-sm-12">
+    <app-loading></app-loading>
+</div>
+<!--loading end-->
+<div class="card" [ngClass]="{blur:makeBlur}">
+    <div *ngIf="!sampleResponse" class="card-body">
+        <h4 class="card-title">Sample Information</h4>
+        <p class="card-title-desc">Fill all information below</p>
+        <form [formGroup]="sampleForm">
+            <div class="row">
+                <div class="col-12">
+                    <label class="control-label">Choose Category</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <select formControlName="category" class="form-control select2">
+                        <option *ngFor="let item of categories" value="{{item.id}}">{{item.name}}</option>
+                    </select>
+                </div>
+                <div class="col-sm-1">
+                    OR
+                </div>
+                <div class="col-sm-5">
+                    <!-- Button trigger modal -->
+                    <button class="btn" data-toggle="modal" data-target="#exampleModal" (click)="openModal()">Add New
+                        Category</button>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="col-12">
+                        <label for="productname">Sample Name</label>
+                    </div>
+                    <input formControlName="sample_name" id="productname" name="productname" type="text"
+                        class="form-control" placeholder="Sample Name">
+                </div>
+                <div class="col-sm-4">
+                    <div class="col-12">
+                        <label for="file-upload" class="btn">Choose Page</label>
+                        <P>Upload the image in 1080 x 1350 pixels</P>
+                    </div>
+                    <input id="file-upload" class="form-control" type="file" multiple (change)="onFileChange($event)">
+                    <p *ngFor="let item of files; let i=index" class="px-4 pt-2 text-primary">{{item.name}}
+                        <span class="fa fa-times text-danger" (click)="removeFile(i)"></span>
+                    </p>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-12">
+                    <button (click)="add_samples()" type="submit" class="btn waves-effect waves-light"
+                        [disabled]="sampleForm.invalid || files.length==0">
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="category_form">
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="control-label">Enter Name</label>
+                        </div>
+                        <div class="col-12">
+                            <input formControlName="category_name" type="text" class="form-control"
+                                placeholder="Enter Text Here..." (input)="resetError()" />
+                        </div>
+                        <div class="col-12">
+                            <p *ngIf="category_already_exist_error" class="error">Category Already Exists.</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    (click)="closeModal()">Close</button>
+                <button type="button" class="btn btn-primary" (click)="addCategory()"
+                    [disabled]="category_form.invalid">
+                    Save changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

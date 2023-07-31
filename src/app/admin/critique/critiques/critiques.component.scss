@@ -1,0 +1,36 @@
+table {
+  text-align: center;
+  width: 100% !important;
+
+  tr {
+    background-color: transparent !important;
+
+    td {
+      vertical-align: middle;
+    }
+  }
+
+  @media(max-width:810px) {
+    .file {
+      display: none;
+    }
+  }
+
+  @media(max-width:700px) {
+    .sr_no {
+      display: none;
+    }
+  }
+
+  @media(max-width:650px) {
+    .status {
+      display: none;
+    }
+  }
+}
+
+.critique_status {
+  border-radius: 30px;
+  color: #fff;
+  padding: 10px 15px;
+}

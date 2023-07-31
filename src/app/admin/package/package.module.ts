@@ -6,6 +6,7 @@ import { PackagesComponent } from './packages/packages.component';
 import { CreatePackageComponent } from './create-package/create-package.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
+import { WebsiteModule } from '../../website/website.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { DataTablesModule } from 'angular-datatables';
     FormsModule,
     ReactiveFormsModule,
     DataTablesModule,
-    PackageRoutingModule
+    PackageRoutingModule,
+    WebsiteModule
   ]
 })
 export class PackageModule { }

@@ -9,8 +9,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FirstDraftComponent } from './order/first-draft/first-draft.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FinalDraftComponent } from './order/final-draft/final-draft.component';
-import { CKEditorModule } from 'ng2-ckeditor';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { RevisionComponent } from './order/revision/revision.component';
+import { AppHeaderModule } from '@coreui/angular';
+import { WebsiteModule } from '../../website/website.module';
 
 @NgModule({
   declarations: [OrdersComponent, OrderComponent, FirstDraftComponent, RevisionComponent,FinalDraftComponent],
@@ -22,6 +24,8 @@ import { RevisionComponent } from './order/revision/revision.component';
     ReactiveFormsModule,
     ModalModule.forRoot(),
     CKEditorModule,
+    AppHeaderModule,
+    WebsiteModule
   ]
 })
 export class OrderModule { }

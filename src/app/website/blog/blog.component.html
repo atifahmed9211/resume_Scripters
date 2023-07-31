@@ -1,74 +1,114 @@
-<app-header [navbarClass]= "navbarClass"></app-header>
-
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12 mt-5">
-            <h1>Career Advice</h1>
+<app-header></app-header>
+<div class="banner">
+    <div class="container">
+        <div class="banner_img">
+            <img src="../../../assets/images/hiring.png" class="img-fluid" style="height:100%" />
         </div>
-        <div class="col-lg-12">
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 mt-3" *ngFor="let blog of blogs;let i = index">
-                            <div class="blog" *ngIf="i<4">
-                                <div class="img">
-                                    <img class="w-100" src="{{mediaUrl}}blogs_imgs/{{blog?.img}}">
-                                </div>
-                                <h2><a routerLink="../blog-detail/{{blog?.id}}">{{blog?.title}}</a></h2>
-                                <h3>{{blog?.created_at | date}}</h3>
-                            </div>
-                        </div>
-                        <!-- <div class="col-lg-6 col-md-6 mt-3">
-                            <div class="blog">
-                                <div class="img">
-                                    <img class="w-100" src="../../../assets/images/blog1.jpg">
-                                </div>
-                                <h2><a routerLink="../blog-detail">What is the Purpose of a
-                                    Cover Letter?</a></h2>
-                                <h3>20 Oct 2020</h3>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 mt-3">
-                            <div class="blog">
-                                <div class="img">
-                                    <img class="w-100" src="../../../assets/images/blog1.jpg">
-                                </div>
-                                <h2><a routerLink="../blog-detail">What is the Purpose of a
-                                    Cover Letter?</a></h2>
-                                <h3>20 Oct 2020</h3>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 mt-3">
-                            <div class="blog">
-                                <div class="img">
-                                    <img class="w-100" src="../../../assets/images/blog1.jpg">
-                                </div>
-                                <h2><a routerLink="../blog-detail">What is the Purpose of a
-                                    Cover Letter?</a></h2>
-                                <h3>20 Oct 2020</h3>
-                            </div>
-                        </div> -->
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 mt-3">
-                    <div class="blog">
-                        <div class="img">
-                            <img class="w-100" src="{{mediaUrl}}blogs_imgs/{{blogs[4]?.img}}">
-                        </div>
-                        <h2><a routerLink="../blog-detail/{{blogs[4]?.id}}">{{blogs[4]?.title}}</a></h2>
-                        <h3>{{blogs[4]?.created_at | date}}</h3>
+        <div class="row">
+            <div class="col-12">
+                <div class="banner-text">
+                    <div>
+                        <h2>Career Advice!</h2>
+                        <p class="text-center" style="margin-bottom:0;width:100%">
+                            Our company have helped thousands of professionals in building
+                            their personal brands and bringing their career stories to life.
+                        </p>
                     </div>
                 </div>
             </div>
-            <div class="row mt-3">
-                <div class="col-lg-3 col-md-3 mt-3" *ngFor="let blog of blogs;let i=index;">
-                    <div class="blog" *ngIf="i>4">
-                        <div class="img">
-                            <img class="w-100" src="{{mediaUrl}}blogs_imgs/{{blog?.img}}">
+        </div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 170" style="background-color:#fafbf6;">
+        <path fill="#00a67d" fill-opacity="1"
+            d="M0,64L80,90.7C160,117,320,171,480,170.7C640,171,800,117,960,96C1120,75,1280,85,1360,90.7L1440,96L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z">
+        </path>
+    </svg>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 mt-3">
+            <h1>Career Advice</h1>
+        </div>
+        <!--loading start-->
+        <div *ngIf="showLoader" class="content" style="margin:auto">
+            <app-loading></app-loading>
+        </div>
+        <!--loading end-->
+
+        <div *ngIf="!showLoader" class="col-lg-12">
+            <!--Last Post-->
+            <div *ngFor="let blog of blogs;let i = index">
+                <div class="row">
+                    <div *ngIf="i==blogs.length-1" class="col-12 mt-3">
+                        <div class="blog row last_blog">
+                            <!--in case there is no image-->
+                            <div *ngIf="blog?.img else custom_image_box" class="col-lg-7">
+                                <img class="w-100" src="{{mediaUrl}}blogs_imgs/{{blog?.img}}">
+                            </div>
+                            <ng-template #custom_image_box>
+                                <div class="col-lg-7">
+                                    <div class="custom_img_box">
+                                        <h1>{{blog.title}}</h1>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <div class="col-lg-5">
+                                <h2><a (click)="getSpecificBlog(blog.id)">{{blog?.title}}</a></h2>
+                                <p>{{getTrimText(blog?.description,65)}}</p>
+                                <section class="flex flex-nowrap flex-align-center">
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <i class="fal fa-user-circle" style="font-size: 20px;"></i>
+                                        </div>
+                                        <div class="col-11">
+                                            Admin
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-1">
+
+                                        </div>
+                                        <div class="col-11">
+                                            <div class="text-xs"><span>{{blog?.created_at | date}}</span></div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
                         </div>
-                        <h2><a routerLink="../blog-detail/{{blog?.id}}">{{blog?.title}}</a></h2>
-                        <h3>{{blog?.created_at | date}}</h3>
                     </div>
+                </div>
+            </div>
+            <div class="row" style="margin:0">
+                <div class="col-xl-3 col-lg-4 col-md-6 mt-3 blog" *ngFor="let blog of blogs;let i = index" style="box-shadow: 0px 1px 2px rgb(0 0 0 / 20%);">
+                    <!--in case there is no image-->
+                    <div *ngIf="blog?.img else custom_image_box_2">
+                        <img class="w-100" src="{{mediaUrl}}blogs_imgs/{{blog?.img}}">
+                    </div>
+                    <ng-template #custom_image_box_2>
+                        <div class="custom_img_box_2">
+                            <h6>{{blog.title}}</h6>
+                        </div>
+                    </ng-template>
+                    <h2><a (click)="getSpecificBlog(blog.id)">{{blog?.title}}</a></h2>
+                    <p [innerHTML]="getTrimText(blog?.description,20)"></p>
+                    <section class="flex flex-nowrap flex-align-center">
+                        <div class="row">
+                            <div class="col-1">
+                                <i class="fal fa-user-circle" style="font-size: 20px;"></i>
+                            </div>
+                            <div class="col-11">
+                                Admin
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1">
+
+                            </div>
+                            <div class="col-11">
+                                <div class="text-xs"><span>{{blog?.created_at | date}}</span></div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
@@ -78,11 +118,11 @@
     </div>
 </div>
 
-<div class="banner-content mt-5">
+<div class="banner-content mt-5" [ngClass]="{blur:showModal}">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="content">
+                <div class="top_content">
                     <h1 data-aos="fade-right">Transform your resume into a job-seeking missile</h1>
                     <p>
                         Upload your <span>resume</span> for a free expert review
@@ -90,11 +130,11 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="content text-center">
+                <div class="bottom_content text-center">
                     <div class="upload-btn-wrapper">
                         <img src="../../../assets/images/ic_upload.png">
                         <button class="foo">Upload Your Resume</button>
-                        <input type="file" name="myfile" />
+                        <input #file_upload type="file" name="myfile" (change)="uploadResume($event)" />
                     </div>
                 </div>
             </div>
@@ -152,4 +192,4 @@
     </section>
 </div> -->
 
-<app-footer></app-footer>
+<app-footer [ngClass]="{blur:showModal}"></app-footer>

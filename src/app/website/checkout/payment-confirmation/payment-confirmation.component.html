@@ -1,18 +1,9 @@
-<div class="modal-header">
-    <button type="button" class="close pull-right" aria-label="Close" (click)="redirectToOrder()">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-<div class="modal-body">
-    <div style="direction: ltr !important;">
-        <h4 class="modal-title pull-left">
-            <span class="tickIcon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-check2-all" viewBox="0 0 16 16">
-                    <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"/>
-                    <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/>
-                </svg>
-                <i class="bi bi-check2-all"></i>
-            </span>
-            payment method Completed.</h4>
+<div>
+    <span class="card__success"><i class="fas fa-check"></i></span>
+    <div class="msg">
+        <h1>Success!</h1>
+        <h1 class="card_msg">Payment Complete</h1>
+        <h2 class="card_submsg">Thank you for your transfer</h2>
+        <button class="btn btn-success" (click)="redirectToOrder()">OK</button>
     </div>
 </div>

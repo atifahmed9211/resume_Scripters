@@ -1,0 +1,22 @@
+.col-sm-12 {
+    padding: 0 !important;
+
+    table {
+        text-align: center;
+        width: 100% !important;
+
+        tr {
+            background-color: transparent !important;
+
+            td {
+                vertical-align: middle;
+            }
+        }
+
+        @media(max-width:608px) {
+            .images {
+                display: none;
+            }
+        }
+    }
+}

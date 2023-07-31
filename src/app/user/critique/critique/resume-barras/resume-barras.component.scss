@@ -2,58 +2,60 @@
 $Largura-Barra: 40px;
 $MaxHeight: 300px;
 
-.grafico .content{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: $MaxHeight;
-}
+.grafico {
+    .content {
+        display: flex;
+        flex-direction: row;
+        height: $MaxHeight;
+        width: 100%;
 
-.grafico .content span{
-    font-family: 'Roboto';
-    font-size: 13px;
-    color: #707070;
-}
+        span {
+            color: #707070;
+            font-family: 'Roboto';
+            font-size: 13px;
+        }
+    }
 
-.grafico .line{
-    background-color: #CCCCCC;
-    width: 100%;
-    height: 1px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-}
+    .line {
+        background-color: #CCCCCC;
+        height: 1px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        width: 100%;
+    }
 
-.grafico .legends{
-    display: flex;
-    flex-direction: row;
-    color: #707070;
-    font-family: 'Roboto';
-    font-size: 12px;
-    text-align: center;
-}
+    .legends {
+        color: #707070;
+        display: flex;
+        flex-direction: row;
+        font-family: 'Roboto';
+        font-size: 12px;
+        text-align: center;
 
-.grafico .legends span{
-    width: $Largura-Barra;
-    margin:0 15px;
-}
+        span {
+            margin: 0 15px;
+            width: $Largura-Barra;
+        }
+    }
 
-.grafico .bars{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    height: 100%;
-}
+    .bars {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: flex-end;
+    }
 
-.grafico .bar{
-    width: $Largura-Barra;
-    min-height: 2px;
-    margin:0 15px;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
-}
+    .bar {
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+        min-height: 2px;
+        margin: 0 15px;
+        width: $Largura-Barra;
 
-.grafico .bar:hover{
-    transform: translateY(-1px);
-    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.20);
+        &:hover {
+            box-shadow: 0 4px 17px rgba(0, 0, 0, 0.20);
+            transform: translateY(-1px);
+        }
+    }
 }

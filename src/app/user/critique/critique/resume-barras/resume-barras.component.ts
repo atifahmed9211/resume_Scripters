@@ -6,10 +6,11 @@ import {ResumeModel} from "../model/resume.model";
   templateUrl: './resume-barras.component.html',
   styleUrls: ['./resume-barras.component.scss']
 })
+
 export class ResumeBarrasComponent implements OnInit {
 
   @Input() List: Array<ResumeModel>;
-
+  
   public Total=0;
   public MaxHeight= 160;
 
@@ -18,6 +19,7 @@ export class ResumeBarrasComponent implements OnInit {
   ngOnInit(): void {
     this.MontarGrafico();
   }
+
   MontarGrafico(){
     this.List.forEach(element => {
       this.Total += element.Value;

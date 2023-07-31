@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ProfileComponent } from './profile/profile.component';
+import { TransactionDetailComponent } from './transaction/transaction-detail/transaction-detail.component';
+import { TransactionComponent } from './transaction/transaction.component';
 import { UserAuthGuard } from './user-auth.guard';
 import { UserComponent } from './user.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'orders',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   },
   {
@@ -15,7 +18,7 @@ const routes: Routes = [
     data: {
       title: 'Home'
     },
-    canActivate:[UserAuthGuard],
+    canActivate: [UserAuthGuard],
     children: [
       {
         path: 'orders',
@@ -28,12 +31,24 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
-      }
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+      },
+      {
+        path: 'transaction',
+        component:TransactionComponent,
+      },
+      {
+        path:"transaction/order/:id",
+        component:TransactionDetailComponent,
+        data:{
+          title:"Transaction Detail"
+        },
+      },
     ]
   },
-  {
-    path:'profile'
-  }
 ];
 
 @NgModule({

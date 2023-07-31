@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CritiqueComponent } from './critique/critique.component';
 import { CritiquesComponent } from './critiques/critiques.component';
+import { ResumeServicesComponent } from '../../website/resume-services/resume-services.component';
 
 const routes: Routes = [
   {
@@ -28,7 +29,12 @@ const routes: Routes = [
         path:"",
         redirectTo:"all",
         pathMatch:"full"
-      }
+      },
+      {
+        path: 'Resume-service',
+        component: ResumeServicesComponent,
+        data:{data:"Resume-service"}
+      },
     ]
   }
 ];

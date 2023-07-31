@@ -1,85 +1,87 @@
-@font-face{
+@font-face {
     font-family: Roboto-Regular;
     src: url(../../../assets/fonts/Roboto-Regular.ttf);
 }
-@font-face{
+
+@font-face {
     font-family: Roboto-Medium;
     src: url(../../../assets/fonts/Roboto-Medium.ttf);
 }
-@font-face{
+
+@font-face {
     font-family: Roboto-Bold;
     src: url(../../../assets/fonts/Roboto-Bold.ttf);
 }
 
-h1{
+h1 {
+    color: #282a41;
     font-family: Roboto-Medium;
     margin-bottom: 12px;
-    font-size: 50px;
-    color: #282a41;
 }
 
-.banner{
+.banner {
+    align-items: center;
     background-image: url(../../../assets/images/about-bg.png);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 630px;
     display: flex;
-    align-items: center;
+    height: 630px;
 
-    .banner-text{
-        img{
+    .banner-text {
+        img {
             height: 400px;
             object-fit: cover;
         }
-        h1{
+
+        h1 {
+            color: #ffffff;
             font-family: Roboto-Bold;
-            color: #ffffff;
             line-height: 1.4;
-            font-size: 50px;
-        }
-        h2{
-            font-family: Roboto-Medium;
-            color: #ffffff;
-            line-height: 1.4;
-            font-size: 25px;
-        }
-        .more-btn{
-            background-color: #ffffff;
-            font-family: Roboto-Bold;
-            text-decoration: none;
-            display: inline-block;
-            padding: 20px 60px;
-            margin-top: 15px;
-            color: #00a67d;
-            font-size: 20px;
-            transition: 1s;
-            box-shadow: -12px 10px 0px 0px rgba(255,224,143,1);
-            -webkit-box-shadow: -12px 10px 0px 0px rgba(255,224,143,1);
-            -moz-box-shadow: -12px 10px 0px 0px rgba(255,224,143,1);
-        }
-        .more-btn:hover{
-            box-shadow: 0px 0px 0px 0px rgba(255,224,143,1);
-            -webkit-box-shadow: 0px 0px 0px 0px rgba(255,224,143,1);
-            -moz-box-shadow: 0px 0px 0px 0px rgba(255,224,143,1);
-            background-color: #0f2b33;
-            color: #ffffff;
         }
 
+        h2 {
+            color: #ffffff;
+            font-family: Roboto-Medium;
+            line-height: 1.4;
+        }
+
+        .more-btn {
+            background-color: #ffffff;
+            box-shadow: -12px 10px 0px 0px rgba(255, 224, 143, 1);
+            color: #00a67d;
+            display: inline-block;
+            font-family: Roboto-Bold;
+            font-size: 20px;
+            margin-top: 15px;
+            padding: 20px 60px;
+            text-decoration: none;
+            transition: 1s;
+            -webkit-box-shadow: -12px 10px 0px 0px rgba(255, 224, 143, 1);
+            -moz-box-shadow: -12px 10px 0px 0px rgba(255, 224, 143, 1);
+
+            &:hover {
+                box-shadow: 0px 0px 0px 0px rgba(255, 224, 143, 1);
+                background-color: #0f2b33;
+                color: #ffffff;
+                -webkit-box-shadow: 0px 0px 0px 0px rgba(255, 224, 143, 1);
+                -moz-box-shadow: 0px 0px 0px 0px rgba(255, 224, 143, 1);
+            }
+        }
     }
 }
 
-.our-story{
+.our-story {
     margin-top: 50px;
-    h1{
+
+    h1 {
+        color: #282a41;
         font-family: Roboto-Medium;
         margin-bottom: 12px;
-        font-size: 50px;
-        color: #282a41;
     }
-    h3{
-        font-family: Roboto-Medium;
+
+    h3 {
         color: #7a7b86;
+        font-family: Roboto-Medium;
         line-height: 2;
-        font-size: 20px;
     }
 }

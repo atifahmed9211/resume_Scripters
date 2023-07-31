@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { BlogComponent } from './blog/blog.component';
 import { ResumeServicesComponent } from './resume-services/resume-services.component';
-import { CareerAdviceComponent } from './career-advice/career-advice.component';
 import { TestimonialsComponent } from './testimonials/testimonials.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { FaqComponent } from './faq/faq.component';
@@ -17,6 +16,8 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
 import { SignupComponent } from './signup/signup.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ResumeSamplesComponent } from './resume-samples/resume-samples.component';
+import { ReferralsComponent } from './referrals/referrals.component';
 
 const routes: Routes = [
   {
@@ -34,12 +35,6 @@ const routes: Routes = [
     path: 'federal',
     component: FederalServicesComponent,
     data:{data:"federal"}
-  },
-
-  {
-    path: "career-advice",
-    component: CareerAdviceComponent,
-    data:{data:"career-advice"}
   },
 
   {
@@ -70,6 +65,10 @@ const routes: Routes = [
     path: "blog-detail/:id",
     component: BlogDetailComponent,
     data:{data:"blog-detail"}
+  },
+  {
+    path: "resume_samples",
+    component:ResumeSamplesComponent,
   },
   
   {
@@ -122,7 +121,12 @@ const routes: Routes = [
   {
     path:'checkout',
     component:CheckoutComponent
-  }
+  },
+  {
+    path: "referrals",
+    component:ReferralsComponent,
+    data:{data:""}
+  },
 ];
 
 @NgModule({

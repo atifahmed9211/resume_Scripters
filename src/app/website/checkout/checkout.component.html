@@ -1,33 +1,83 @@
 <app-header></app-header>
-<div class="container">
+<div class="banner">
+    <!-- <img class="w-100" src="../../../assets/images/bg.png"> -->
+    <div class="container">
+        <div class="banner_img">
+            <img src="../../../assets/images/hiring.png" class="img-fluid" style="height:100%" />
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="banner-content">
+                    <div>
+                        <h2>Your Plan, Your Choice!</h2>
+                        <p style="margin-bottom:0;width:100%">Get discovered & shortlisted with our tailored resume
+                            writing services.
+                            Our unique approach maximize your chances of getting interview calls.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 170" style="background-color:#fafbf6;">
+        <path fill="#00a67d" fill-opacity="1"
+            d="M0,64L80,90.7C160,117,320,171,480,170.7C640,171,800,117,960,96C1120,75,1280,85,1360,90.7L1440,96L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z">
+        </path>
+    </svg>
+</div>
+<br /><br />
+<div [ngClass]="{blur:showLoading}" class="container">
     <div class="row">
         <div class="col-md-6">
-            <div class="card" data-aos="fade-down" data-aos-duration="1000">
+            <!--loading start-->
+            <div *ngIf="showLoading" class="content">
+                <app-loading></app-loading>
+            </div>
+            <!--loading end-->
+            <div class="card" data-aos="fade-down" data-aos-duration="1000" style="border-radius:15px">
+                <div class="bg-primary bg-soft">
+                    <div class="row">
+                        <div class="col-7">
+                            <h4>Payment Information</h4>
+                        </div>
+                        <div class="col-5 align-self-end">
+                            <img src="../../assets/skote/images/profile-img.png" alt=""
+                                style="max-width:80%;height:auto">
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
                     <form [formGroup]="checkoutForm">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="name">Full Name</label>
-                                <input type="text" placeholder="Full Name" formControlName="name" class="form-control" id="name">
-                                <span *ngIf="name && name.invalid && name.touched">This Field is invalid</span>
+                                <input type="text" placeholder="Full Name" formControlName="name" class="form-control"
+                                    id="name">
+                                <span class="error" *ngIf="name && name.invalid && name.touched">This Field is
+                                    invalid</span>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="phone_number">Phone Number</label>
-                                <input type="number" placeholder="Phone Number" formControlName="phone_number" class="form-control" id="phone_number">
-                                <br/>
-                                <span *ngIf="phone_number && phone_number.invalid && phone_number.touched">This Field is invalid</span>
+                                <input type="tel" placeholder="Phone Number" formControlName="phone_number"
+                                    class="form-control" id="phone_number">
+                                <br />
+                                <span class="error"
+                                    *ngIf="phone_number && phone_number.invalid && phone_number.touched">This Field is
+                                    invalid</span>
                             </div>
                         </div>
                         <div class="form-row">
                             <label for="Email">Email</label>
-                            <input type="email" placeholder="name@email.com" formControlName="email" class="form-control" id="Email">
-                            <span *ngIf="email && email.invalid && email.touched">This Field is invalid</span>
+                            <input type="email" placeholder="name@email.com" formControlName="email"
+                                class="form-control" id="Email">
+                            <span class="error" *ngIf="email && email.invalid && email.touched">This Field is
+                                invalid</span>
                         </div>
                         <div>
                             <div class="modal-body">
                                 <div id="card-info" #cardInfo class="w-100" style="direction: ltr !important;">
                                 </div>
-                                
+
                             </div>
                             <div class="modal-footer">
                                 <!-- <button type="submit" class="btn btn-primary" (click)="createStripeToken()">
@@ -35,39 +85,55 @@
                                 </button> -->
                             </div>
                         </div>
-                            <button [disabled]="((checkoutForm.valid==true) && (cardError==null)) ? false:true" (click)="createStripeToken()" type="submit" class="btn btn-danger">Pay Now</button>
+                        <div>
+                            <label>HAVE A DISCOUNT CODE?</label><br />
+                            <div class="row" style="margin:0">
+                                <div class="col-10">
+                                    <input type="text" class="form-control"
+                                        placeholder="place your discount code and press enter" (input)="showEnterBtn()" formControlName="discountCode"/><br />
+                                </div>
+                                <div class="col-2">
+                                    <button *ngIf="showBtn" class="btn btn-dark">Enter</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button [disabled]="((checkoutForm.valid==true) && (cardError==null)) ? false:true"
+                            (click)="createStripeToken()" type="submit" class="btn paynow">Pay Now</button>
                     </form>
                 </div>
-            </div>       
+            </div>
         </div>
         <div class="col-md-6">
             <h1>Package Detail</h1>
             <div class="pricing">
-                <div class="container">
-                    <div class="row">
-                            <div class="card" data-aos="fade-down" data-aos-duration="1000">
-                                <div class="card-title pt-2">
-                                    <span>{{selectedPackage.title}}</span><span class="float-right mr-3">{{selectedPackage.price | currency}}</span>
-                                </div>
-                                <div class="card-body">
-                                        <!-- <p class="card-price">$100</p> -->
-                                    <h3>{{selectedPackage.description}}</h3>
-            
-                                    <div class="true" *ngFor="let service of selectedPackage.services; let j = index;">
-                                        <div class="heading">
-                                            <h4>{{service.title}}</h4>
-                                        </div>
-                                        <div class="icon">
-                                            <i class="fa fa-check" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="card">
+                    <div class="card-title pt-2">
+                        <div class="row">
+                            <div class="col-8">
+                                <span>{{selectedPackage.title}}</span>
                             </div>
+                            <div class="col-4" style="margin:auto">
+                                <span class="float-right mr-3">{{selectedPackage.price | currency}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- <p class="card-price">$100</p> -->
+                        <h3>{{getTrimText(selectedPackage.description)}}</h3>
+
+                        <div class="true" *ngFor="let service of selectedPackage.services; let j = index;">
+                            <div class="heading">
+                                <h4>{{service.title}}</h4>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<br/><br/>
+<br /><br />
 <app-footer></app-footer>

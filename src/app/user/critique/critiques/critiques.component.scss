@@ -1,5 +1,23 @@
-a.disabled{
-    color: gray;
-    cursor: not-allowed;
-    text-decoration: underline;
+table {
+  text-align: center;
+  width: 100% !important;
+
+  tr {
+    background-color:transparent !important;
+    td{
+      vertical-align:middle;
+    }
+  }
+}
+
+@media(max-width:440px) {
+  .file {
+    display: none;
+  }
+}
+
+.critique_status {
+  border-radius: 30px;
+  color: #fff;
+  padding: 10px 15px;
 }

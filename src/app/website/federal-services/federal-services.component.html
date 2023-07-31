@@ -1,15 +1,18 @@
-<app-header [navbarClass]="navbarClass"></app-header>
+<app-header></app-header>
 
 <!-- Price Packaging section start from here -->
 <div class="banner">
     <!-- <img class="w-100" src="../../../assets/images/bg.png"> -->
     <div class="container">
+        <div class="banner_img">
+            <img src="../../../assets/images/hiring.png" class="img-fluid" style="height:100%" />
+        </div>
         <div class="row">
             <div class="col-12">
                 <div class="banner-content">
                     <div>
-                        <h1>Your Plan, Your Choice!</h1>
-                        <p>Get discovered & shortlisted with our tailored resume writing services. 
+                        <h2>Your Plan, Your Choice!</h2>
+                        <p style="margin-bottom:0;width:100%">Get discovered & shortlisted with our tailored resume writing services.
                             Our unique approach maximize your chances of getting interview calls.
                         </p>
                     </div>
@@ -17,6 +20,11 @@
             </div>
         </div>
     </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 170" style="background-color:#fafbf6;">
+        <path fill="#00a67d" fill-opacity="1"
+            d="M0,64L80,90.7C160,117,320,171,480,170.7C640,171,800,117,960,96C1120,75,1280,85,1360,90.7L1440,96L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z">
+        </path>
+    </svg>
 </div>
 
 <!-- Price Packaging section end here -->
@@ -25,18 +33,38 @@
         <div class="row">
             <div class="col-12">
                 <p>
-                    When you are applying for a job in the Federal Government you need a separate resume called a federal resume. A federal resume is much different from our conventional resume. It is far more technical and also requires specifics, so not everyone can write it perfectly. Careerscripters.com provides the Best Federal Resume Writing Services in the United Kingdom and the United States.
-We have a team of experienced writers who can provide you with professionally written federal resumes for applying for federal government positions. Careerscripters.com has established itself as one of the top resume writing services, with the aim of assisting you in securing your dream work.
+                    When you are applying for a job in the Federal Government you need a separate resume called a
+                    federal resume. A federal resume is much different from our conventional resume. It is far more
+                    technical and also requires specifics, so not everyone can write it perfectly. ResumeScripters.com
+                    provides the Best Federal Resume Writing Services in the United Kingdom and the United States.
+                    We have a team of experienced writers who can provide you with professionally written federal
+                    resumes for applying for federal government positions. resumescripters.com has established itself as
+                    one of the top resume writing services, with the aim of assisting you in securing your dream work.
 
                 </p>
                 <h2>Best Federal Resume Writing</h2>
                 <p>
-                    There are many items to consider when writing a Federal resume; they are longer than standard resumes, varying from 4 to 6 pages. Federal resumes include more comprehensive educational and work details, such as your title, work duration, average number of working hours each week, as well as duties and achievements.
-In addition, there is a specific format for writing a Federal resume. You must write each piece of information in a specific order, such as job title, grade, listing, and so on. To deal with these complexities, most people turn to Federal writing services online to design their resume.
-Careerscripters.com recognizes the significance of the federal resume and how to make them perfect. We not only offer a comprehensive resume that will grab the attention of recruiters, but we also adhere to the template requirements needed by several federal departments.
-Our professional writers gather all of your data, including work history, academic qualifications, publications, and much more, when preparing your federal resume. We strive to highlight the best qualities and accomplishments while remaining consistent with federal government requirements.
-The entire procedure is simple, user-friendly, and straightforward. All you have to do is choose your package based on your budget and needs. Once you've settled on a package, you can place an order for your preferred document, in this case, a Federal Resume. Upon receiving the order, our team will send you a questionnaire to gather all the required information.
-Our professional team then uses all this information to craft the perfect federal resume by listing your education and other details as well as using keywords that prove to be helpful in the selection process. If you use the federal resume writing service of Careerscripters.com, your resume is less likely to be rejected. The final draft is then sent to you on your given email address. 
+                    There are many items to consider when writing a Federal resume; they are longer than standard
+                    resumes, varying from 4 to 6 pages. Federal resumes include more comprehensive educational and work
+                    details, such as your title, work duration, average number of working hours each week, as well as
+                    duties and achievements.
+                    In addition, there is a specific format for writing a Federal resume. You must write each piece of
+                    information in a specific order, such as job title, grade, listing, and so on. To deal with these
+                    complexities, most people turn to Federal writing services online to design their resume.
+                    ResumeScripters.com recognizes the significance of the federal resume and how to make them perfect.
+                    We not only offer a comprehensive resume that will grab the attention of recruiters, but we also
+                    adhere to the template requirements needed by several federal departments.
+                    Our professional writers gather all of your data, including work history, academic qualifications,
+                    publications, and much more, when preparing your federal resume. We strive to highlight the best
+                    qualities and accomplishments while remaining consistent with federal government requirements.
+                    The entire procedure is simple, user-friendly, and straightforward. All you have to do is choose
+                    your package based on your budget and needs. Once you've settled on a package, you can place an
+                    order for your preferred document, in this case, a Federal Resume. Upon receiving the order, our
+                    team will send you a questionnaire to gather all the required information.
+                    Our professional team then uses all this information to craft the perfect federal resume by listing
+                    your education and other details as well as using keywords that prove to be helpful in the selection
+                    process. If you use the federal resume writing service of resumescripters.com, your resume is less
+                    likely to be rejected. The final draft is then sent to you on your given email address.
 
                 </p>
             </div>
@@ -44,9 +72,10 @@ Our professional team then uses all this information to craft the perfect federa
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-12 mt-5" *ngFor="let package of packages;">
                 <div class="card" data-aos="fade-down" data-aos-duration="1000">
-                    <div class="card-title pt-2"><span>{{package.title}}</span><span class="float-right mr-3">{{package.price | currency}}</span></div>
-                        <div class="card-body">
-                            <!-- <p class="card-price">$100</p> -->
+                    <div class="card-title pt-2"><span>{{package.title}}</span><span
+                            class="float-right mr-3">{{package.price | currency}}</span></div>
+                    <div class="card-body">
+                        <!-- <p class="card-price">$100</p> -->
                         <h3>{{package.description}}</h3>
 
                         <div class="true" *ngFor="let service of package.services">
@@ -60,7 +89,7 @@ Our professional team then uses all this information to craft the perfect federa
                         </div>
 
                         <div class="w-100 text-center mt-3">
-                            <a href="javascript:;" (click)="buy(package.price,package.id,'package')" class="more-btn">Buy Now</a>
+                            <a href="javascript:;" (click)="buyService(package.id)" class="more-btn">Buy Now</a>
                         </div>
                     </div>
                 </div>
@@ -73,7 +102,7 @@ Our professional team then uses all this information to craft the perfect federa
     <div class="row">
         <div class="col-lg-12">
             <div class="img">
-                <img class="w-100" src="../../../assets/images/ad.PNG" />
+                <img class="w-100 ad_image" src="../../../assets/images/ad.PNG" />
             </div>
         </div>
     </div>
@@ -97,7 +126,7 @@ Our professional team then uses all this information to craft the perfect federa
                             <div>
                                 <h1>{{service.price | currency}}</h1>
                                 <div class="w-100 text-center mt-3">
-                                    <a href="javascript:;" (click)="buy(service.price,service.id,'service')" class="more-btn">Buy Now</a>
+                                    <a href="javascript:;" (click)="buyService(service.id)" class="more-btn">Buy Now</a>
                                 </div>
                             </div>
                         </div>
@@ -125,7 +154,8 @@ Our professional team then uses all this information to craft the perfect federa
                                     </h2>
                                 </div>
                                 <div id="collapse1" class="panel-collapse collapse in">
-                                    <div class="panel-body">To order, you will need to provide your billing and contact information. 
+                                    <div class="panel-body">To order, you will need to provide your billing and contact
+                                        information.
                                         Then, choose the best-suited package for you.
                                     </div>
                                 </div>
@@ -134,14 +164,16 @@ Our professional team then uses all this information to craft the perfect federa
                                 <div class="panel-heading">
                                     <h2 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                                            <span class="fa fa-chevron-right"></span> Why should I get my resume written?
+                                            <span class="fa fa-chevron-right"></span> Why should I get my resume
+                                            written?
                                         </a>
                                     </h2>
                                 </div>
                                 <div id="collapse2" class="panel-collapse collapse">
-                                    <div class="panel-body">Your resume has to appeal to both the resume scanning software 
-                                        (ATS) and the hiring manager, so, working with a professional resume writer 
-                                        ensures your resume will not be passed over by applicant tracking software. 
+                                    <div class="panel-body">Your resume has to appeal to both the resume scanning
+                                        software
+                                        (ATS) and the hiring manager, so, working with a professional resume writer
+                                        ensures your resume will not be passed over by applicant tracking software.
                                         It also makes you more valuable in the eyes of recruiters.
                                     </div>
                                 </div>
@@ -150,14 +182,15 @@ Our professional team then uses all this information to craft the perfect federa
                                 <div class="panel-heading">
                                     <h2 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                                            <span class="fa fa-chevron-right"></span> What kind of industries do you specialize in?
+                                            <span class="fa fa-chevron-right"></span> What kind of industries do you
+                                            specialize in?
                                         </a>
                                     </h2>
                                 </div>
                                 <div id="collapse3" class="panel-collapse collapse">
-                                    <div class="panel-body">Nearly all of them! We have a team of qualified experts with 
-                                        experience across IT, Finance, Business Development, Marketing, Nursing, 
-                                        Healthcare, Education, Computer Engineering, Law Enforcement, Construction, 
+                                    <div class="panel-body">Nearly all of them! We have a team of qualified experts with
+                                        experience across IT, Finance, Business Development, Marketing, Nursing,
+                                        Healthcare, Education, Computer Engineering, Law Enforcement, Construction,
                                         and more from small start-ups to Fortune 500s.
                                     </div>
                                 </div>
@@ -170,13 +203,14 @@ Our professional team then uses all this information to craft the perfect federa
                                 <div class="panel-heading">
                                     <h2 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#services" href="#service1">
-                                            <span class="fa fa-chevron-right"></span> Do you tailor resumes and cover letters to specific jobs?
+                                            <span class="fa fa-chevron-right"></span> Do you tailor resumes and cover
+                                            letters to specific jobs?
                                         </a>
                                     </h2>
                                 </div>
                                 <div id="service1" class="panel-collapse collapse in">
-                                    <div class="panel-body">Yes, we sure do! We consider ourselves to be quite versatile 
-                                        with creating resumes and cover letters that resonate with specific jobs of 
+                                    <div class="panel-body">Yes, we sure do! We consider ourselves to be quite versatile
+                                        with creating resumes and cover letters that resonate with specific jobs of
                                         interest. We can also create general ones upon your request.
                                     </div>
                                 </div>
@@ -185,13 +219,14 @@ Our professional team then uses all this information to craft the perfect federa
                                 <div class="panel-heading">
                                     <h2 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#services" href="#service2">
-                                            <span class="fa fa-chevron-right"></span> What resume templates do you offer?
+                                            <span class="fa fa-chevron-right"></span> What resume templates do you
+                                            offer?
                                         </a>
                                     </h2>
                                 </div>
                                 <div id="service2" class="panel-collapse collapse">
-                                    <div class="panel-body">We offer a variety of templates, which are tested and 
-                                        proven to immediately capture the attention of employers. They range 
+                                    <div class="panel-body">We offer a variety of templates, which are tested and
+                                        proven to immediately capture the attention of employers. They range
                                         from simple, traditional to fancy-style ones with a modern appeal that pass ATS.
                                     </div>
                                 </div>
@@ -205,10 +240,10 @@ Our professional team then uses all this information to craft the perfect federa
                                     </h2>
                                 </div>
                                 <div id="service3" class="panel-collapse collapse">
-                                    <div class="panel-body">Effective resumes and cover letters require extensive 
-                                        research of the specific industry and job position you're applying to. 
-                                        Our turnaround time is usually between 2-4 days, depending on the 
-                                        current state of your resume and your requirements. However, we do 
+                                    <div class="panel-body">Effective resumes and cover letters require extensive
+                                        research of the specific industry and job position you're applying to.
+                                        Our turnaround time is usually between 2-4 days, depending on the
+                                        current state of your resume and your requirements. However, we do
                                         offer same day delivery at an extra cost.
                                     </div>
                                 </div>
@@ -226,8 +261,8 @@ Our professional team then uses all this information to craft the perfect federa
                                     </h2>
                                 </div>
                                 <div id="support1" class="panel-collapse collapse in">
-                                    <div class="panel-body">We certainly do! If you're not sure which of my packages is 
-                                        right for you or if your request is rather complicated, please feel free to 
+                                    <div class="panel-body">We certainly do! If you're not sure which of my packages is
+                                        right for you or if your request is rather complicated, please feel free to
                                         send us a message. We respond in 24 hours or less to all customer inquiries.
                                     </div>
                                 </div>
@@ -236,12 +271,13 @@ Our professional team then uses all this information to craft the perfect federa
                                 <div class="panel-heading">
                                     <h2 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#support" href="#support2">
-                                            <span class="fa fa-chevron-right"></span> Will my personal information be safe?
+                                            <span class="fa fa-chevron-right"></span> Will my personal information be
+                                            safe?
                                         </a>
                                     </h2>
                                 </div>
                                 <div id="support2" class="panel-collapse collapse">
-                                    <div class="panel-body">Yes! We ensure 100% client confidentiality. All information 
+                                    <div class="panel-body">Yes! We ensure 100% client confidentiality. All information
                                         shared between us will remain secure and will never be shared.
                                     </div>
                                 </div>
@@ -255,7 +291,7 @@ Our professional team then uses all this information to craft the perfect federa
                                     </h2>
                                 </div>
                                 <div id="support3" class="panel-collapse collapse">
-                                    <div class="panel-body">We offer two rounds of revisions. If you are not satisfied 
+                                    <div class="panel-body">We offer two rounds of revisions. If you are not satisfied
                                         with the final product, we’ll rewrite your resume free of charge.
                                     </div>
                                 </div>

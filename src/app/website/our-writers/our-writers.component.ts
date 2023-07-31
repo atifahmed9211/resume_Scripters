@@ -1,14 +1,20 @@
 import { Component, Input, OnInit,HostListener } from '@angular/core';
+
 declare var $;
+
 @Component({
   selector: 'app-our-writers',
   templateUrl: './our-writers.component.html',
   styleUrls: ['./our-writers.component.scss']
 })
-export class OurWritersComponent implements OnInit {
 
-  navbarClass = "navbar2";
+export class OurWritersComponent implements OnInit {
+  
   constructor() { }
+  
+  ngOnInit() {
+  }
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
     var oTop;
@@ -38,10 +44,5 @@ export class OurWritersComponent implements OnInit {
         });
       });
     }
-    
-     
   }
-  ngOnInit() {
-  }
-
 }

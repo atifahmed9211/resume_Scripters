@@ -7,6 +7,7 @@ import { CritiqueComponent } from './critique/critique.component';
 import { DataTablesModule } from 'angular-datatables';
 import { ResumeBarrasComponent } from './critique/resume-barras/resume-barras.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { WebsiteModule } from '../../website/website.module';
 
 @NgModule({
   declarations: [CritiquesComponent,CritiqueComponent, ResumeBarrasComponent],
@@ -32,8 +33,9 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
       "showUnits": false,
       "showBackground": true,
       "responsive": true,
-      "lazy": true,
+      "lazy":false,
     }),
+    WebsiteModule
   ]
 })
 export class CritiqueModule { }

@@ -5,12 +5,11 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './writer-detail.component.html',
   styleUrls: ['./writer-detail.component.scss']
 })
+
 export class WriterDetailComponent implements OnInit {
 
-  navbarClass = "navbar2";
   constructor() { }
 
   ngOnInit() {
   }
-
 }

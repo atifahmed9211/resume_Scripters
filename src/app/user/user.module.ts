@@ -26,9 +26,14 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ProfileComponent } from './profile/profile.component';
+import { TransactionComponent } from './transaction/transaction.component';
+import { TransactionDetailComponent } from './transaction/transaction-detail/transaction-detail.component';
+import { DataTablesModule } from 'angular-datatables';
+import { WebsiteModule } from '../website/website.module';
 
 @NgModule({
-  declarations: [UserComponent],
+  declarations: [UserComponent, ProfileComponent, TransactionComponent, TransactionDetailComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -45,6 +50,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     FormsModule,
     TabsModule.forRoot(),
     ReactiveFormsModule,
+    DataTablesModule,
+    WebsiteModule
   ],
   providers: [
     IconSetService,

@@ -109,7 +109,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary mt-3" (click)="addIndustries()">Add Industry</button>
+                        <button type="button" class="btn btn-success mt-3" (click)="addIndustries()">Add Industry</button>
                         <h2 class="text-center mt-3">Add Grammar & Flow Comments</h2>
                         <div formArrayName="grammarFlow">
                             <div *ngFor="let grammar of grammarFlow.controls; let i = index">
@@ -140,7 +140,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary mt-3" (click)="addGrammarFlow()">Add Grammar & Flow Comment</button>
+                        <button type="button" class="btn btn-success mt-3" (click)="addGrammarFlow()">Add Grammar & Flow Comment</button>
                         <h2 class="text-center mt-3">Add Visual Presentation Comments</h2>
                         <div formArrayName="visualPresenatation">
                             <div *ngFor="let visual of visualPresenatation.controls; let i = index">
@@ -171,7 +171,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary mt-3" (click)="addVisualPresenatation()">Add Visual Presentation Comment</button>
+                        <button type="button" class="btn btn-success mt-3" (click)="addVisualPresenatation()">Add Visual Presentation Comment</button>
                         <button type="submit" class="btn btn-success float-right">Submit</button>
                     </form>
                 </div>

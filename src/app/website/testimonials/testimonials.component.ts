@@ -1,14 +1,20 @@
 import { Component, Input, OnInit, HostListener } from '@angular/core';
+
 declare var $;
+
 @Component({
   selector: 'app-testimonials',
   templateUrl: './testimonials.component.html',
   styleUrls: ['./testimonials.component.scss']
 })
+
 export class TestimonialsComponent implements OnInit {
 
-  navbarClass = "navbar2";
   constructor() { }
+  
+  ngOnInit() {
+  }
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
     var oTop;
@@ -28,16 +34,10 @@ export class TestimonialsComponent implements OnInit {
           duration: 1000,
           easing: 'swing',
           step: (countNum) => {
-            console.log(countNum);
             $this.text(Math.floor(countNum)+'+');
           }
         });
       });
     }
-    
-     
   }
-  ngOnInit() {
-  }
-
 }

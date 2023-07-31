@@ -4,24 +4,52 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div> -->
-<div class="modal-body">
+<div *ngIf="!showEmailVerification" class="modal-body">
     <span>Next Step</span><br/><br/>
-    <h4>Hi Atif, where shall we send your critique?</h4>
+    <h4>Hi! where shall we send your critique?</h4>
         <p>We will get you a detailed analysis of your resume within 48 hours.<strong> Now, we 
         just need to know where to send it!</strong></p>
-    <form>
+    <form [formGroup]="critiqueModal">
         <label>Email Address</label>
         <br/>
         <div class="row">
-            <div class="col-sm-8">
-                <input type="email" class="form-control" placeholder="name@example.com"/>
+            <div class="col-sm-8 text-center" style="padding-bottom: 15px;">
+                <input type="email" class="form-control" formControlName="email" (keyup)="resetErrorResponse()"/>
             </div>
-            <div class="col-sm-4">
-                <input id="getEmailButton" type="button" class="btn btn-primary" value="Get my critique" (click)="uploadCV()"/>
+            <div class="col-sm-4 text-center">
+                <input id="getEmailButton" type="submit" class="btn btn-primary" value="Get my critique" (click)="verifyEmail()" [disabled]="critiqueModal.invalid"/>
             </div>
         </div>
+        <span style="color:red" *ngIf="email && email.invalid && email.touched">Enter a valid Email Address.</span>
+        <span style="color:red" *ngIf="!emailexist">Email does not exist</span>
+        <!-- <span *ngIf="email.invalid else elseBlock">
+            invalid email
+        </span> -->
+        <ng-template #elseBlock>
+            valid email
+        </ng-template>
         <br/><br/>
-        <p>By uploading my resume, I agree to the TopResume <a class="link" href="#">Terms of Use</a>  
-            and acknowledge I have read the <a class="link" href="#">Privacy Policy</a></p> 
+        <p>By uploading my resume, I agree to the Resume Scripters <a class="link" routerLink="/terms-and-conditions">Terms of Use</a>  
+            and acknowledge I have read the <a class="link" routerLink="/privacy-policy">Privacy Policy</a></p> 
     </form>    
 </div>
+
+<form *ngIf="showEmailVerification" action="javascript: void(0)" class="otp-form p-5" name="otp-form">
+  
+    <div class="title">
+      <h3>OTP VERIFICATION</h3>
+      <p class="info">An otp has been sent to ********@gmail.com</p>
+      <p class="msg">Please enter OTP to verify</p>
+    </div>
+    <div class="otp-input-fields">
+      <input type="number" class="otp__digit otp__field__1">
+      <input type="number" class="otp__digit otp__field__2">
+      <input type="number" class="otp__digit otp__field__3">
+      <input type="number" class="otp__digit otp__field__4">
+      <input type="number" class="otp__digit otp__field__5">
+      <input type="number" class="otp__digit otp__field__6">
+    </div>
+    <button class="btn btn-block btn-success mt-4" (click)="uploadCV()">Verify</button>
+  </form>
+
+

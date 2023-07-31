@@ -1,82 +1,82 @@
-<nav class="navbar navbar-dark navbar-expand-lg {{navbarClass}}" role="navigation">
-    <div class="container">
-        <a class="navbar-brand" routerLink="/"><img src="{{ logoSrc }}"></a>
-        <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
-            &#9776;
-        </button>
-        <div class="collapse navbar-collapse navigation" id="exCollapsingNavbar">
-            <ul *ngIf="url != 'login'" class="nav navbar-nav navigation-links">
-                <li class="nav-item dropdown dropdown-slide dropdown-hover">
-                  <a  class="nav-link dropdown-toggle navigation-anchor" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Resume Services</a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a routerLink="/Resume-service" class="dropdown-item" >Private Sector</a>
-                    <a class="dropdown-item" routerLink="/federal">Federal</a>
-                  </div>
-                </li>
-                <li class="nav-item dropdown dropdown-slide dropdown-hover">
-                    <a class="nav-link dropdown-toggle navigation-anchor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      About Us
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a routerLink="/about-us" class="dropdown-item" >Our Company</a>
-                      <a class="dropdown-item" routerLink="/writers">Our Writers</a>
-                      <a class="dropdown-item" routerLink="/FAQ's">FAQ</a>
-                      <a class="dropdown-item" routerLink="/contact-us"> Contact Us</a>
-                    </div>
-                </li>
-                <li class="nav-item"><a routerLink="/testimonials" class="nav-link navigation-anchor">Testimonials</a></li>
-                <!-- <li class="nav-item dropdown dropdown-slide dropdown-hover">
-                  <a class="nav-link dropdown-toggle navigation-anchor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Resource
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a routerLink="../career-advice" class="dropdown-item"> Career Advice</a>
-                    
-                  </div>
-                </li> -->
-                <li class="nav-item"><a class="nav-link navigation-anchor" routerLink="/blog"> Blog</a></li>
-            
-            <div class="login-btn" *ngIf="!user">
-                <li class="nav-item dropdown dropdown-slide dropdown-hover">
-                  <a class="nav-link dropdown-toggle navigation-anchor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span>
-                      <i class="bi bi-person"></i>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                      </svg>
-                    </span>
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" (click)="login()">Login</a>
-                    <a class="dropdown-item" (click)="register()">Register</a>
-                  </div>
-                </li>
-                <li >
+<div class="row sticky-top">
+  <div class="col-6 col-sm-4 col-lg-3">
+    <a class="" routerLink="/"><img src="./../../../assets/images/headerlogo.png" style="width:198px;height:38px"></a>
+  </div>
+  <div class="col-6 col-sm-8 col-lg-9">
+    <nav class="navbar navbar-expand-xl navbar-dark {{navbarClass}}" role="navigation">
+      <a class="navbar-brand" href="#" style="visibility:hidden;">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-                </li>
-                </div>
-                <div *ngIf="user">
-                  <li class="nav-item dropdown dropdown-slide dropdown-hover">
-                    <a class="nav-link dropdown-toggle navigation-anchor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <span>
-                        <i class="bi bi-person"></i>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                          <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                        </svg>
-                      </span>
-                    </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item">{{username}}</a>
-                    <a routerLink="/user" class="dropdown-item">Dashboard</a>
-                    <a href="javascript:;" class="dropdown-item" (click)="logout()">Log Out</a>
-                  </div>
-                </div>
-              </ul>
-            <!-- <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
-                <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
-                    
-            </ul> -->
-        </div>
-    </div>
-</nav>
+      <div class="collapse navbar-collapse navigation" id="exCollapsingNavbar">
+        <ul class="navbar-nav navigation-links">
+          <li class="nav-item dropdown dropdown-slide dropdown-hover">
+            <a class="nav-link dropdown-toggle navigation-anchor" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Resume Services</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a routerLink="/Resume-service" class="dropdown-item">Private Sector</a>
+              <a class="dropdown-item" routerLink="/federal">Federal</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link navigation-anchor" routerLink="/resume_samples">
+              <i class="fas fa-file-alt"></i>&nbsp;
+              Resume Samples</a>
+          </li>
+          <li class="nav-item dropdown dropdown-slide dropdown-hover">
+            <a class="nav-link dropdown-toggle navigation-anchor" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              About Us
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a routerLink="/about-us" class="dropdown-item">
+                <i class="mdi mdi-alarm-panel-outline" style="margin-right:0;color: #7b7b86;"></i>Our Company</a>
+              <a class="dropdown-item" routerLink="/writers">
+                <i class="fas fa-edit" style="margin-right:0;color: #7b7b86;"></i>Our Writers</a>
+              <a class="dropdown-item" routerLink="/FAQ's">
+                <i class="fas fa-question-circle" style="margin-right:0;color: #7b7b86;"></i>FAQ</a>
+              <a class="dropdown-item" routerLink="/contact-us">
+                <i class="fas fa-phone-alt" style="margin-right:0;color: #7b7b86;"></i>Contact Us</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/testimonials" class="nav-link navigation-anchor">Testimonials</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link navigation-anchor" routerLink="/blog">
+              <i class="fab fa-blogger"></i>&nbsp;Career Advice</a>
+          </li>
 
+          <div class="login-btn" *ngIf="!user">
+            <li class="nav-item dropdown dropdown-slide dropdown-hover">
+              <a class="nav-link navigation-anchor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                (click)="login()">
+                <span>
+                  <i class="fal fa-user-circle" style="font-size:24px"></i>
+                </span>
+              </a>
+            </li>
+          </div>
+          <div *ngIf="user">
+            <li class="nav-item dropdown dropdown-slide dropdown-hover">
+              <a class="nav-link navigation-anchor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span>
+                  <i class="fal fa-user-circle" style="font-size:24px"></i>
+                </span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="min-width:6rem">
+                <a routerLink="/user/profile" class="dropdown-item">
+                  <i class="fas fa-user" style="margin-right:0;color: #7b7b86;"></i>{{username}}</a>
+                <a routerLink="/user" class="dropdown-item">
+                  <i class="fas fa-tachometer-alt-fast" style="margin-right:0;color: #7b7b86;"></i>Dashboard</a>
+                <a class="dropdown-item" (click)="logout()">
+                  <i class="fas fa-power-off" style="margin-right:0;color: #7b7b86;"></i>Log Out</a>
+              </div>
+          </div>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>

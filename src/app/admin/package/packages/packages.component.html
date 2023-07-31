@@ -1,40 +1,46 @@
 <div class="animated fadeIn">
-    <div class="row">
-        <div class="col-sm-12">
-            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Services</th>
-                    <th>Service Type</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody *ngIf="packages?.length != 0">
-                  <tr *ngFor="let package of packages; let i = index">
-                    <td>{{ i + 1 }}</td>
-                    <td>{{ package.title }}</td>
-                    <td>{{ package.description }}</td>
-                    <td>{{ package.price }}</td>
-                    <td>
-                        <p *ngFor="let service of package.services">{{service.title}}</p>
-                    </td>
-                    <td>{{ package.service_types[0].name }}</td>
-                    <td>
-                        <a routerLink="../edit/{{package.id}}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                        <a href="javascript:;" (click)="deletePackage(package.id)" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody *ngIf="packages?.length == 0">
-                    <tr>
-                        <td colspan="6" class="no-data-available text-center">No data!</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  <div class="row">
+    <!--loading start-->
+    <div *ngIf="!showPackageList" class="content col-sm-12">
+      <app-loading></app-loading>
     </div>
+    <!--loading end-->
+    <div class="col-sm-12" style="height: 832px;">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
+        <thead *ngIf="showPackageList">
+          <tr>
+            <th class="sr_no">#</th>
+            <th>Title</th>
+            <th class="description">Description</th>
+            <th>Price</th>
+            <th class="services">Services</th>
+            <th>Service Type</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="packages?.length != 0 && showPackageList">
+          <tr *ngFor="let package of packages; let i = index">
+            <td class="sr_no">{{ i + 1 }}</td>
+            <td>{{ package.title }}</td>
+            <td class="description">{{ package.description }}</td>
+            <td>{{ package.price }}</td>
+            <td class="services">
+              <p *ngFor="let service of package.services">{{service.title}}</p>
+            </td>
+            <td>{{ package.service_types[0].name }}</td>
+            <td style="padding:5px 0">
+              <a routerLink="../edit/{{package.id}}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+              <a href="javascript:;" (click)="deletePackage(package.id)" class="btn btn-danger"><i
+                  class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="packages?.length == 0 && showPackageList">
+          <tr>
+            <td colspan="6" class="no-data-available text-center">No data!</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminAuthGuard } from './admin-auth.guard';
 import { AdminComponent } from './admin.component';
 import { LoginComponent } from './views/login/login.component';
+import { TransactionComponent } from './transaction/transaction.component';
+import { TransactionDetailComponent } from './transaction/transaction-detail/transaction-detail.component';
 
 const routes: Routes = [
   {
@@ -28,7 +30,7 @@ const routes: Routes = [
       },
       {
         path: 'orders',
-        loadChildren: () => import('./order/order.module').then(m => m.OrderModule)
+        loadChildren: () => import('./order/order.module').then(m => m.OrderModule),
       },
       {
         path: 'blog',
@@ -45,7 +47,22 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
-      }
+      },
+      {
+        path: 'samples',
+        loadChildren: () => import('./resumes-samples/resumes-samples.module').then(m => m.ResumesSamplesModule)
+      },
+      {
+        path: 'transaction',
+        component:TransactionComponent,
+      },
+      {
+        path:"transaction/order/:id",
+        component:TransactionDetailComponent,
+        data:{
+          title:"Transaction Detail"
+        },
+      },
     ]
   }
 ];

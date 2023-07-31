@@ -3,23 +3,16 @@ import { FormArray, FormBuilder, Validator, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { UserService } from '../../../user.service';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-resume-data',
   templateUrl: './resume-data.component.html',
   styleUrls: ['./resume-data.component.scss']
 })
+
 export class ResumeDataComponent implements OnInit {
 
-  orderId;
-
-  constructor(
-    private fb: FormBuilder,
-    private location: Location,
-    private us: UserService,
-    private route: ActivatedRoute
-  ) {
-  }
   public cvForm = this.fb.group({
     firstName: ['', Validators.required],
     middleName: [''],
@@ -39,6 +32,25 @@ export class ResumeDataComponent implements OnInit {
     memberships: this.fb.array([]),
     experience: this.fb.array([]),
   })
+
+  orderId;
+  //to enable or disable plus button
+  lastIndexLanguageValue;
+  lastIndexPositionValue;
+  lastIndexAcademicValue;
+  lastIndexCertificateValue;
+  lastIndexMembershipValue;
+  lastIndexExperienceValue;
+
+  constructor(
+    private fb: FormBuilder,
+    private location: Location,
+    private us: UserService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+  }
+
   ngOnInit(): void {
     this.addLanguage();
     this.addPositions();
@@ -48,6 +60,7 @@ export class ResumeDataComponent implements OnInit {
     this.addExperience();
     this.orderId = this.route.snapshot.paramMap.get('id');
   }
+  
   addLanguage() {
     this.lastIndexLanguageValue = false;
     const language = this.fb.group({
@@ -57,9 +70,11 @@ export class ResumeDataComponent implements OnInit {
 
     this.languages.push(language);
   }
+
   RemoveLanguage() {
     this.languages.removeAt(this.languages.length - 1);
   }
+
   addPositions() {
     this.lastIndexPositionValue = false;
     const position = this.fb.group({
@@ -72,9 +87,11 @@ export class ResumeDataComponent implements OnInit {
 
     this.positions.push(position);
   }
+
   RemovePositions() {
     this.positions.removeAt(this.positions.length - 1);
   }
+
   addDegrees() {
     this.lastIndexAcademicValue = false;
     const degree = this.fb.group({
@@ -88,9 +105,11 @@ export class ResumeDataComponent implements OnInit {
 
     this.academic_degrees.push(degree);
   }
+
   RemoveDegrees() {
     this.academic_degrees.removeAt(this.academic_degrees.length - 1);
   }
+
   addCertificate() {
     this.lastIndexCertificateValue = false;
     const certificate = this.fb.group({
@@ -104,9 +123,11 @@ export class ResumeDataComponent implements OnInit {
 
     this.certifications.push(certificate);
   }
+
   RemoveCertificate() {
     this.certifications.removeAt(this.certifications.length - 1);
   }
+
   addMembership() {
     this.lastIndexMembershipValue = false;
     const membership = this.fb.group({
@@ -120,9 +141,11 @@ export class ResumeDataComponent implements OnInit {
 
     this.memberships.push(membership);
   }
+
   RemoveMembership() {
     this.memberships.removeAt(this.memberships.length - 1);
   }
+
   addExperience() {
     this.lastIndexExperienceValue = false;
     const experience = this.fb.group({
@@ -138,48 +161,57 @@ export class ResumeDataComponent implements OnInit {
 
     this.experience.push(experience);
   }
+
   RemoveExperience() {
     this.experience.removeAt(this.experience.length);
   }
+
   get languages() {
     return this.cvForm.controls["languages"] as FormArray
-    console.log(this.cvForm.controls["languages"]);
   }
+
   get positions() {
     return this.cvForm.controls["positions"] as FormArray
   }
+
   get academic_degrees() {
     return this.cvForm.controls["academic_degrees"] as FormArray
   }
+
   get certifications() {
     return this.cvForm.controls["certifications"] as FormArray
   }
+
   get memberships() {
     return this.cvForm.controls["memberships"] as FormArray
   }
+
   get experience() {
     return this.cvForm.controls["experience"] as FormArray
   }
+
   submitCVForm() {
-    console.log(this.cvForm.value)
     this.us.chooseCV = false;
     let order = {
       id: this.orderId,
       resume_details: this.cvForm.value
     };
-    this.us.submitResumeData(order).subscribe((res) => {
-      console.log(res);
-    })
+    /* we cannot initialize usertoken globally becuase in case we change user 
+    token from browser(Apllication) then our method will not get new token and 
+    it always get global token,, */ 
+    let usertoken = localStorage.getItem("userToken");
+    //in case we delete token from browser(Application)
+    if (usertoken != null) {
+      this.us.submitResumeData(order).subscribe((res) => {
+        console.log();
+      })
+    }
+    else {
+      this.router.navigateByUrl('login');
+    }
     this.location.back();
   }
 
-  //to enable or disable plus button
-  lastIndexLanguageValue;
-  lastIndexPositionValue;
-  lastIndexAcademicValue;
-  lastIndexCertificateValue;
-  lastIndexMembershipValue;
-  lastIndexExperienceValue;
   getLanguageName(i) {
     if (this.languages.at(i).value.language_name) {
       this.lastIndexLanguageValue = true;
@@ -188,6 +220,7 @@ export class ResumeDataComponent implements OnInit {
       this.lastIndexLanguageValue = false;
     }
   }
+
   getPositionValue(i) {
     if (this.positions.at(i).value.country_targeted || this.positions.at(i).value.position_title || this.positions.at(i).value.description || this.positions.at(i).value.position_link || this.positions.at(i).value.salary) {
       this.lastIndexPositionValue = true;
@@ -196,6 +229,7 @@ export class ResumeDataComponent implements OnInit {
       this.lastIndexPositionValue = false;
     }
   }
+
   getAcademicValue(i) {
     if (this.academic_degrees.at(i).value.name_of_institute || this.academic_degrees.at(i).value.name_of_degree) {
       this.lastIndexAcademicValue = true;
@@ -204,6 +238,7 @@ export class ResumeDataComponent implements OnInit {
       this.lastIndexAcademicValue = false;
     }
   }
+
   getCertificateValue(i) {
     if (this.certifications.at(i).value.name_of_institute || this.certifications.at(i).value.name_of_course) {
       this.lastIndexCertificateValue = true;
@@ -212,6 +247,7 @@ export class ResumeDataComponent implements OnInit {
       this.lastIndexCertificateValue = false;
     }
   }
+
   getMembershipValue(i) {
     if (this.memberships.at(i).value.name_of_institute || this.memberships.at(i).value.explanation) {
       this.lastIndexMembershipValue = true;
@@ -220,6 +256,7 @@ export class ResumeDataComponent implements OnInit {
       this.lastIndexMembershipValue = false;
     }
   }
+
   getExperienceValue(i) {
     if (this.experience.at(i).value.name_of_institute || this.experience.at(i).value.position || this.experience.at(i).value.duties || this.experience.at(i).value.achievements) {
       this.lastIndexExperienceValue = true;
@@ -228,7 +265,6 @@ export class ResumeDataComponent implements OnInit {
       this.lastIndexExperienceValue = false;
     }
   }
+  
   //to enable or disable negative button
-
-
 }

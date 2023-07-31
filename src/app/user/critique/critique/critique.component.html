@@ -1,36 +1,359 @@
-<div class="animated fadeIn">
-    <section data-aos="fade-down" data-aos-duration="1000" class="rez-score-box">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="rez-score-content-box">
-                        <div class="rez-score-image">
-                            <div class="rez-score-analysis">
-                                <p> {{users[0].name}} </p>
+<!--loading start-->
+<div *ngIf="!showCritique" class="content col-sm-12">
+    <app-loading></app-loading>
+</div>
+<!--loading end-->
+<section *ngIf="showCritique" class="white-block critique-written-section">
+    <div class="row" style="margin:0">
+        <div class="col-lg-8">
+            <div class="container">
+                <h1>Your CV Critique</h1>
+                <p>
+                    <span>
+                        <strong>Admin</strong> &lt;resumescripters.gmail.com&gt;
+                    </span>
+                    <span class="float-right mr-3 date">
+                        October 5, 2022 <svg>
+                            <use xlink:href="#icon-star"></use>
+                        </svg>
+                    </span>
+                    <span>
+                        to {{users[0].name}}
+                    </span>
+                    <strong>
+                        <br /><br />
+                        Hi {{users[0].name}},</strong>
+                </p>
+                <p class="text-justify">This free CV critique is meant to give you an honest,
+                    straightforward
+                    assessment and some suggestions to help in your job search. I'm able to offer insight into how
+                    you
+                    compare to other job seekers competing for the same positions because I personally review
+                    hundreds
+                    of CVs every month.
+                </p>
+                <section data-aos="fade-up" data-aos-duration="1000">
+                    <div class="pointer-box-visual">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="pointer-icon">
+                                            <img alt="sectionTitle"
+                                                src="../../../../assets/critique_images/rez-pointer-2.svg">
+                                        </div>
+                                    </div>
+                                    <div class="col-10">
+                                        <h3>Visual Presentation and Organisation</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-justify">Sometimes looks do matter. In the case of your CV, it's
+                                    especially
+                                    true.
+                                    I found your design
+                                    to
+                                    be visually uneven. I'd like to see your document more polished, something more
+                                    fitting
+                                    of
+                                    your
+                                    experience level. Remember that your CV is your marketing tool. It's the first
+                                    glimpse a
+                                    potential employer has of you.</p>
+                                <p class="text-justify">However, your use of bullets is splendid! They help the employer
+                                    zero in
+                                    on important pieces
+                                    of
+                                    details, and also break up long sections of text. At the same time, you shouldn't
+                                    have
+                                    too
+                                    many
+                                    bullets that it makes your CV difficult to read!</p>
+                                <p class="text-justify">You do not need a References section or even a 'References
+                                    Available'
+                                    note. Employers
+                                    typically
+                                    assume that you’ll have this on hand during interviews.</p>
+                                <ul>
+                                    <li *ngFor="let item of critique.critique_presentation_comments">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-x-octagon text-danger" viewBox="0 0 16 16">
+                                            <path
+                                                d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z" />
+                                            <path
+                                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                        </svg>
+                                        <h5 style="display:inline">{{item.title}}</h5>
+                                        <p style="padding-left: 20px;">
+                                            <span>
+                                                <span>
+                                                    {{item.description}}
+                                                </span>
+                                                <span class="float-right mr-3">
+                                                    {{item.status}}
+                                                </span>
+                                            </span>
+                                        </p>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="rez-score-content">
-                            <h2 _ngcontent-resumeble-app-c17="">Your Resume Result</h2>
-                            <p _ngcontent-resumeble-app-c17=""> Your resume will most likely get screened by Applicant Tracking 
-                                System before it even gets to recruiter. Our analysis below will tell you: </p>
-                                <ul _ngcontent-resumeble-app-c17="">
-                                    <li _ngcontent-resumeble-app-c17=""><i _ngcontent-resumeble-app-c17="" class="icon-checked-light"></i> 
-                                        How ATS reads your resume </li>
-                                    <li _ngcontent-resumeble-app-c17=""><i _ngcontent-resumeble-app-c17="" class="icon-checked-light"></i> 
-                                        Recommendations and possible fixes </li>
-                                    <li _ngcontent-resumeble-app-c17=""><i _ngcontent-resumeble-app-c17="" class="icon-checked-light"></i> 
-                                         What information does the recruiter get from it </li>
-                                </ul>
+                    </div>
+                </section>
+                <h2>CV Writing</h2>
+                <p class="text-justify">Your career summary is not as strong as it should be. This is a key piece to
+                    compel the hiring
+                    manager to keep reading. Flesh out your career summary to define you as a professional and cover
+                    those areas most relevant to the job that you seek.</p>
+                <p class="text-justify">Based on how the CV is phrased, you could be perceived as a "doer," as
+                    opposed
+                    to an "achiever."
+                    A few too many of your job descriptions are task-based rather than results-based. This means
+                    that they tell you what you did, instead of what you achieved. This is a common misstep for
+                    non-professional CV writers. To be effective and create excitement a good CV aids the hiring
+                    executive envisage you delivering similar achievements at his or her company. Here are some
+                    examples of task-based sentences in your CV: </p>
+                <ul>
+                    <li>“Manage human resources (HR) to ensure the success of recruitment, retention policies and
+                        processes, diversity and inclusion, health and safety and organisational design and
+                        development”</li>
+                    <li>“Oversee the operations of the organisation and making any necessary changes to meet
+                        business goals and projections PROFESSIONAL EXPERIENCE”</li>
+                </ul><br> Employers want to learn about your previous achievements and specifically how you've
+                helped make an impact. More importantly, they want to know how you are going to make a significant
+                difference at their organisation.<p></p>
+                <p class="text-justify">In reading your CV, I did not find the kind of active language that would
+                    bring
+                    your work to
+                    life. Instead, <strong>I saw passive words and non-action verbs.<br><br></strong> Phrases like
+                    <strong>“Managed”</strong> and <strong>“Assisted in”</strong> are monotonous, overused, and add
+                    little value to your CV. Strong action verbs, used with engaging language to outline outstanding
+                    achievements, are essential parts of a soundly-built CV. <br><br>Now, let's see how to put this
+                    into practice. Here's a real life sample taken from a former client's CV. By changing the
+                    language, we helped to enhance the perception of the job-seeker.<br>
+                </p>
+                <ul>
+                    <li><b>Passive language / Doing:</b> “Negotiated contracts with vendors”</li>
+                    <li><b>Action language / Achieving:</b> “Slashed payroll/benefits administration costs 30% by
+                        negotiating pricing and fees, while ensuring the continuation and enhancements of services.”
+                    </li>
+                </ul><br>
+                <p class="text-justify">An adjustment like this makes a big improvement.<br><br> A regular review of
+                    every word
+                    and sentence in your CV is an important thing to do, especially if you're the only one looking
+                    at
+                    it. Hiring managers are looking for an excuse to eliminate you as a candidate. You may not be
+                    able
+                    to see awkward phrases and grammatical errors if you've already spent too much time with your
+                    own
+                    CV.</p>
+
+                <h2>Digital Readiness</h2>
+                <p class="text-justify">Your CV is saved in PDF format. 19% of CVs look like yours. While this may
+                    make
+                    viewing
+                    consistent for recruiters, <strong>some older</strong> <a class="hover-for-info">Applicant
+                        Tracking Systems (ATS)<span class="hover-info-balloon"><strong>What is an
+                                ATS?</strong><br>An applicant tracking system (ATS) is a program used by employers
+                            to screen applicants based on the contents of their CV before passing viable candidates
+                            on to the hiring manager.</span></a> <strong>might not be able to correctly parse
+                        this</strong>. You might want to consider converting your document to a Microsoft Word file.
+                </p>
+
+                <h2>Your Employment and Education History</h2>
+                <p class="text-justify">We recommend limiting your work history to the past 10 to 15 years as most
+                    employers are
+                    concerned with your most current, relevant work experience. Not sure where to draw the line? Our
+                    writers can help you decide what to cut and what to include in order to craft a solid CV that
+                    accurately speaks to your experience and potential as a candidate.</p>
+                <p class="text-justify">Consider removing dates from your education section. For someone as advanced
+                    in
+                    their career as
+                    you, your experience is what employers find most useful when forming an opinion of you as a
+                    candidate, and should be the focal point of your CV. Removing education dates can help you steer
+                    clear of unconscious bias and ageism without detracting from your accomplishments.</p>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="group-section rewriting-packages-cta" style="position: sticky;top: 80px;">
+                <div class="row" style="margin:0">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    Your Next Step
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <p>Team up with a Resume Scripters writer and <em>land more interviews</em>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <p>
+                                    <strong>
+                                        Professional Growth
+                                    </strong>
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    A professionally written and keyword-optimised CV that sets you apart.
+                                </p>
+
+                                <div>
+                                    <a class="btn btn-block" href="/purchase/rG9ba0F?r=critRSp1">
+                                        Learn more
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <p>
+                                    <strong>
+                                        Career Evolution
+                                    </strong>
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    An expertly written CV and cover letter complete with our 60-day interview
+                                    guarantee.
+                                </p>
+                                <div>
+                                    <a class="btn btn-block" href="/purchase/XQAE1Oj?r=critRSp1">
+                                        Learn more
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <p>
+                                    <strong>
+                                        Executive Priority
+                                    </strong>
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    A CV, cover letter, and LinkedIn profile written by one of our top writers. All with
+                                    our
+                                    60-day interview guarantee.
+                                </p>
+                                <div>
+                                    <a class="btn btn-block" href="/purchase/IA4qfqq?r=critRSp1">
+                                        Learn more
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-12" *ngFor="let pkg of packages; let i = index;">
+                        <div class="card">
+                            <div class="card-header">
+                                <p>
+                                    <strong>
+                                        <span>{{pkg.title}}</span><span class="float-right mr-3">{{pkg.price |
+                                            currency}}</span>
+                                    </strong>
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                {{pkg.description}}
+                                <div class="true" *ngFor="let service of pkg.services; let j = index;">
+                                    <br />
+                                    <p>
+                                        <strong>
+                                            <span>
+                                                {{service.title}}
+                                            </span>
+                                            <span class="float-right mr-3">
+                                                <i class="fa fa-check" aria-hidden="true"></i>
+                                            </span>
+                                        </strong>
+                                    </p>
+                                </div>
+                                <div>
+                                    <a routerLink="#" class="btn btn-block" (click)="BuyNow(pkg.id)">Buy Now</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <section data-aos="fade-down" data-aos-duration="1000" class="rez-score-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h2>CV Scan Test Results</h2>
                 </div>
             </div>
+            <div class="row rez-score-content-box">
+                <div class="col-md-6">
+                    <div class="rez-score-image">
+                        <p class="rez-score-analysis"> {{users[0].name}} </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="rez-score-content">
+                        <p> Your resume will most likely get screened by Applicant
+                            Tracking
+                            System before it even gets to recruiter. Our analysis below will tell you: </p>
+                        <ul>
+                            <li><i class="icon-checked-light"></i>
+                                How ATS reads your resume </li>
+                            <li><i class="icon-checked-light"></i>
+                                Recommendations and possible fixes </li>
+                            <li><i class="icon-checked-light"></i>
+                                What information does the recruiter get from it </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin:0">
+                <div class="col-lg-12">
+                    <p class="text-justify">
+                        <strong>93% of all Hiring Managers use CV scanning software called
+
+                            <a class="hover-for-info">
+                                applicant tracking systems (ATS)
+                                <span class="hover-info-balloon">
+                                    <strong>What is an ATS?</strong><br>
+                                    An applicant tracking system (ATS) is a program used by employers to screen
+                                    applicants based on the contents of their CV before passing viable candidates on to
+                                    the hiring manager.
+                                </span>
+                            </a>
+
+                            to filter candidates from the application pool.</strong> To illustrate how you stand up to
+                        the automation, I passed your CV through the very same software that Hiring Managers use to
+                        filter the real talent from the hundreds, <em>sometimes thousands</em>, of candidates that apply
+                        for a single open position.
+                    </p>
+
+                    <p class="continue-below">
+                        <em>Continue below to view how applicant tracking systems present you...</em>
+                    </p>
+                </div>
+            </div>
+        </div>
     </section>
-    <div class="container analysis-container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="row rez-score-custom-row">
+
+    <div class="animated fadeIn">
+        <div class="container analysis-container">
+            <div class="row rez-score-custom-row">
+                <div class="col-sm-6">
                     <div class="rez-score-content-bottom">
                         <ul>
                             <li>
@@ -51,7 +374,8 @@
                                         <span>{{critique.impact}}</span>
                                         <span>/</span>
                                         <span>100</span>
-                                    </h2><p> {{critique.impact_description}} </p>
+                                    </h2>
+                                    <p> {{critique.impact_description}} </p>
                                 </div>
                             </li>
                             <li>
@@ -61,138 +385,249 @@
                                         <span>{{critique.depth}}</span>
                                         <span>/</span>
                                         <span>100</span>
-                                    </h2><p> {{critique.depth_description}} </p>
+                                    </h2>
+                                    <p> {{critique.depth_description}} </p>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                <div class="bar-chart-outer">
-                    <div class="css_bar_graph">
-                        <ul class="y_axis">
-                            <li>
-                                <span>100</span>
-                            </li>
-                            <li>
-                                <span>80</span>
-                            </li>
-                            <li>
-                                <span>60</span>
-                            </li>
-                            <li>
-                                <span>40</span>
-                            </li>
-                            <li>
-                                <span>20</span>
-                            </li>
-                            <li class="bottom">
-                                <span>00</span>
-                            </li>
-                        </ul>
-                        <div class="graph" data-aos="fade-up" data-aos-duration="1000">
-                            <div class="bar-graph-area">
-                                <app-resume-barras [List]="Brevity_Impact_Depth"></app-resume-barras>
+                </div>
+                <div class="col-sm-6">
+                    <div class="bar-chart-outer">
+                        <div class="css_bar_graph">
+                            <ul class="y_axis">
+                                <li>
+                                    <span>100</span>
+                                </li>
+                                <li>
+                                    <span>80</span>
+                                </li>
+                                <li>
+                                    <span>60</span>
+                                </li>
+                                <li>
+                                    <span>40</span>
+                                </li>
+                                <li>
+                                    <span>20</span>
+                                </li>
+                                <li class="bottom">
+                                    <span>00</span>
+                                </li>
+                            </ul>
+                            <div class="graph" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="bar-graph-area">
+                                    <app-resume-barras [List]="Brevity_Impact_Depth"></app-resume-barras>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
-    </div>
-    <section class="file-type-box skills">
-        <div class="container analysis-container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <h2>Industries that suit you best</h2>
-                    <div class="chart-flex-box">
-                        <div class="chart-holder">
-                            <div class="chart-detail-box col-6">
-                                <div class="chart-content" *ngFor="let item of critique.critique_industries let i=index">
-                                    <div class="chart-label-list">
-                                        <span class="chart-label" [ngStyle]="{backgroundColor:getCircleColor(i)}">{{item.value}} %</span> 
-                                        {{item.name}}
+        <section class="file-type-box skills">
+            <div class="container analysis-container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <h2>Industries that suit you best</h2>
+                    </div>
+                </div>
+                <div class="chart-flex-box">
+                    <div class="chart-holder">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="chart-detail-box">
+                                    <div class="chart-content"
+                                        *ngFor="let item of critique.critique_industries let i=index">
+                                        <div class="chart-label-list">
+                                            <span class="chart-label"
+                                                [ngStyle]="{backgroundColor:getCircleColor(i)}">{{item.value}} %</span>
+                                            {{item.name}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="circle-chart col-6">
-                                <div data-aos="zoom-out" data-aos-duration="1000" *ngFor="let item of critique.critique_industries let i=index" class="circle-outer">
-                                    <circle-progress [percent]="item.value" [backgroundPadding]="i*20" [outerStrokeColor]="getCircleColor(i)" >
-                                    </circle-progress>
+                            <div class="col-md-6">
+                                <div class="circle-chart">
+                                    <div data-aos="zoom-out" data-aos-duration="1000"
+                                        *ngFor="let item of critique.critique_industries let i=index"
+                                        class="circle-outer">
+                                        <circle-progress [percent]="item.value" [backgroundPadding]="i*20"
+                                            [outerStrokeColor]="getCircleColor(i)">
+                                        </circle-progress>
+                                        <br />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <p class="item-desc-text"> If your goal industries differ from the ones mentioned above, you should consider re-wording your document 
-                            <br>and using appropriate keywords that reflect your industry choice. 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p class="item-desc-text"> If your goal industries differ from the ones mentioned above, you
+                            should consider re-wording your document
+                            <br>and using appropriate keywords that reflect your industry choice.
                         </p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="contact-details-overview">
-        <div class="container">
-            <div class="row">
-                <div data-aos="fade-up" data-aos-duration="1000" class="col-md-12">
-                    <h2>Contact Details Overview</h2>
-                    <ul class="contact-list-items">
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-envelope-check" viewBox="0 0 16 16">
-                                <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2H2Zm3.708 6.208L1 11.105V5.383l4.708 2.825ZM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2-7-4.2Z"/>
-                                <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z"/>
-                              </svg>
-                            {{critique.mail}}
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
-                                <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
-                              </svg>
-                              {{critique.phone}}
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
-                                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
-                              </svg>
-                              {{critique.linkedin}} 
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
-                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                              </svg>
-                              {{critique.address}} 
-                        </li>
-                    </ul>
-                    <div class="contact-detail-boxes">
-                        <div class="box">
-                            <h5>Please add your LinkedIn profile URL:</h5>
-                            <p> Adding a LinkedIn profile URL is important because as many as 85% recruiters see this as an 
-                                advantage. It's a good medium to display your personality, values and interests without overloading your resume. 
-                            </p>
+        </section>
+        <section class="ats-intro-section">
+            <div class="container">
+                <div class="mx-auto col_full" data-aos="fade-up" data-aos-duration="1000">
+                    <h2 style="color:#ffffff" class="py-3">The raw data, <em>pulled directly from your CV.</em></h2>
+                </div>
+            </div>
+        </section>
+        <section class="ats-parsing-section">
+            <div class="full_col" data-aos="fade-up" data-aos-duration="1000">
+                <div class="group-section">
+                    <div class="container">
+                        <br />
+                        <div class="row">
+                            <div class="col-4">
+                                <strong>Full Name</strong>
+                            </div>
+                            <div class="col-4">
+                                <strong>Most Recent Employer</strong>
+                            </div>
+                            <div class="col-4">
+                                <strong>Most Recent Professional Position</strong>
+                            </div>
+                        </div>
+                        <hr noshade="" />
+                        <div class="row">
+                            <div class="col-4">
+                                {{users[0].name}}
+                            </div>
+                            <div class="col-4">
+                                Imperium Global Villages
+                            </div>
+                            <div class="col-4">
+                                Chief Operating Officer
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-4">
+                                <strong>Contact Info</strong>
+                            </div>
+                            <div class="col-4">
+                                <strong>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                                        class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                        <path
+                                            d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+                                        <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                    </svg>
+                                    Location
+                                </strong>
+                            </div>
+                            <div class="col-4">
+                                <strong>Experience</strong>
+                            </div>
+                        </div>
+                        <hr noshade="" />
+                        <div class="row">
+                            <div class="col-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                                    class="bi bi-telephone" viewBox="0 0 16 16">
+                                    <path
+                                        d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                                </svg>&nbsp;{{critique.phone}}
+                                <br>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                                    class="bi bi-envelope-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2H2Zm3.708 6.208L1 11.105V5.383l4.708 2.825ZM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2-7-4.2Z" />
+                                    <path
+                                        d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z" />
+                                </svg>&nbsp;
+                                {{critique.mail}}
+                            </div>
+                            <div class="col-4">
+                                {{critique.address}}
+                            </div>
+                            <div class="col-4">
+                                24 total years
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Most Recent Education</strong>
+                            </div>
+                            <div class="col-6">
+                                <strong>Management Score</strong>
+                            </div>
+                        </div>
+                        <hr noshade="" />
+                        <div class="row">
+                            <div class="col-6">
+                                Oxford University England
+                            </div>
+                            <div class="col-6">
+                                100/100
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-12">
+                                <label>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                                        class="bi bi-linkedin" viewBox="0 0 16 16">
+                                        <path
+                                            d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" />
+                                    </svg>
+                                    Linkdin
+                                </label>
+
+                                <div>
+                                    {{critique.linkedin}}
+                                    <div>
+                                        <div class="box">
+                                            <h5>Please add your LinkedIn profile URL:</h5>
+                                            <p> Adding a LinkedIn profile URL is important because as many as 85%
+                                                recruiters
+                                                see
+                                                this as
+                                                an
+                                                advantage. It's a good medium to display your personality, values
+                                                and
+                                                interests
+                                                without
+                                                overloading your resume.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="rez-graphical-interface">
-        <div data-aos="fade-up" data-aos-duration="1000" class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <h2>File Size &amp; Content</h2>
+        </section>
+
+        <section class="rez-graphical-interface">
+            <div data-aos="fade-up" data-aos-duration="1000" class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <h2>File Size &amp; Content</h2>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div data-aos="fade-left" data-aos-duration="1000" class="col-md-3">
-                    <div>
+                <div class="row">
+                    <div data-aos="fade-up" data-aos-duration="1000" class="col-md-3">
+                        <div>
                             <div class="rez-page-length">
                                 <div class="rez-page-length-heading">
                                     <div class="file-img">
-                                        <img alt="page size" src="../../../../assets/critique_images/page-length-2.png" class="page-size-show">
+                                        <img alt="page size" src="../../../../assets/critique_images/page-length-2.png"
+                                            class="page-size-show">
                                     </div>
                                     <span>
                                         <span>
                                             <span class="">Moderately Long: </span>
-                                        </span> {{critique.pages}} pages 
+                                        </span> {{critique.pages}} pages
                                     </span>
                                 </div>
                                 <div class="rez-page-length-text">
@@ -201,16 +636,18 @@
                                     </p>
                                 </div>
                             </div>
+                        </div>
                     </div>
-                </div>
-                <div data-aos="zoom-out" data-aos-duration="1000" class="col-md-6">
-                    <div>
+                    <div data-aos="zoom-out" data-aos-duration="1000" class="col-md-6">
+                        <div>
                             <div class="rez-word-count">
                                 <div class="word-graph-outer">
                                     <div class="word-graph">
-                                        <img class="g-mask" src="../../../../assets/critique_images/word-count-graph-mask.svg">
-                                        <img class="g-ing" src="../../../../assets/critique_images/word-count-graph.svg">
-                                        <div class="word-graph-marker" [ngStyle]="{left:getPercentage()}">
+                                        <img class="g-mask"
+                                            src="../../../../assets/critique_images/word-count-graph-mask.svg">
+                                        <img class="g-ing"
+                                            src="../../../../assets/critique_images/word-count-graph.svg">
+                                        <div class="word-graph-marker">
                                         </div>
                                     </div>
                                     <ul class="word-graph-ruler">
@@ -229,7 +666,10 @@
                                     <span>
                                         <span>
                                             <span class="">Word Count: </span>
-                                        </span> {{critique.word_count}}
+                                        </span>
+                                        <span class="counterUp">
+                                            0+
+                                        </span>
                                     </span>
                                 </div>
                                 <div class="rez-word-count-text">
@@ -238,22 +678,25 @@
                                     </p>
                                 </div>
                             </div>
+                        </div>
                     </div>
-                </div>
-                <div data-aos="fade-right" data-aos-duration="1000" class="col-md-3">
-                    <div>
+                    <div data-aos="fade-up" data-aos-duration="1000" class="col-md-3">
+                        <div>
                             <div class="rez-page-size">
                                 <div class="gauge">
                                     <div class="gauge-semi-circle">
                                     </div>
-                                    <div class="needle" [ngStyle]="{transform:'rotate('+getTransformRotation()+')'}">
+                                    <div class="needle">
                                     </div>
                                 </div>
                                 <div class="rez-page-size-heading">
                                     <span class="text-uppercase">
                                         <span class="text-capitalize">
                                             <span class="">File Size: </span>
-                                        </span> {{critique.file_size}}  KB
+                                            <span class="counterUpp">
+                                                0+
+                                            </span>KB
+                                        </span>
                                     </span>
                                 </div>
                                 <div class="rez-page-size-text">
@@ -262,33 +705,43 @@
                                     </p>
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <div class="rez-analyst-comments">
-        <div class="text-center addmarginB30">
-            <h2 class="text-color-black">Analyst's Comments</h2>
-        </div>
+        </section>
+        <div>
+            <div class="text-center addmarginB30">
+                <h2 class="text-color-black">Analyst's Comments</h2>
+            </div>
             <section data-aos="fade-up" data-aos-duration="1000">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="pointer-box">
+                            <div class="pointer-box reference_bottom">
                                 <div class="pointer-icon">
                                     <img alt="sectionTitle" src="../../../../assets/critique_images/rez-pointer-1.svg">
                                 </div>
                                 <h4>Grammar &amp; Flow</h4>
                                 <ul>
                                     <li *ngFor="let item of critique.critique_grammar_comments">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-octagon text-danger" viewBox="0 0 16 16">
-                                            <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z"/>
-                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                                          </svg>
-                                        <h5 style="display:inline">{{item.title}}</h5> 
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-x-octagon text-danger" viewBox="0 0 16 16">
+                                            <path
+                                                d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z" />
+                                            <path
+                                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                        </svg>
+                                        <h5 style="display:inline">{{item.title}}</h5>
                                         <p style="padding-left: 20px;">
-                                            {{item.description}} ---{{item.status}}
+                                            <span>
+                                                <span>
+                                                    {{item.description}}
+                                                </span>
+                                                <span class="float-right mr-3">
+                                                    {{item.status}}
+                                                </span>
+                                            </span>
                                         </p>
                                     </li>
                                 </ul>
@@ -297,31 +750,166 @@
                     </div>
                 </div>
             </section>
-            <br/><br/><br/>
-            <section data-aos="fade-up" data-aos-duration="1000">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="pointer-box">
-                                <div class="pointer-icon">
-                                    <img alt="sectionTitle" src="../../../../assets/critique_images/rez-pointer-2.svg">
-                                </div><h4>Visual Presentation</h4>
-                                <ul>
-                                    <li *ngFor="let item of critique.critique_presentation_comments">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-octagon text-danger" viewBox="0 0 16 16">
-                                            <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z"/>
-                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                                          </svg>
-                                        <h5 style="display:inline">{{item.title}}</h5> 
-                                        <p style="padding-left: 20px;">
-                                            {{item.description}} ---{{item.status}}
-                                        </p> 
-                                    </li>
-                                </ul>
-                        </div>
-                    </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section *ngIf="showCritique" class="gray5-block skills-section before-chevron-section">
+    <div class="container">
+        <div class="col full_col">
+            <h2>What the Tracking Systems think of you as an Applicant</h2>
+            <p class="text-justify">
+                Hiring Managers use
+
+                <a class="hover-for-info">
+                    applicant tracking systems (ATS)
+                    <span class="hover-info-balloon">
+                        <strong>What is an ATS?</strong><br>
+                        An applicant tracking system (ATS) is a program used by employers to screen applicants based
+                        on the contents of their CV before passing viable candidates on to the hiring manager.
+                    </span>
+                </a>
+
+                to automatically designate a <strong>Best Fit</strong> based on your experience level and the kinds
+                of keywords spread throughout your CV. The Applicant Tracking System (ATS) will also assign a
+                weighted score to <strong>Key Skills &amp; Competencies</strong> from your CV to paint a picture of
+                who you are as a potential employee.
+            </p>
+            <p>
+                <span class="hide_on_desktop">I passed your CV through the very same software that hiring managers
+                    use.</span> <em>Here is how your CV stacks up...</em>
+            </p>
+
+
+            <div class="keywords group-section white-block">
+                <div class="group-item-block">
+                    <h2><span>Top Keywords &amp; Skills</span></h2>
+                    <ul class="top-skills">
+                        <li>operations</li>
+                        <li>advertising</li>
+                        <li>incentive programs</li>
+                        <li>restructuring</li>
+                        <li>sales incentive</li>
+                    </ul>
+                    <h2><span>Other Core Competencies</span></h2>
+                    <ul class="other-core-competencies">
+                        <li>marketing</li>
+                        <li>coaching</li>
+                        <li>print advertising</li>
+                        <li>budget</li>
+                        <li>manager sales</li>
+                        <li>administrative tasks</li>
+                        <li>print campaign</li>
+                    </ul>
+                    <h2><span>Less Weighted Skills</span></h2>
+                    <ul class="less-weighted-skills">
+                        <li>managed sales</li>
+                        <li>metrics</li>
+                        <li>mitigation</li>
+                        <li>onboarding</li>
+                        <li>asset management</li>
+                        <li>production process</li>
+                        <li>reporting tools</li>
+                    </ul>
+
+                    <p class="alert highlight-alert animate-show-pop ats-animation">
+                        <span class="advice notice lazyloaded">Is this the skillset that you want to convey to
+                            employers?</span><br>
+                        If not, <a href="mailto:sara@co.uk?subject=CV Questions">email me!</a> I'm here to
+                        help you land more interviews so you can get more job offers.
+                    </p>
+
                 </div>
             </div>
-        </section>
+        </div>
     </div>
+</section>
+
+<section *ngIf="showCritique" class="gray5-block top-chevron-section signature-section before-chevron-section">
+    <div class="container">
+        <div class="col full_col">
+            <h2>Recommendations &amp; Next Steps</h2>
+
+            <p></p>
+            <p>Jodie, for a professional with 24 years of experience, your CV undersells you. This is the most
+                important tool in your job search and it needs to clearly communicate your expertise, unique
+                experience, accomplishments, and career goals.</p>
+            <p></p>
+
+            <div class="group-section white-block next-steps-list">
+
+                <div class="group-item-block">
+                    <p>Here are the major issues holding your CV back:</p>
+                </div>
+
+                <div class="group-item-block">
+                    <p class="next-steps-item">
+                        <i class="fas fa-hand-point-right fa-2x"></i>
+                        <span>Remove references from your CV.</span> These should be provided upon request
+                    </p>
+                </div>
+                <div class="group-item-block">
+                    <p class="next-steps-item">
+                        <i class="fas fa-hand-point-right fa-2x"></i>
+                        <span>Show the outcomes of your efforts.</span> Your CV focuses too much on what you’ve
+                        done, not what you’ve achieved.
+                    </p>
+                </div>
+                <div class="group-item-block">
+                    <p class="next-steps-item">
+                        <i class="fas fa-hand-point-right fa-2x"></i>
+                        <span>Your CV does not make a strong visual impression.</span> Your CV should appear clean,
+                        uncluttered, and appealing to the eye.
+                    </p>
+                </div>
+                <div class="group-item-block">
+                    <p class="next-steps-item">
+                        <i class="fas fa-hand-point-right fa-2x"></i>
+                        <span>Your CV needs to include more keywords and skills</span> to help position you as a
+                        stronger candidate.
+                    </p>
+                </div>
+
+                <div class="group-item-block">
+                    <p class="next-steps-item">
+                        <strong>Resume Scripters writers are experts at fixing these kinds of problems.</strong>
+                        Consider
+                        working with a professional writer to get a CV that sets you up for success.
+                    </p>
+
+                    <p class="next-steps-item">
+                        <a routerLink="/Resume-service" class="btn btn-block">
+                            Get an expert to rewrite your CV
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <br>
+            <p>
+                Feel free to email me with any questions. We're here to help you put your best foot forward.<br><br>
+                Thank you,
+            </p>
+
+            <br>
+
+            <div>
+                <div>
+                    <p>
+                        <b>Admin</b> <br>CV Expert, Resume Scripters<br><a href="mailto:sara@co.uk"
+                            class="no-underline">resumescripters.gmail.com</a>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
+</section>
+<section *ngIf="showCritique" class="dark-block">
+    <div class="container">
+        <p>
+            <span>Our CVs get you interviews.</span><a href="/cv-writing">Browse our
+                packages</a>
+        </p>
+    </div>
+</section>

@@ -1,0 +1,102 @@
+<!--loading start-->
+<div *ngIf="!showProfile" class="content">
+    <app-loading></app-loading>
+</div>
+<!--loading end-->
+<div style="height: 832px;">
+    <div *ngIf="showProfile" class="profile-header row">
+        <div *ngIf="user.profile_pic!=null" class="profile-img col-md-6">
+            <div class="profile-pic">
+                <img src="{{mediaURL}}/users/{{user.profile_pic}}" width="200" alt="Profile Image">
+            </div>
+        </div>
+        <div *ngIf="user.profile_pic==null" class="profile-img col-md-6">
+            <div class="profile-name">
+                <p>{{firstTwoLetter}}</p>
+            </div>
+        </div>
+        <div class="profile-nav-info col-md-6">
+            <h3 class="user-name">{{user.name}}</h3>
+            <div class="text-center">
+                <i class="fa fa-envelope icon_class"></i>
+                <p class="user-mail">&nbsp;&nbsp;{{user.email}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="showProfile" class="main-bd row row2">
+        <div *ngIf="disableForm" class="col-md-12">
+            <div class="profile-side">
+                <div class="user-bio">
+                    <h3>Account Detail</h3>
+                    <div class="bio"><br />
+                        Full Name : {{user.name}}<br /><br />
+                        Email : {{user.email}}<br /><br />
+                        Password : **********<br /><br />
+                        <button class="btn btn-success" (click)="editProfile()">Edit Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="profile-body col-md-12">
+            <form [formGroup]="profile_form" *ngIf="!disableForm" action="index.html" method="post">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" formControlName="user_name">
+                <span style="color:red" *ngIf="user_name && user_name.invalid && user_name.touched">This Field is
+                    reuired.</span>
+                <br />
+                <a *ngIf="!changePasswordField" style="margin-bottom:10px" class="link_text"
+                    (click)="changePassword()">Change Password</a><br /><br />
+                <fieldset *ngIf="changePasswordField" style="margin-bottom:0px">
+                    <label for="password">Current Password:</label>
+                    <p>
+                        <input #old_password type="password" name="user_password" placeholder="Enter Old Password"
+                            (keyup)="resetErrorResponse()" class="password" formControlName="previous_password">
+                        <button class="unmask" type="button" (click)="showPassword(old_password)"></button>
+                    </p>
+                    <span style="color:red"
+                        *ngIf="previous_password && previous_password.invalid && previous_password.touched">This Field
+                        is
+                        reuired.</span>
+                    <span style="color:red"
+                        *ngIf="old_password_response && !previous_password.invalid">{{old_password_response}}</span>
+                    <label for="password">New Password:</label>
+                    <p>
+                        <input #new_password type="password" name="user_password" placeholder="Enter New Password"
+                            (keyup)="validatePassword()" class="password" formControlName="newCode">
+                        <button class="unmask" type="button" (click)="showPassword(new_password)"></button>
+                    </p>
+                    <span style="color:red" *ngIf="newCode && newCode.invalid && newCode.touched">This Field is
+                        reuired.</span>
+                    <label for="password">Confirm Password:</label>
+                    <p>
+                        <input #confirm_password type="password" name="user_password" placeholder="Confirm Password"
+                            (keyup)="validatePassword()" class="password" formControlName="confirmCode">
+                        <button class="unmask" type="button" (click)="showPassword(confirm_password)"></button>
+                    </p>
+                    <span style="color:red" *ngIf="confirmCode && confirmCode.invalid && confirmCode.touched">This Field
+                        is
+                        reuired.</span>
+                    <p #passwordMatchParagraph></p>
+                </fieldset>
+                Profile Pic:
+                <label style="display:inline" for="file"><a class="link_text">Choose File:</a></label>
+                <input #fileMessage id="file" type="file" (change)="uploadProfilePic($event)" style="display:none;" />
+                <span *ngIf="selectedProfilePicName">
+                    <p class="selectedFiles">
+                        {{selectedProfilePicName}}
+                    </p>
+                    <i class="fal fa-times-circle" (click)="deleteItem()"></i>
+                </span>
+                <br /><br />
+                <p *ngIf="!validImage" style="margin-bottom: 15px; color: red;">Only jpg, jpeg and png files are
+                    allowed!
+                </p>
+                <button class="btn btn-success"
+                    [disabled]="(user_name.invalid) || passwordMismatch || (changePasswordField && (previous_password.invalid || newCode.invalid || confirmCode.invalid))"
+                    (click)="updateProfile()">Update
+                    Profile</button>
+            </form>
+        </div>
+    </div>
+</div>

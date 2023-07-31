@@ -1,48 +1,22 @@
-<div class="row" [ngClass]="{blur:firstDraftSend}">
+<div class="row" [ngClass]="{blur:DraftSend}">
     <div class="col-12">
         <!--loading start-->
         <div *ngIf="!showOrderInfo" class="content">
-            <div class="load-wrapp">
-                <div class="load-3">
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                </div>
-            </div>
+            <app-loading></app-loading>
         </div>
         <!--loading end-->
         <tabset *ngIf="showOrderInfo" #orderTabs>
             <tab heading="Order Info">
-                <button *ngIf="order?.status==2" (click)="sendFirstDraft()" style="position:absolute;right:0;"
-                    class="mt-2 mr-4 btn btn-primary">Send First Draft</button>
-                <button *ngIf="order?.status==5" (click)="sendRevision()" style="position:absolute;right:0"
-                    class="mt-2 mr-4 btn btn-primary">Send Revision</button>
-                <button *ngIf="order?.status==4" (click)="sendFinalDraft()" style="position:absolute;right:0"
-                    class="mt-2 mr-4 btn btn-primary">Send Final Draft</button>
-                <div class="mt-4 d-flex">
-                    <div class=" flex-fill">
-                        <h2>Customer Detail :</h2>
-                        <div class="d-flex flex-column">
-                            <p class="mx-5"><b>Name :</b> {{ order?.users[0].name }}</p>
-                            <p class="mx-5"><b>Email :</b> {{ order?.users[0].email }}</p>
-                        </div>
-                        <h2>Order Detail :</h2>
-                        <div class="d-flex flex-column">
-                            <!-- <p class="mx-5"><b>Price :</b> {{ order?.price | currency }}</p> -->
-                            <p class="mx-5"><b>Status :</b> {{ admin_status[order?.status] }}</p>
-                            <p class="mx-5"><b>Date :</b> {{ order?.created_at | date }}</p>
-                        </div>
-                        <h2>Service / Package Detail</h2>
-                        <div class="d-flex flex-column">
-                            <p class="mx-5"><b>Service Type :</b> {{ order?.service_types[0].name }}</p>
-                            <p class="mx-5"><b>Service / Package Name :</b> {{ (order?.services.length >
-                                0)?order?.services[0].title:order?.packages[0].title }}</p>
-                            <h3 class="mx-5">Description : </h3>
-                            <p class="mx-5">{{ (order?.services.length >
-                                0)?order?.services[0].description:order?.packages[0].description }}</p>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-column justify-content-center align-items-center flex-fill">
+                <div class="send_draft_btn_div">
+                    <button *ngIf="order?.status==2" (click)="sendFirstDraft()" class="send_draft_btn
+                        mt-2 mr-4 btn draft_btn">Send First Draft</button>
+                    <button *ngIf="order?.status==5" (click)="sendRevision()" class="send_draft_btn
+                        mt-2 mr-4 btn draft_btn">Send Revision</button>
+                    <button *ngIf="order?.status==4" (click)="sendFinalDraft()" class="send_draft_btn
+                        mt-2 mr-4 btn draft_btn">Send Final Draft</button>
+                </div>
+                <div class="mt-2 row">
+                    <div class="col-md-7 justify-content-center align-items-center">
                         <div *ngIf="order?.status == 1">
                             <h2>No Questionaire Completed</h2>
                         </div>
@@ -90,110 +64,100 @@
                                     8) What is your LinkedIn URL?</label>
                                 <p *ngIf="questionaire_answer">{{questionaire_answer.q8}}</p>
                             </div>
-                            <div class="mb-3">
+                            <div *ngIf="resumes_detail==null" class="mb-3">
                                 <a href="{{mediaUrl}}answers_files/{{order?.answers_file}}"
-                                    download="{{order?.answers_file}}" class="btn btn-lg btn-success">Download
+                                    download="{{order?.answers_file}}" class="btn btn-lg draft_btn">Download
                                     Resume</a>
                             </div>
                         </div>
                     </div>
-                </div>
-
-            </tab>
-            <tab heading="Chat" (selectTab)="enterChatRoom()">
-                <div class="card">
-                    <div class="card-header msg_head">
-                        <div class="d-flex bd-highlight">
-                            <div class="img_cont">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                                    class="rounded-circle user_img">
-                                <span class="online_icon"></span>
+                    <div class="col-md-5">
+                        <div class="card sidebar_card">
+                            <div class="card-header">
+                                <h4>Customer Detail</h4>
                             </div>
-                            <!-- <div class="user_info">
-                                <span>Chat with Admin</span>
-                                <p>1767 Messages</p>
-                            </div> -->
-                        </div>
-                    </div>
-                    <div #chatcontent [scrollTop]="scrolltop" class="card-body msg_card_body chat-content">
-                        <div class="message-box" *ngFor="let chat of chats">
-                            <div class="chat-status" text-center
-                                *ngIf="chat.type==='join'||chat.type==='exit';else message">
-                                <span class="chat-date">{{chat.date}}</span>
-                                <span class="chat-content-center">{{chat.message}}</span>
-                            </div>
-                            <ng-template #message>
-                                <div *ngIf="chat.type!='firstDraftMessage'" class="chat-message">
-                                    <div class="right-bubble"
-                                        [ngClass]="{'right-bubble': chat.nickname === nickname, 'left-bubble': chat.nickname !== nickname}">
-                                        <span class="msg-name" *ngIf="chat.nickname === nickname">Me</span>
-                                        <span class="msg-name"
-                                            *ngIf="chat.nickname !== nickname">{{chat.nickname}}</span>
-                                        <span class="msg-date"> at {{chat.date}}</span>
-                                        <p [innerHTML]="chat.message"></p>
-                                        <a *ngIf="chat.fileName" class="message_File_Download_Link"
-                                            (click)="DownloadMessageFile(chat.attachFile,chat.fileName)"><i
-                                                class="fas fa-arrow-to-bottom"></i>{{chat.fileName}}</a>
+                            <div class="card-body d-flex flex-column">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p><b>Name</b></p>
+                                    </div>
+                                    <div class="col-8">
+                                        <p class="text-right"> {{ order?.users[0].name }}</p>
                                     </div>
                                 </div>
-                                <div *ngIf="chat.type=='firstDraftMessage'" class="chat-message">
-                                    <div class="right-bubble"
-                                        [ngClass]="{'right-bubble': chat.nickname === nickname, 'left-bubble': chat.nickname !== nickname}">
-                                        <span class="msg-name" *ngIf="chat.nickname === nickname">Me</span>
-                                        <span class="msg-name"
-                                            *ngIf="chat.nickname !== nickname">{{chat.nickname}}</span>
-                                        <span class="msg-date"> at {{chat.date}}</span>
-                                        <p [innerHTML]="chat.message"></p>
-                                        <!-- <span>
-                                            <i
-                                                    class="fas fa-arrow-to-bottom"></i>{{chat.}}
-                                        </span> -->
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p><b>Email</b></p>
+                                    </div>
+                                    <div class="col-8">
+                                        <p class="text-right"> {{ order?.users[0].email }}</p>
                                     </div>
                                 </div>
-                            </ng-template>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <form [formGroup]="chatForm">
-                            <div class="input-group">
-                                <div class="input-group-append">
-                                    <label for="fileMessage" class="input-group-text attach_btn"><i
-                                            class="fas fa-paperclip"></i></label>
-                                    <input #fileMessage id="fileMessage" type="file" class="" style="display:none"
-                                        formControlName="attachFile" (change)="onFileChange($event)" multiple />
-                                </div>
-                                <div class="col-lg-11 col-md-10 col-sm-9 col-8" style="padding:0">
-                                    <ckeditor [(ngModel)]="ckContent" formControlName="message"
-                                        (change)="send_btn_class($event)" [config]="{enterMode :2,
-                                    shiftEnterMode:2,height:100,width:'100%'}">
-                                        <ckbutton [name]="'saveButton'" [command]="'saveCmd'" [icon]="'save.png'"
-                                            [label]="'Save Document'" [toolbar]="'clipboard,1'">
-                                        </ckbutton>
-                                    </ckeditor>
-                                </div>
-                                <div class="input-group-append">
-                                    <button [disabled]="!send_btn_enable" [ngClass]="{send_btn:send_btn_enable}"
-                                        class="input-group-text" (click)="sendMessage(chatForm.value)"><i
-                                            class="fas fa-location-arrow"></i></button>
-                                </div>
                             </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-12">
-                                    <span *ngFor="let item of files; let i=index">
-                                        <p class="selectedFiles">
-                                            {{item.name}}
+                        </div>
+                        <div class="card sidebar_card">
+                            <div class="card-header">
+                                <h4>Order Detail</h4>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <!-- <p class="mx-5"><b>Price :</b> {{ order?.price | currency }}</p> -->
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p><b>Status</b></p>
+                                    </div>
+                                    <div class="col-8">
+                                        <p class="text-right">
+                                            <span class="order_status"
+                                                [ngStyle]="{backgroundColor:order_status_color[order?.status]}">
+                                                {{admin_status[order?.status] }}</span>
                                         </p>
-                                        <div *ngIf="showLoader && item==files[files.length-1]"
-                                            class="spinner-border spinner-border-sm" role="status">
-                                            <span class="sr-only">Loading...</span>
-                                        </div>
-                                        <i *ngIf="!showLoader || !(item==files[files.length-1])" (click)="deleteItem(i)"
-                                            class="fal fa-times-circle"></i>
-                                        &nbsp;&nbsp;&nbsp;
-                                    </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p><b>Date</b></p>
+                                    </div>
+                                    <div class="col-8">
+                                        <p class="text-right"> {{ order?.created_at | date }}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
+                        <div class="card sidebar_card">
+                            <div class="card-header">
+                                <h4>Service / Package Detail</h4>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p><b>Service Type</b></p>
+                                    </div>
+                                    <div class="col-8">
+                                        <p class="text-right">{{ order?.service_types[0].name }}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p><b>Service / Package Name</b> </p>
+                                    </div>
+                                    <div class="col-8">
+                                        <p class="text-right">{{ (order?.services.length >
+                                            0)?order?.services[0].title:order?.packages[0].title }}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>
+                                            <b>Description</b>
+                                        </p>
+                                    </div>
+                                    <div class="col-8">
+                                        <p class="text-right">{{ (order?.services.length >
+                                            0)?order?.services[0].description:order?.packages[0].description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </tab>
@@ -204,7 +168,7 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <td>#</td>
+                                    <td class="file_no">#</td>
                                     <td>Name</td>
                                     <td>Date</td>
                                     <td>Download</td>
@@ -212,7 +176,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let item of firstDraftFiles; let i=index">
-                                    <td>{{i+1}}</td>
+                                    <td class="file_no">{{i+1}}</td>
                                     <td>{{item.file}}</td>
                                     <td>{{item.date}}</td>
                                     <td><a href="{{mediaUrl}}{{item.file_path}}" download="{{item.file}}"
@@ -226,7 +190,7 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <td>#</td>
+                                    <td class="file_no">#</td>
                                     <td>Name</td>
                                     <td>Date</td>
                                     <td>Download</td>
@@ -234,7 +198,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let item of adminRevisionFiles; let i=index">
-                                    <td>{{i+1}}</td>
+                                    <td class="file_no">{{i+1}}</td>
                                     <td>{{item.file}}</td>
                                     <td>{{item.date}}</td>
                                     <td><a href="{{mediaUrl}}{{item.file_path}}" download="{{item.file}}"
@@ -248,7 +212,7 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <td>#</td>
+                                    <td class="file_no">#</td>
                                     <td>Name</td>
                                     <td>Date</td>
                                     <td>Download</td>
@@ -256,7 +220,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let item of finalDraftFiles; let i=index">
-                                    <td>{{i+1}}</td>
+                                    <td class="file_no">{{i+1}}</td>
                                     <td>{{item.file}}</td>
                                     <td>{{item.date}}</td>
                                     <td><a href="{{mediaUrl}}{{item.file_path}}" download="{{item.file}}"
@@ -515,5 +479,108 @@
                 <button class="btn btn-success" (click)="downloadResumeData()">Download Resume Detail</button>
             </tab>
         </tabset>
+        <div class="tab-chat" class="chat-popup" heading="Chat">
+            <div id="chat-box" class="card" style="visibility:hidden;">
+                <div class="card-header msg_head">
+                    <div class="d-flex bd-highlight">
+                        <div class="img_cont">
+                            <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                                class="rounded-circle user_img">
+                            <span class="online_icon"></span>
+                        </div>
+                        <div class="user_info">
+                            <span>Chat with {{ order?.users[0].name }}</span>
+                            <p> {{total_message}} Messages</p>
+                        </div>
+                        <button type="button" class="close pull-right" aria-label="Close" title="close chat"
+                            (click)="closeChat(openChatbtn)">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                <div #chatcontent class="card-body msg_card_body chat-content">
+                    <!--yeh wala content har dafa re render ho ga-->
+                    <ng-template #content>
+                        <div *ngFor="let chat of chats">
+                            <div *ngIf="chat.type!='join' && chat.type!='exit'">
+                                <div class="message-box">
+                                    <div class="chat-status" text-center
+                                        *ngIf="chat.type==='join'||chat.type==='exit';else message">
+                                        <span class="chat-date">{{chat.date}}</span>
+                                        <span class="chat-content-center">{{chat.message}}</span>
+                                    </div>
+                                    <ng-template #message>
+                                        <div class="chat-message">
+                                            <div class="right-bubble"
+                                                [ngClass]="{'right-bubble': chat.nickname === nickname, 'left-bubble': chat.nickname !== nickname}">
+                                                <span class="msg-name" *ngIf="chat.nickname === nickname">Me</span>
+                                                <span class="msg-name"
+                                                    *ngIf="chat.nickname !== nickname">{{chat.nickname}}</span>
+                                                <span class="msg-date"> at {{chat.date}}</span>
+                                                <!-- <p text-wrap>chat.message</p> -->
+                                                <p [innerHTML]="chat.message"></p>
+                                                <a *ngIf="chat.fileName" class="message_File_Download_Link"
+                                                    (click)="DownloadMessageFile(chat.attachFile,chat.fileName)"><i
+                                                        class="fas fa-arrow-to-bottom"></i>{{chat.fileName}}</a>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <!--end-->
+                    <!--is jagha par rendered content place ho ga-->
+                    <ng-container #outlet>
+                    </ng-container>
+                    <!--end-->
+                </div>
+                <div class="card-footer chat-editor-container">
+                    <form [formGroup]="chatForm">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <span *ngFor="let item of files; let i=index">
+                                    <p class="selectedFiles">
+                                        {{item.name}}
+                                    </p>
+                                    <div *ngIf="showLoader && item==files[files.length-1]"
+                                        class="spinner-border spinner-border-sm" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <i *ngIf="!showLoader || !(item==files[files.length-1])" (click)="deleteItem(i)"
+                                        class="fal fa-times-circle"></i>
+                                    &nbsp;&nbsp;&nbsp;
+                                </span>
+                            </div>
+                        </div>
+                        <div class="flex-container">
+                            <div class="flex-item" id="flex-item-1">
+                                <div class="input-group-append" style="padding:0">
+                                    <label for="fileMessage" class="input-group-text attach_btn"><i
+                                            class="fas fa-paperclip"></i></label>
+                                    <input #fileMessage id="fileMessage" type="file" class="" style="display:none"
+                                        formControlName="attachFile" (change)="onFileChange($event)" multiple />
+                                </div>
+                            </div>
+                            <div class="flex-item" id="flex-item-2">
+                                <ckeditor [editor]="Editor" [(ngModel)]="ckContent" formControlName="message"
+                                    (change)="send_btn_class($event)" [config]="config">
+                                </ckeditor>
+                            </div>
+                            <div class="flex-item" id="flex-item-3">
+                                <div class="input-group-append" style="padding:0">
+                                    <button [ngClass]="{send_btn:send_btn_enable}" class="input-group-text"
+                                        (click)="sendMessage(chatForm.value)"><i
+                                            class="fas fa-location-arrow"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <button #openChatbtn class="openChat" type="button" (click)="openChat(openChatbtn)">
+                <i class="far fa-headset"></i>
+            </button>
+        </div>
     </div>
 </div>

@@ -7,28 +7,65 @@ import { AdminService } from '../../../admin.service';
 import { __await } from 'tslib';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
-
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-revision',
   templateUrl: './revision.component.html',
   styleUrls: ['./revision.component.scss']
 })
+
 export class RevisionComponent implements OnInit {
 
   @ViewChild('fileMessage') fileMessage: ElementRef;
+  
+  revisionDraft = new FormGroup({
+    message: new FormControl(''),
+    attachFile: new FormControl('')
+  })
 
   files = [];
   filesResponse = [];
   ckContent = ""
   showLoader;
   private baseUrl = environment.baseUrl;
+  //for chat editor 
+  public Editor = ClassicEditor;
+  public config = {
+    toolbar: {
+      items: [
+        "heading",
+        "|",
+        "bold",
+        "italic",
+        "link",
+        "bulletedList",
+        "numberedList",
+        "|",
+        "indent",
+        "outdent",
+        "|",
+        "blockQuote",
+        "insertTable",
+        "undo",
+        "redo"
+      ]
+    },
+    table: {
+      contentToolbar: [
+        "tableColumn",
+        "tableRow",
+        "mergeTableCells"
+      ]
+    },
+    language: "en"
+  }
+
   constructor(
     public bsModalRef: BsModalRef,
     private route: ActivatedRoute,
     private as: AdminService,
     private http: HttpClient,
-
   ) { }
 
   ngOnInit(): void {
@@ -41,6 +78,7 @@ export class RevisionComponent implements OnInit {
       this.sendFilesToAPI(event.target.files[i])
     }
   }
+
   async sendFilesToAPI(file) {
     let formdata = new FormData;
     formdata.append("id", this.as.selectedOrderId);
@@ -50,21 +88,18 @@ export class RevisionComponent implements OnInit {
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', `Bearer ${token}`);
     const res = await this.http.post<any>(`${this.baseUrl}/update-order`, formdata, { headers }).toPromise();
-    console.log("res", res);
     if (res) {
       this.filesResponse.push(res.data);
       this.showLoader = false;
       this.fileMessage.nativeElement.value = null;
     }
   }
+
   deleteItem(i) {
     this.files.splice(i, 1);
     this.filesResponse.splice(i, 1);
   }
-  revisionDraft = new FormGroup({
-    message: new FormControl(''),
-    attachFile: new FormControl('')
-  })
+ 
   sendRevision() {
     this.sendEmail();
     //send form data to services
@@ -97,6 +132,7 @@ export class RevisionComponent implements OnInit {
       this.hideModal();
     }
   }
+
   sendEmail() {
     Email.send({
       Host: 'smtp.elasticemail.com',
@@ -106,16 +142,17 @@ export class RevisionComponent implements OnInit {
       From: `atif.ahmed9211@gmail.com`,
       Subject: 'Subject',
       Body: `
-      <i>Hi! user, you have just received a revised document from career scripters.com.</b> `
-    }).then(message => { console.log(message); });
+      <i>Hi! user, you have just received a revised document from Resume Scripters.com.</b> `
+    }).then(message => { console.log(); });
   }
+  
   // in case use cancelled the modal
   hideModal() {
     this.bsModalRef.hide();
     let data = {
       status: "cancelled"
     }
-    this.as.firstDraftData = data;
+    this.as.adminRevisionData = data;
   }
 }
 
